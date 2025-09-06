@@ -27,7 +27,7 @@ Have you ever struggled to stick to a budget? Have you ever wanted to cut down o
 ![Login design image](Login.png)
 ![Budget design image](Budget.JPG)
 
-Here is a sequence diagram that shows how you would interact with the server tomake a deposit and a withdrawl.
+Here is a sequence diagram that shows how you would interact with the server to make a deposit and a withdrawl.
 
 ```mermaid
 sequenceDiagram
