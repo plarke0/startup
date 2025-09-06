@@ -27,13 +27,15 @@ Have you ever struggled to stick to a budget? Have you ever wanted to cut down o
 ![Login design image](Login.png)
 ![Budget design image](Budget.JPG)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Here is a sequence diagram that shows how you would interact with the server tomake a deposit and a withdrawl.
 
 ```mermaid
 sequenceDiagram
     actor You
-    actor Website
-    You->>Website: Replace this with your design
+    You->>Server: Deposit $5
+    Server-->>You: Updated category values
+    You->>Server: Withdraw $2 from Savings
+    Server-->>You: Updated category values
 ```
 
 ### Key features
