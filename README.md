@@ -4,13 +4,6 @@
 
 A website to help you keep track of your money. By creating budget categories, you can more easily build your savings, set aside your tithing, and stick with your budgeting plans. It allows you to deposit money between these budget categories according to customizable ratios. Every action is logged, giving you an in depth history of what you have done with your money.
 
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
-
 ## 🚀 Specification Deliverable
 
 > [!NOTE]
@@ -26,7 +19,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever struggled to stick to a budget? Have you ever wanted to cut down on wasteful spending? Then Budget Center is the solution for you! With it, you can create categories to take control of your money. By making and saving different ratios, you can fine tune where your money goes. And when you have control over where your money goes, you control where you go.
 
 ### Design
 
