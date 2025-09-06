@@ -15,7 +15,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -27,7 +27,7 @@ Have you ever struggled to stick to a budget? Have you ever wanted to cut down o
 ![Login design image](Login.png)
 ![Budget design image](Budget.JPG)
 
-Here is a sequence diagram that shows how you would interact with the server to make a deposit and a withdrawl.
+Here is a sequence diagram that shows how you would interact with the server to make a deposit and a withdrawl:
 
 ```mermaid
 sequenceDiagram
@@ -40,9 +40,16 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- **HTML** - Uses the correct HTML structure. There will be three HTML pages. One for signing up, one for logging in, and one for the budget application.
+- **CSS** - CSS that allows for adjustable screen sizes, makes good use of space, and makes good use of color, leading to an aesthetically pleasing experience.
+- **React** - Makes up the login/signup, updates totals/logs after useer input, and allows for the user to switch between interfaces in the budget page.
+- **Service** - Backend server functionality for the following:
+  - Saving and retrieving user budget data
+  - Sign up, login, and log out for each user
+  - Calculation of values for deposits, withdrawls, and log modifications
+  - Calls to https://www.purgomalum.com to check for inappropriate usernames/category names
+- **Data Base** - User data including total values, saved ratio profiles, and logs.
+- **WebSocket** - Display number of total and concurrent users that have accounts.
 
 ### Technologies
 
