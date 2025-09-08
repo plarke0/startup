@@ -12,7 +12,7 @@
 <p>Steps of using git in the command line</p>
 1. ```git add .```
 2. ```git commit -m "{Title Message}" -m "{Description Message}"```
-3. ```git push```
+3. ```git push {Remote name} {Branch name}```
 
 ## Class 9/8
 
