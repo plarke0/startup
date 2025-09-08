@@ -8,6 +8,12 @@
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
 
+## Git
+<p>Steps of using git in the command line</p>
+1. ```git add .```
+2. ```git commit -m "{Title Message}" -m "{Description Message}"```
+3. ```git push```
+
 ## Class 9/8
 
 ### Start Ups
