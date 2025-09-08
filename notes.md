@@ -9,7 +9,7 @@
 - [MDN](https://developer.mozilla.org)
 
 ## Git
-Steps of using git in the command line
+Steps of using git to push changes through the command line
 ```bash
 git add .
 ```
@@ -18,6 +18,16 @@ git commit -m "{Title Message}" -m "{Description Message}"
 ```
 ```bash
 git push {Remote name (eg. origin)} {Branch name (eg. main)}
+```
+Steps of using git to sync changes through the command line
+```bash
+git fetch
+```
+```bash
+git status
+```
+```bash
+git pull
 ```
 
 ## Class 9/8
