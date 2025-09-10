@@ -45,4 +45,10 @@ Even if your website doesn't necessarily need one of the technologies, you can j
 APIs return .jsons that can be used however you want. In the context of this class, the information can be used to update information in your website.
 
 ### Basic Structure of the Internet
-[6 byte Ethernet | 4 byte IP Addresses | 2 byte Port | ...]
+[6 byte Ethernet | 4 byte IP Addresses | 2 byte Port | HTTP | ...]
+
+IP Address: Host <--> Host
+
+TCP Ports: App <--> App
+
+TCP ports allow your device to connect to different applications simultainiously
