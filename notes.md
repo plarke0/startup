@@ -9,6 +9,13 @@
 - [MDN](https://developer.mozilla.org)
 
 ## Git
+Steps of using git to clone a repo
+```bash
+cd {directory of project}
+```
+```bash
+git clone {repo url}
+```
 Steps of using git to push changes through the command line
 ```bash
 git add .
@@ -34,4 +41,8 @@ git pull
 
 ### Start Ups
 Even if your website doesn't necessarily need one of the technologies, you can just put it in so it passes it off.
+
 APIs return .jsons that can be used however you want. In the context of this class, the information can be used to update information in your website.
+
+### Basic Structure of the Internet
+[6 byte Ethernet | 4 byte IP Addresses | 2 byte Port | ...]
