@@ -37,16 +37,12 @@ git status
 git pull
 ```
 
-## Class 9/8
-
-### Start Ups
+## Start Ups
 Even if your website doesn't necessarily need one of the technologies, you can just put it in so it passes it off.
 
 APIs return .jsons that can be used however you want. In the context of this class, the information can be used to update information in your website.
 
-## Class 9/10
-
-### Basic Structure of the Internet
+## Basic Structure of the Internet
 [6 byte Ethernet | 4 byte IP Addresses | 2 byte Port | HTTP | ...]
 
 IP Address: Host <--> Host
@@ -54,3 +50,47 @@ IP Address: Host <--> Host
 TCP Ports: App <--> App
 
 TCP ports allow your device to connect to different applications simultainiously
+
+## HTML Stuff
+
+### HTML Structure Elements
+| Element    | Meaning                          | Example                                        |
+| ---------- | -------------------------------- | ---------------------------------------------- |
+| `body`     | Contains all content in the page | `<body></body>`                                |
+| `header`   | For introductory content         | `<header></header>`                            |
+| `nav`      | Set of navigation links          | `<nav></nav>`                                  |
+| `footer`   | Footer for document or section   | `<footer></footer>`                            |
+| `main`     | Main content of the document     | `<main></main>`                                |
+| `section`  | Section of a document            | `<section></section>`                          |
+| `aside`    | Indirectly related content       | `<aside></aside>`                              |
+| `p`        | Paragraph (space before/after)   | `<p></p>`                                      |
+| `table`    | Table of cells                   | `<table></table>`                              |
+| `tr`       | Row in a table                   | `<tr></tr>`                                    |
+| `ol`       | Ordered list                     | `<ol></ol>`                                    |
+| `ul`       | Unordered list                   | `<ul></ul>`                                    |
+| `div`      | Block structure element          | `<div></div>`                                  |
+| `span`     | Inline structure element         | `<span></span>`                                |
+
+### HTML Elements
+| Element    | Meaning                          | Example                                        |
+| ---------- | -------------------------------- | ---------------------------------------------- |
+| `a`        | Anchor defines a hyperlink       | `<a href=link></a>`                            |
+| `img`      | Image element                    | `<img src=link width=x height=y>`              |
+| `th`       | Table header element             | `<th></th>`                                    |
+| `td`       | Table data element               | `<td></td>`                                    |
+| `li`       | List item for ul and ol          | `<li value=num></li>`                          |
+
+### Inputs
+| Element    | Meaning                          | Example                                        |
+| ---------- | -------------------------------- | ---------------------------------------------- |
+| `form`     | Input container and submission   | `<form action="form.html" method="post">`      |
+| `fieldset` | Labeled input grouping           | `<fieldset> ... </fieldset>`                   |
+| `input`    | Multiple types of user input     | `<input type="" />`                            |
+| `select`   | Selection dropdown               | `<select><option>1</option></select>`          |
+| `optgroup` | Grouped selection dropdown       | `<optgroup><option>1</option></optgroup>`      |
+| `option`   | Selection option                 | `<option selected>option2</option>`            |
+| `textarea` | Multiline text input             | `<textarea></textarea>`                        |
+| `label`    | Individual input label           | `<label for="range">Range: </label>`           |
+| `output`   | Output of input                  | `<output for="range">0</output>`               |
+| `meter`    | Display value with a known range | `<meter min="0" max="100" value="50"></meter>` |
+| ``     |    | `<></>`      |
