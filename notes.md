@@ -75,7 +75,12 @@ TCP ports allow your device to connect to different applications simultainiously
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
 | `a`        | Anchor defines a hyperlink       | `<a href=link></a>`                            |
-| `img`      | Image element                    | `<img src=link width=x height=y>`              |
+| `img`      | External image element           | `<img src=link width=x height=y>`              |
+| `audio`    | External audio element           | `<audio src=link></audio>`                     |
+| `video`    | External video element           | `<img src=link width=x height=y>`              |
+| `source`   | Source of an img/video/audio     | `<source src=link>`                            |
+| `svg`      | Inline graphics display          | `<svg width=x height=y></svg>`                 |
+| `canvas`   | Drawing and animating through JS | `<canvas id="" width=x height=y></canvas>`     |
 | `th`       | Table header element             | `<th></th>`                                    |
 | `td`       | Table data element               | `<td></td>`                                    |
 | `li`       | List item for ul and ol          | `<li value=num></li>`                          |
@@ -93,7 +98,6 @@ TCP ports allow your device to connect to different applications simultainiously
 | `label`    | Individual input label           | `<label for="range">Range: </label>`           |
 | `output`   | Output of input                  | `<output for="range">0</output>`               |
 | `meter`    | Display value with a known range | `<meter min="0" max="100" value="50"></meter>` |
-[//]: # | ``     |    | `<></>`      |
 
 ### Common Input Attributes
 | Attribute | Meaning                                                                             |
@@ -123,4 +127,3 @@ TCP ports allow your device to connect to different applications simultainiously
 | file           | Local file                        |
 | submit         | button to trigger form submission |
 
-[//]: # | ``     |    | `<></>`      |
