@@ -56,6 +56,7 @@ TCP ports allow your device to connect to different applications simultainiously
 ### HTML Structure Elements
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
+| `head`     | Section for metadata             | `<head></head>`                                |
 | `body`     | Contains all content in the page | `<body></body>`                                |
 | `header`   | For introductory content         | `<header></header>`                            |
 | `nav`      | Set of navigation links          | `<nav></nav>`                                  |
