@@ -57,6 +57,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
 | `head`     | Section for metadata             | `<head></head>`                                |
+| `style`    | CSS styling in head              | `<style></style>`                              |
 | `body`     | Contains all content in the page | `<body></body>`                                |
 | `header`   | For introductory content         | `<header></header>`                            |
 | `nav`      | Set of navigation links          | `<nav></nav>`                                  |
@@ -85,6 +86,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | `th`       | Table header element             | `<th></th>`                                    |
 | `td`       | Table data element               | `<td></td>`                                    |
 | `li`       | List item for ul and ol          | `<li value=num></li>`                          |
+| `hr`       | Horizontal rule (line)           | `<hr>`                                         |
 
 ### Inputs
 | Element    | Meaning                          | Example                                        |
@@ -128,3 +130,18 @@ TCP ports allow your device to connect to different applications simultainiously
 | file           | Local file                        |
 | submit         | button to trigger form submission |
 
+## CSS
+
+Priority of CSS tags is as follows: inline > header > style sheet. 
+
+### Style Sheet Format
+selector (eg. "p") {
+    property (eg. "color"): value;
+}
+
+| Selector  | Example | Example Description        |
+| `element` | eg. `p` | Selects all `<p>` elements |
+| `.class` | eg. `.intro` | Selects |
+| `element.class` | eg. `p.intro` | Selects |
+| `#id` | eg. `` | Selects |
+| `*` | eg. `` | Selects |
