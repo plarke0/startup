@@ -140,6 +140,7 @@ selector (eg. "p") {
 }
 
 | Selector                   | Example              | Example Description                                            |
+| -------------------------- | -------------------- | -------------------------------------------------------------- |
 | `element`                  | eg. `p`              | Selects all `<p>` elements                                     |
 | `element, element`         | eg. `p, h1`          | Selects all `<p>` and `<h1>` elements                          |
 | `.class`                   | eg. `.intro`         | Selects all elements with `class="intro"`                      |
