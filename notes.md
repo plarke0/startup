@@ -139,17 +139,17 @@ selector (eg. "p") {
     property (eg. "color"): value;
 }
 
-| Selector           | Example       | Example Description                          |
-| `element`          | eg. `p`       | Selects all `<p>` elements                   |
-| `element, element` | eg. `p, h1`   | Selects all `<p>` and `<h1>` elements        |
-| `.class`           | eg. `.intro`  | Selects all elements with `class="intro"`    |
-| `element.class`    | eg. `p.intro` | Selects all `<p>` with `class="intro"`       |
-| `#id`              | eg. `#name`   | Selects all elements with `id="name"`        |
-| `*`                | eg. `*`       | Selects all elements                         |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
-| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| Selector                   | Example              | Example Description                                            |
+| `element`                  | eg. `p`              | Selects all `<p>` elements                                     |
+| `element, element`         | eg. `p, h1`          | Selects all `<p>` and `<h1>` elements                          |
+| `.class`                   | eg. `.intro`         | Selects all elements with `class="intro"`                      |
+| `element.class`            | eg. `p.intro`        | Selects all `<p>` with `class="intro"`                         |
+| `#id`                      | eg. `#name`          | Selects all elements with `id="name"`                          |
+| `*`                        | eg. `*`              | Selects all elements                                           |
+| `[attribute]`              | eg. `[lang]`         | Selects all elements with a `lang` attribute                   |
+| `[attribute=value]`        | eg. `[lang="en"]`    | Selects all elements with `lang="en"`                          |
+| `[attribute~=value]`       | eg. `[lang~="en"]`   | Selects all elements with a `lang` attribute containing `"en"` |
+| `[attribute\|=value]`      | eg. `[lang\|="en"]`  | Selects all elements with a `lang` attribute equal to or starting with `"en"` |
+| `[attribute^=value]`       | eg. `[lang^="en"]`   | Selects all elements with a `lang` attribute that begins with `"en"` |
+| `[attribute$=value]`       | eg. `[lang$="en"]`   | Selects all elements with a `lang` attribute that ends with `"en"` |
+| `[attribute*=value]`       | eg. `[lang*="en"]`   | Selects all elements with a `lang` attribute that contains `"en"` |
