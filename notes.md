@@ -139,9 +139,17 @@ selector (eg. "p") {
     property (eg. "color"): value;
 }
 
-| Selector  | Example | Example Description        |
-| `element` | eg. `p` | Selects all `<p>` elements |
-| `.class` | eg. `.intro` | Selects |
-| `element.class` | eg. `p.intro` | Selects |
-| `#id` | eg. `` | Selects |
-| `*` | eg. `` | Selects |
+| Selector           | Example       | Example Description                          |
+| `element`          | eg. `p`       | Selects all `<p>` elements                   |
+| `element, element` | eg. `p, h1`   | Selects all `<p>` and `<h1>` elements        |
+| `.class`           | eg. `.intro`  | Selects all elements with `class="intro"`    |
+| `element.class`    | eg. `p.intro` | Selects all `<p>` with `class="intro"`       |
+| `#id`              | eg. `#name`   | Selects all elements with `id="name"`        |
+| `*`                | eg. `*`       | Selects all elements                         |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
+| `[attribute]`      | eg. `[lang]`  | Selects all elements with a `lang` attribute |
