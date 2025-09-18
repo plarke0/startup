@@ -9,6 +9,7 @@
 - [MDN](https://developer.mozilla.org)
 
 ## Git
+
 Steps of using git to clone a repo
 ```bash
 cd {directory of project}
@@ -38,11 +39,13 @@ git pull
 ```
 
 ## Start Ups
+
 Even if your website doesn't necessarily need one of the technologies, you can just put it in so it passes it off.
 
 APIs return .jsons that can be used however you want. In the context of this class, the information can be used to update information in your website.
 
 ## Basic Structure of the Internet
+
 [6 byte Ethernet | 4 byte IP Addresses | 2 byte Port | HTTP | ...]
 
 IP Address: Host <--> Host
@@ -54,6 +57,7 @@ TCP ports allow your device to connect to different applications simultainiously
 ## HTML Stuff
 
 ### HTML Structure Elements
+
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
 | `head`     | Section for metadata             | `<head></head>`                                |
@@ -74,6 +78,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | `span`     | Inline structure element         | `<span></span>`                                |
 
 ### HTML Elements
+
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
 | `a`        | Anchor defines a hyperlink       | `<a href=link></a>`                            |
@@ -89,6 +94,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | `hr`       | Horizontal rule (line)           | `<hr>`                                         |
 
 ### Inputs
+
 | Element    | Meaning                          | Example                                        |
 | ---------- | -------------------------------- | ---------------------------------------------- |
 | `form`     | Input container and submission   | `<form action="form.html" method="post">`      |
@@ -103,6 +109,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | `meter`    | Display value with a known range | `<meter min="0" max="100" value="50"></meter>` |
 
 ### Common Input Attributes
+
 | Attribute | Meaning                                                                             |
 | --------- | ----------------------------------------------------------------------------------- |
 | name      | The name of the input. This is submitted as the name of the input if used in a form |
@@ -111,6 +118,7 @@ TCP ports allow your device to connect to different applications simultainiously
 | required  | Signifies that a value is required in order to be valid                             |
 
 ### Input Elements
+
 | Type           | Meaning                           |
 | -------------- | --------------------------------- |
 | text           | Single line textual value         |
@@ -135,9 +143,12 @@ TCP ports allow your device to connect to different applications simultainiously
 Priority of CSS tags is as follows: inline > header > style sheet. 
 
 ### Style Sheet Format
+
 selector (eg. "p") {
     property (eg. "color"): value;
 }
+
+### CSS Selectors
 
 | Selector                   | Example              | Example Description                                            |
 | -------------------------- | -------------------- | -------------------------------------------------------------- |
@@ -154,3 +165,25 @@ selector (eg. "p") {
 | `[attribute^=value]`       | eg. `[lang^="en"]`   | Selects all elements with a `lang` attribute that begins with `"en"` |
 | `[attribute$=value]`       | eg. `[lang$="en"]`   | Selects all elements with a `lang` attribute that ends with `"en"` |
 | `[attribute*=value]`       | eg. `[lang*="en"]`   | Selects all elements with a `lang` attribute that contains `"en"` |
+
+### CSS Size Units
+
+#### Absolute Lengths
+  
+| Unit   | Description      |
+| ------ | ---------------- |
+| `cm`   | centimeters      |
+| `mm`   | millimeters      |
+| `in`   | inches (96px)    |
+| `px*`  | pixels (1/96in)  |
+| `pt`   | points (1/72in)  |
+| `pc`   | picas (12pt)     |
+*Pixels are not equal to device pixels. It scales with dpi, so for low dpi devices, 1px = 1 device pixel, but on higher dpi devices 1px can be multiple device pixels.
+
+#### Relative Lengths
+
+| Unit   | Description                                   |
+| ------ | --------------------------------------------- |
+| `em`   | Relative to the font size of the element      |
+| `rem`  | Relative to the font size of the root element |
+| `%`    | Relative to the parent element                |
