@@ -188,6 +188,7 @@
             <div>
                 <div>
                     <!--TODO: make functional and animate-->
+                    <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
                     <svg width="230" height="230">
                         <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
                         <text fill="#000000" font-size="45" justify="center" font-family="Monospace" x="50" y="50%">$0.00</text>
@@ -206,7 +207,37 @@
             <!--Logs-->
             <h4>Logs</h4>
             <div>
-
+                <!--Log selection-->
+                <div>
+                    <button type="button">&lt;</button>
+                    <span>Category Log</span>
+                    <button type="button">&gt;</button>
+                </div>
+                <hr>
+                <!--Log entries-->
+                <!--TODO: make scrollable-->
+                <div>
+                    <div>
+                        <span>9/20/25</span><span style="color: red;">-$10.00</span>
+                        <div>
+                            Note
+                            <button type="button">v</button>
+                            <div>
+                                Example note content.
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span>9/18/25</span><span style="color: green;">$10.00</span>
+                        <div>
+                            Note
+                            <button type="button">v</button>
+                            <div>
+                                Example note content.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
         <hr>
