@@ -46,9 +46,23 @@
                         <button type="button">Deposit</button>
                     </div>
                     <div>
+                        <label>Date</label>
+                        <input type="date">
+                        <label>Note</label>
+                        <input type="text">
+                    </div>
+                    <div>
+                        <select name="deposit-destination">
+                            <option>Deposit Ratio</option>
+                            <option>Tithing</option>
+                            <option>Savings</option>
+                            <option>Fun</option>
+                        </select>
+                    </div>
+                    <div>
                         <span>Deposit Ratios</span>
                         <br>
-                        <select name="Category Splits">
+                        <select name="category-splits">
                             <option>Default</option>
                             <option>Create New +</option>
                         </select>
@@ -63,26 +77,46 @@
                                 <li>Fun: 20%</li>
                             </ul>
                             <button type="button">Edit</button>
+                            <button type="button">Save</button>
                         </div>
                     </div>
                 </div>
+<hr>
                 <!--Withdraw controls-->
                 <div>
-                    
+                    <div>
+                        <input type="number">
+                        <button type="button">Withdraw</button>
+                    </div>
+                    <div>
+                        <label>Date</label>
+                        <input type="date">
+                        <label>Note</label>
+                        <input type="text">
+                    </div>
+                    <select name="withdraw-category">
+                        <option>Tithing</option>
+                        <option>Savings</option>
+                        <option>Fun</option>
+                    </select>
                 </div>
+<hr>
                 <!--Transfer controls-->
                 <div>
                     
                 </div>
+<hr>
                 <!--Category controls-->
                 <div>
                     
                 </div>
             </div>
+<hr>
             <!--Category breakdown-->
             <div>
 
             </div>
+<hr>
             <!--Logs-->
             <div>
 
