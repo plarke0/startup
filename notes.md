@@ -178,6 +178,7 @@ selector (eg. "p") {
 | `px*`  | pixels (1/96in)  |
 | `pt`   | points (1/72in)  |
 | `pc`   | picas (12pt)     |
+
 *Pixels are not equal to device pixels. It scales with dpi, so for low dpi devices, 1px = 1 device pixel, but on higher dpi devices 1px can be multiple device pixels.
 
 #### Relative Lengths
