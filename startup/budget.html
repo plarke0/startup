@@ -122,13 +122,13 @@
                     </div>
                     <div>
                         <label>Source</label>
-                        <select name="withdraw-category">
+                        <select name="transfer-source">
                             <option>Tithing</option>
                             <option>Savings</option>
                             <option>Fun</option>
                         </select>
                         <label>Destination</label>
-                        <select name="withdraw-category">
+                        <select name="transfer-destination">
                             <option>Tithing</option>
                             <option>Savings</option>
                             <option>Fun</option>
@@ -137,14 +137,60 @@
                 </div>
 <hr>
                 <!--Category controls-->
+                <h4>Category Controls</h4>
                 <div>
-                    
+                    <!--Create category-->
+                    <div>
+                        <input type="text" placeholder="Name">
+                        <button type="button">Create</button>
+                    </div>
+                    <br><br>
+                    <!--Rename category-->
+                    <div>
+                        <div>
+                            <input type="text" placeholder="New Name">
+                            <button type="button">Rename</button>
+                        </div>
+                        <div>
+                            <select name="rename-dropdown">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br><br>
+                    <!--Merge categories-->
+                    <div>
+                        <div>
+                            <label>Source</label>
+                            <select name="merge-source">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                            <label>Destination</label>
+                            <select name="merge-destination">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button">Merge</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 <hr>
             <!--Category breakdown-->
             <div>
+                <div>
 
+                </div>
+                <div>
+                    
+                </div>
             </div>
 <hr>
             <!--Logs-->
