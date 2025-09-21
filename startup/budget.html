@@ -36,13 +36,13 @@
                 <!--Control selection-->
                 <div>
                     <button type="button">&lt;</button>
-                    Control Type
+                    <span>Control Type</span>
                     <button type="button">&gt;</button>
                 </div>
                 <!--Deposit controls-->
                 <div>
                     <div>
-                        <input type="number">
+                        <input type="number" placeholder="Amount">
                         <button type="button">Deposit</button>
                     </div>
                     <div>
@@ -52,6 +52,7 @@
                         <input type="text">
                     </div>
                     <div>
+                        <label>Destination</label>
                         <select name="deposit-destination">
                             <option>Deposit Ratio</option>
                             <option>Tithing</option>
@@ -85,7 +86,7 @@
                 <!--Withdraw controls-->
                 <div>
                     <div>
-                        <input type="number">
+                        <input type="number" placeholder="Amount">
                         <button type="button">Withdraw</button>
                     </div>
                     <div>
@@ -94,11 +95,14 @@
                         <label>Note</label>
                         <input type="text">
                     </div>
-                    <select name="withdraw-category">
-                        <option>Tithing</option>
-                        <option>Savings</option>
-                        <option>Fun</option>
-                    </select>
+                    <div>
+                        <label>Source</label>
+                        <select name="withdraw-category">
+                            <option>Tithing</option>
+                            <option>Savings</option>
+                            <option>Fun</option>
+                        </select>
+                    </div>
                 </div>
 <hr>
                 <!--Transfer controls-->
