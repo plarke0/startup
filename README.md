@@ -68,21 +68,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Server deployed and accessible with custom domain name** - [My server link](https://startup.plarke.net).
+- [X] **Server deployed and accessible with custom domain name** - [My server link](https://startup.plarke.net).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] **HTML pages** - I added 5 different pages. The home page (index.html), the login page (login.html), the signup page (signup.html), the main budget center page (budget.html), and an about page (about.html).
+- [X] **Proper HTML element usage** - I reasearched the use of different html tags and structured my website using header, main, footer, nav, menu, label, input, and various others. I also researched the svg tag to make my central pie chart.
+- [X] **Links** - Links between different pages in nav.
+- [X] **Text** - My about page has text, and the budget page has some example inputs.
+- [X] **3rd party API placeholder** - Signup page has a note to make a call to a profanity checker to filter new usernames.
+- [X] **Images** - An image is used to link to the budget center on the homepage.
+- [X] **Login placeholder** - Placeholder for auth on the login and signup pages.
+- [X] **DB data placeholder** - All data within the budget center page.
+- [X] **WebSocket placeholder** - In the header, there is a text area for total user and current user counts.
 
 ## 🚀 CSS deliverable
 
