@@ -11,32 +11,32 @@
         <header>
             <h1>Plarke.net</h1>
             <hr>
-            <div>
+            <section>
                 <button type="button">Save</button>
                 <button type="button">Undo</button>
                 <button type="button">Redo</button>
                 <button type="button">Log Out</button>
-            </div>
+            </section>
             <nav>
                 <menu>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                 </menu>
             </nav>
-            <div>
+            <section>
                 Username
-            </div>
-            <div>
+            </section>
+            <section>
                 <!--Live user count through websocket-->
                 Total users: 0
                 <br>
                 Active now: 0
-            </div>
+            </section>
         </header>
         <hr>
         <main>
             <!--Control panel-->
-            <div>
+            <section>
                 <!--Control selection-->
                 <div>
                     <button type="button">&lt;</button>
@@ -44,8 +44,8 @@
                     <button type="button">&gt;</button>
                 </div>
                 <!--Deposit controls-->
-                <div>
-                    <h4>Deposit</h4>
+                <h4>Deposit</h4>
+                <section>
                     <div>
                         <input type="number" placeholder="Amount">
                         <button type="button">Deposit</button>
@@ -86,11 +86,11 @@
                             <button type="button">Save</button>
                         </div>
                     </div>
-                </div>
+                </section>
 <hr>
                 <!--Withdraw controls-->
-                <div>
-                    <h4>Withdraw</h4>
+                <h4>Withdraw</h4>
+                <section>
                     <div>
                         <input type="number" placeholder="Amount">
                         <button type="button">Withdraw</button>
@@ -109,11 +109,11 @@
                             <option>Fun</option>
                         </select>
                     </div>
-                </div>
+                </section>
 <hr>
                 <!--Transfer controls-->
-                <div>
-                    <h4>Transfer</h4>
+                <h4>Transfer</h4>
+                <section>
                     <div>
                         <input type="number" placeholder="Amount">
                         <button type="button">Transfer</button>
@@ -138,19 +138,19 @@
                             <option>Fun</option>
                         </select>
                     </div>
-                </div>
+                </section>
 <hr>
                 <!--Category controls-->
                 <h4>Category Controls</h4>
-                <div>
+                <section>
                     <!--Create category-->
-                    <div>
+                    <section>
                         <input type="text" placeholder="Name">
                         <button type="button">Create</button>
-                    </div>
+                    </section>
                     <br><br>
                     <!--Rename category-->
-                    <div>
+                    <section>
                         <div>
                             <input type="text" placeholder="New Name">
                             <button type="button">Rename</button>
@@ -162,10 +162,10 @@
                                 <option>Fun</option>
                             </select>
                         </div>
-                    </div>
+                    </section>
                     <br><br>
                     <!--Merge categories-->
-                    <div>
+                    <section>
                         <div>
                             <label>Source</label>
                             <select name="merge-source">
@@ -183,44 +183,44 @@
                         <div>
                             <button type="button">Merge</button>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </section>
 <hr>
             <!--Category breakdown-->
             <h4>Category Breakdown</h4>
-            <div>
-                <div>
+            <section>
+                <section>
                     <!--TODO: make functional and animate-->
                     <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
                     <svg width="230" height="230">
                         <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
                         <text fill="#000000" font-size="45" justify="center" font-family="Monospace" x="50" y="50%">$0.00</text>
                     </svg>
-                </div>
-                <div>
+                </section>
+                <section>
                     <!--TODO: make scrolable-->
                     <ul>
                         <li>Tithing: $0.00</li>
                         <li>Savings: $0.00</li>
                         <li>Fun: $0.00</li>
                     </ul>
-                </div>
-            </div>
+                </section>
+            </section>
 <hr>
             <!--Logs-->
             <h4>Logs</h4>
-            <div>
+            <section>
                 <!--Log selection-->
-                <div>
+                <section>
                     <button type="button">&lt;</button>
                     <span>Category Log</span>
                     <button type="button">&gt;</button>
-                </div>
+                </section>
                 <hr>
                 <!--Log entries-->
                 <!--TODO: make scrollable-->
-                <div>
+                <section>
                     <div>
                         <span>9/20/25</span><span style="color: red;">-$10.00</span>
                         <div>
@@ -241,8 +241,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
+            </section>
         </main>
         <hr>
         <footer>
