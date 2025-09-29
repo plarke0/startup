@@ -26,7 +26,7 @@
         </div>
         <main>
             <!-- Action Bar -->
-            <div class="container">
+            <div class="container mb-2">
                 <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom">
                     <section class="d-flex justify-content-center order-0">
                         <button type="button" class="btn">Undo</button>
@@ -45,220 +45,223 @@
                 </div>
             </div>
             <!-- Control panel -->
-            <section>
-                <!-- Control selection -->
-                <div>
-                    <button type="button">&lt;</button>
-                    <span>Control Type</span>
-                    <button type="button">&gt;</button>
-                </div>
-                <!--Deposit controls-->
-                <h4>Deposit</h4>
-                <section>
+            <div class="container">
+                <div class="d-flex">
+                    <!-- Control selection -->
                     <div>
-                        <input type="number" placeholder="Amount">
-                        <button type="button">Deposit</button>
+                        <button type="button">&lt;</button>
+                        <span>Control Type</span>
+                        <button type="button">&gt;</button>
                     </div>
-                    <div>
-                        <label>Date</label>
-                        <input type="date">
-                        <label>Note</label>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label>Destination</label>
-                        <select name="deposit-destination">
-                            <option>Deposit Ratio</option>
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span>Deposit Ratios</span>
-                        <br>
-                        <select name="category-splits">
-                            <option>Default</option>
-                            <option>Create New +</option>
-                        </select>
-                        <hr>
-                        <!--TODO: make this area scrollable-->
-                        <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
-                        <div>
-                            <!--Ability to edit values-->
-                            <ul>
-                                <li>Tithing: 10%</li>
-                                <li>Savings: 70%</li>
-                                <li>Fun: 20%</li>
-                            </ul>
-                            <button type="button">Edit</button>
-                            <button type="button">Save</button>
-                        </div>
-                    </div>
-                </section>
-<hr>
-                <!--Withdraw controls-->
-                <h4>Withdraw</h4>
-                <section>
-                    <div>
-                        <input type="number" placeholder="Amount">
-                        <button type="button">Withdraw</button>
-                    </div>
-                    <div>
-                        <label>Date</label>
-                        <input type="date">
-                        <label>Note</label>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label>Source</label>
-                        <select name="withdraw-category">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
-                        </select>
-                    </div>
-                </section>
-<hr>
-                <!--Transfer controls-->
-                <h4>Transfer</h4>
-                <section>
-                    <div>
-                        <input type="number" placeholder="Amount">
-                        <button type="button">Transfer</button>
-                    </div>
-                    <div>
-                        <label>Date</label>
-                        <input type="date">
-                        <label>Note</label>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label>Source</label>
-                        <select name="transfer-source">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
-                        </select>
-                        <label>Destination</label>
-                        <select name="transfer-destination">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
-                        </select>
-                    </div>
-                </section>
-<hr>
-                <!--Category controls-->
-                <h4>Category Controls</h4>
-                <section>
-                    <!--Create category-->
+                    <!--Deposit controls-->
+                    <h4>Deposit</h4>
                     <section>
-                        <input type="text" placeholder="Name">
-                        <button type="button">Create</button>
+                        <div>
+                            <input type="number" placeholder="Amount">
+                            <button type="button">Deposit</button>
+                        </div>
+                        <div>
+                            <label>Date</label>
+                            <input type="date">
+                            <label>Note</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label>Destination</label>
+                            <select name="deposit-destination">
+                                <option>Deposit Ratio</option>
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                        </div>
+                        <div>
+                            <span>Deposit Ratios</span>
+                            <br>
+                            <select name="category-splits">
+                                <option>Default</option>
+                                <option>Create New +</option>
+                            </select>
+                            <hr>
+                            <!--TODO: make this area scrollable-->
+                            <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
+                            <div>
+                                <!--Ability to edit values-->
+                                <ul>
+                                    <li>Tithing: 10%</li>
+                                    <li>Savings: 70%</li>
+                                    <li>Fun: 20%</li>
+                                </ul>
+                                <button type="button">Edit</button>
+                                <button type="button">Save</button>
+                            </div>
+                        </div>
                     </section>
-                    <br><br>
-                    <!--Rename category-->
+    <hr>
+                    <!--Withdraw controls-->
+                    <h4>Withdraw</h4>
                     <section>
                         <div>
-                            <input type="text" placeholder="New Name">
-                            <button type="button">Rename</button>
+                            <input type="number" placeholder="Amount">
+                            <button type="button">Withdraw</button>
                         </div>
                         <div>
-                            <select name="rename-dropdown">
+                            <label>Date</label>
+                            <input type="date">
+                            <label>Note</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label>Source</label>
+                            <select name="withdraw-category">
                                 <option>Tithing</option>
                                 <option>Savings</option>
                                 <option>Fun</option>
                             </select>
                         </div>
                     </section>
-                    <br><br>
-                    <!--Merge categories-->
+    <hr>
+                    <!--Transfer controls-->
+                    <h4>Transfer</h4>
                     <section>
                         <div>
+                            <input type="number" placeholder="Amount">
+                            <button type="button">Transfer</button>
+                        </div>
+                        <div>
+                            <label>Date</label>
+                            <input type="date">
+                            <label>Note</label>
+                            <input type="text">
+                        </div>
+                        <div>
                             <label>Source</label>
-                            <select name="merge-source">
+                            <select name="transfer-source">
                                 <option>Tithing</option>
                                 <option>Savings</option>
                                 <option>Fun</option>
                             </select>
                             <label>Destination</label>
-                            <select name="merge-destination">
+                            <select name="transfer-destination">
                                 <option>Tithing</option>
                                 <option>Savings</option>
                                 <option>Fun</option>
                             </select>
                         </div>
+                    </section>
+    <hr>
+                    <!--Category controls-->
+                    <h4>Category Controls</h4>
+                    <section>
+                        <!--Create category-->
+                        <section>
+                            <input type="text" placeholder="Name">
+                            <button type="button">Create</button>
+                        </section>
+                        <br><br>
+                        <!--Rename category-->
+                        <section>
+                            <div>
+                                <input type="text" placeholder="New Name">
+                                <button type="button">Rename</button>
+                            </div>
+                            <div>
+                                <select name="rename-dropdown">
+                                    <option>Tithing</option>
+                                    <option>Savings</option>
+                                    <option>Fun</option>
+                                </select>
+                            </div>
+                        </section>
+                        <br><br>
+                        <!--Merge categories-->
+                        <section>
+                            <div>
+                                <label>Source</label>
+                                <select name="merge-source">
+                                    <option>Tithing</option>
+                                    <option>Savings</option>
+                                    <option>Fun</option>
+                                </select>
+                                <label>Destination</label>
+                                <select name="merge-destination">
+                                    <option>Tithing</option>
+                                    <option>Savings</option>
+                                    <option>Fun</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="button">Merge</button>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+    <hr>
+                <!--Category breakdown-->
+                <h4>Category Breakdown</h4>
+                <section>
+                    <section>
+                        <!--TODO: make functional and animate-->
+                        <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
+                        <svg width="230" height="230">
+                            <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
+                            <text fill="#000000" font-size="45" justify="center" font-family="Monospace" x="50" y="50%">$0.00</text>
+                        </svg>
+                    </section>
+                    <section>
+                        <!--TODO: make scrolable-->
+                        <ul>
+                            <li>Tithing: $0.00</li>
+                            <li>Savings: $0.00</li>
+                            <li>Fun: $0.00</li>
+                        </ul>
+                    </section>
+                </section>
+    <hr>
+                <!--Logs-->
+                <h4>Logs</h4>
+                <section>
+                    <!--Log selection-->
+                    <section>
+                        <button type="button">&lt;</button>
+                        <span>Category Log</span>
+                        <button type="button">&gt;</button>
+                    </section>
+                    <hr>
+                    <!--Log entries-->
+                    <!--TODO: make scrollable-->
+                    <section>
                         <div>
-                            <button type="button">Merge</button>
+                            <span>9/20/25</span><span style="color: red;">-$10.00</span>
+                            <div>
+                                Note
+                                <button type="button">v</button>
+                                <div>
+                                    Example note content.
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span>9/18/25</span><span style="color: green;">$10.00</span>
+                            <div>
+                                Note
+                                <button type="button">v</button>
+                                <div>
+                                    Example note content.
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </section>
-            </section>
-<hr>
-            <!--Category breakdown-->
-            <h4>Category Breakdown</h4>
-            <section>
-                <section>
-                    <!--TODO: make functional and animate-->
-                    <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
-                    <svg width="230" height="230">
-                        <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
-                        <text fill="#000000" font-size="45" justify="center" font-family="Monospace" x="50" y="50%">$0.00</text>
-                    </svg>
-                </section>
-                <section>
-                    <!--TODO: make scrolable-->
-                    <ul>
-                        <li>Tithing: $0.00</li>
-                        <li>Savings: $0.00</li>
-                        <li>Fun: $0.00</li>
-                    </ul>
-                </section>
-            </section>
-<hr>
-            <!--Logs-->
-            <h4>Logs</h4>
-            <section>
-                <!--Log selection-->
-                <section>
-                    <button type="button">&lt;</button>
-                    <span>Category Log</span>
-                    <button type="button">&gt;</button>
-                </section>
-                <hr>
-                <!--Log entries-->
-                <!--TODO: make scrollable-->
-                <section>
-                    <div>
-                        <span>9/20/25</span><span style="color: red;">-$10.00</span>
-                        <div>
-                            Note
-                            <button type="button">v</button>
-                            <div>
-                                Example note content.
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <span>9/18/25</span><span style="color: green;">$10.00</span>
-                        <div>
-                            Note
-                            <button type="button">v</button>
-                            <div>
-                                Example note content.
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </section>
+            </div>
         </main>
-        <hr>
-        <footer>
-            <span class="text-reset">Preston Clarke</span>
-            <br />
-            <a href="https://github.com/plarke0/startup">GitHub</a>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <!-- Footer -->
+        <div class="container">
+            <footer class="d-flex flex-row justify-content-between border-top mt-1">
+                <span class="mt-2"><p>Preston Clarke</p></span>
+                <span class="mt-2"><a href="https://github.com/plarke0/startup" class="text-decoration-none link-dark">GitHub</a></span>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+            </footer>
+        </div>
     </body>
 </html>
