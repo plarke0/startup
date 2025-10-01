@@ -46,157 +46,159 @@
             </div>
             <!-- Control panel -->
             <div class="container">
-                <!-- Control selection -->
-                <div calss="d-flex flex-row">
-                    <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
-                    <label>Control Type</label>
-                    <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
-                </div>
-                <div id="control-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
-                    <div class="carousel-inner">
-                        <!--Deposit controls-->
-                        <section class="carousel-item active">
-                            <div class="card">
+                <div class="card w-25 h-100">
+                    <div class="card-header text-center">
+                        <!-- Control selection -->
+                        <div calss="d-flex flex-row justify-content-center">
+                            <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
+                            <label>Control Type</label>
+                            <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
+                        </div>
+                    </div>
+                    <div id="control-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <section class="carousel-item active">
+                                <!-- Deposit controls -->
                                 <div class="card-body">
-                                    <h4>Deposit</h4>
+                                    <form class="">
+                                        <h4>Deposit</h4>
+                                        <div>
+                                            <input type="number" placeholder="Amount" class="form-control">
+                                            <button type="submit" class="btn btn-primary">Deposit</button>
+                                        </div>
+                                        <div>
+                                            <label for="deposit-date">Date</label>
+                                            <input id="deposit-date" type="date" class="form-control">
+                                            <label for="deposit-note">Note</label>
+                                            <input id="deposit-note" type="text" class="form-control">
+                                        </div>
+                                        <div>
+                                            <label for="deposit-destination">Destination</label>
+                                            <select id="deposit-destination" class="form-control">
+                                                <option>Deposit Ratio</option>
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="category-splits">Deposit Ratios</label>
+                                            <select id="category-splits" class="form-control">
+                                                <option>Default</option>
+                                                <option>Create New +</option>
+                                            </select>
+                                            <!--TODO: make this area scrollable-->
+                                            <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
+                                            <div class="overflow-auto">
+                                                <!--Ability to edit values-->
+                                                <ul>
+                                                    <li>Tithing: 10%</li>
+                                                    <li>Savings: 70%</li>
+                                                    <li>Fun: 20%</li>
+                                                </ul>
+                                                <button type="button">Edit</button>
+                                                <button type="button">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                            <!--Withdraw controls-->
+                            <section class="carousel-item">
+                                <h4>Withdraw</h4>
+                                <div>
+                                    <input type="number" placeholder="Amount">
+                                    <button type="button">Withdraw</button>
+                                </div>
+                                <div>
+                                    <label>Date</label>
+                                    <input type="date">
+                                    <label>Note</label>
+                                    <input type="text">
+                                </div>
+                                <div>
+                                    <label>Source</label>
+                                    <select name="withdraw-category">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                </div>
+                            </section>
+                            <!--Transfer controls-->
+                            <section class="carousel-item">
+                                <h4>Transfer</h4>
+                                <div>
+                                    <input type="number" placeholder="Amount">
+                                    <button type="button">Transfer</button>
+                                </div>
+                                <div>
+                                    <label>Date</label>
+                                    <input type="date">
+                                    <label>Note</label>
+                                    <input type="text">
+                                </div>
+                                <div>
+                                    <label>Source</label>
+                                    <select name="transfer-source">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                    <label>Destination</label>
+                                    <select name="transfer-destination">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                </div>
+                            </section>
+                            <!--Category controls-->
+                            <section class="carousel-item">
+                                <h4>Category Controls</h4>
+                                <!--Create category-->
+                                <section>
+                                    <input type="text" placeholder="Name">
+                                    <button type="button">Create</button>
+                                </section>
+                                <br><br>
+                                <!--Rename category-->
+                                <section>
                                     <div>
-                                        <input type="number" placeholder="Amount">
-                                        <button type="button">Deposit</button>
+                                        <input type="text" placeholder="New Name">
+                                        <button type="button">Rename</button>
                                     </div>
                                     <div>
-                                        <label>Date</label>
-                                        <input type="date">
-                                        <label>Note</label>
-                                        <input type="text">
+                                        <select name="rename-dropdown">
+                                            <option>Tithing</option>
+                                            <option>Savings</option>
+                                            <option>Fun</option>
+                                        </select>
                                     </div>
+                                </section>
+                                <br><br>
+                                <!--Merge categories-->
+                                <section>
                                     <div>
+                                        <label>Source</label>
+                                        <select name="merge-source">
+                                            <option>Tithing</option>
+                                            <option>Savings</option>
+                                            <option>Fun</option>
+                                        </select>
                                         <label>Destination</label>
-                                        <select name="deposit-destination">
-                                            <option>Deposit Ratio</option>
+                                        <select name="merge-destination">
                                             <option>Tithing</option>
                                             <option>Savings</option>
                                             <option>Fun</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <span>Deposit Ratios</span>
-                                        <br>
-                                        <select name="category-splits">
-                                            <option>Default</option>
-                                            <option>Create New +</option>
-                                        </select>
-                                        <hr>
-                                        <!--TODO: make this area scrollable-->
-                                        <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
-                                        <div>
-                                            <!--Ability to edit values-->
-                                            <ul>
-                                                <li>Tithing: 10%</li>
-                                                <li>Savings: 70%</li>
-                                                <li>Fun: 20%</li>
-                                            </ul>
-                                            <button type="button">Edit</button>
-                                            <button type="button">Save</button>
-                                        </div>
+                                        <button type="button">Merge</button>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!--Withdraw controls-->
-                        <section class="carousel-item">
-                            <h4>Withdraw</h4>
-                            <div>
-                                <input type="number" placeholder="Amount">
-                                <button type="button">Withdraw</button>
-                            </div>
-                            <div>
-                                <label>Date</label>
-                                <input type="date">
-                                <label>Note</label>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <label>Source</label>
-                                <select name="withdraw-category">
-                                    <option>Tithing</option>
-                                    <option>Savings</option>
-                                    <option>Fun</option>
-                                </select>
-                            </div>
-                        </section>
-                        <!--Transfer controls-->
-                        <section class="carousel-item">
-                            <h4>Transfer</h4>
-                            <div>
-                                <input type="number" placeholder="Amount">
-                                <button type="button">Transfer</button>
-                            </div>
-                            <div>
-                                <label>Date</label>
-                                <input type="date">
-                                <label>Note</label>
-                                <input type="text">
-                            </div>
-                            <div>
-                                <label>Source</label>
-                                <select name="transfer-source">
-                                    <option>Tithing</option>
-                                    <option>Savings</option>
-                                    <option>Fun</option>
-                                </select>
-                                <label>Destination</label>
-                                <select name="transfer-destination">
-                                    <option>Tithing</option>
-                                    <option>Savings</option>
-                                    <option>Fun</option>
-                                </select>
-                            </div>
-                        </section>
-                        <!--Category controls-->
-                        <section class="carousel-item">
-                            <h4>Category Controls</h4>
-                            <!--Create category-->
-                            <section>
-                                <input type="text" placeholder="Name">
-                                <button type="button">Create</button>
+                                </section>
                             </section>
-                            <br><br>
-                            <!--Rename category-->
-                            <section>
-                                <div>
-                                    <input type="text" placeholder="New Name">
-                                    <button type="button">Rename</button>
-                                </div>
-                                <div>
-                                    <select name="rename-dropdown">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                </div>
-                            </section>
-                            <br><br>
-                            <!--Merge categories-->
-                            <section>
-                                <div>
-                                    <label>Source</label>
-                                    <select name="merge-source">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                    <label>Destination</label>
-                                    <select name="merge-destination">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <button type="button">Merge</button>
-                                </div>
-                            </section>
-                        </section>
+                        </div>
                     </div>
                 </div>
     <hr>
