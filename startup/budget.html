@@ -66,7 +66,7 @@
                                                     <input type="number" placeholder="Amount" class="form-control">
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-primary">Deposit</button>
+                                                    <button type="button" class="btn btn-primary">Deposit</button>
                                                 </div>
                                             </div>
                                             <div>
@@ -119,7 +119,7 @@
                                                         <input type="number" placeholder="Amount" class="form-control">
                                                     </div>
                                                     <div class="col">
-                                                        <button type="submit" class="btn btn-primary">Withdraw</button>
+                                                        <button type="button" class="btn btn-primary">Withdraw</button>
                                                     </div>
                                                 </div>
                                             <div>
@@ -141,30 +141,38 @@
                                 </section>
                                 <!--Transfer controls-->
                                 <section class="carousel-item">
-                                    <h4>Transfer</h4>
-                                    <div>
-                                        <input type="number" placeholder="Amount">
-                                        <button type="button">Transfer</button>
-                                    </div>
-                                    <div>
-                                        <label>Date</label>
-                                        <input type="date">
-                                        <label>Note</label>
-                                        <input type="text">
-                                    </div>
-                                    <div>
-                                        <label>Source</label>
-                                        <select name="transfer-source">
-                                            <option>Tithing</option>
-                                            <option>Savings</option>
-                                            <option>Fun</option>
-                                        </select>
-                                        <label>Destination</label>
-                                        <select name="transfer-destination">
-                                            <option>Tithing</option>
-                                            <option>Savings</option>
-                                            <option>Fun</option>
-                                        </select>
+                                    <div class="card-body">
+                                        <form>
+                                            <h4>Transfer</h4>
+                                                <div class="row g-1">
+                                                    <div class="col">
+                                                        <input type="number" placeholder="Amount" class="form-control">
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-primary">Transfer</button>
+                                                    </div>
+                                                </div>
+                                            <div>
+                                                <label for="transfer-date">Date</label>
+                                                <input id="transfer-date" type="date" class="form-control">
+                                                <label for="transfer-note">Note</label>
+                                                <input id="transfer-note" type="text" class="form-control">
+                                            </div>
+                                            <div>
+                                                <label for="transfer-source">Source</label>
+                                                <select id="transfer-source" class="form-select">
+                                                    <option>Tithing</option>
+                                                    <option>Savings</option>
+                                                    <option>Fun</option>
+                                                </select>
+                                                <label for="transfer-destination">Destination</label>
+                                                <select id="transfer-destination" class="form-select">
+                                                    <option>Tithing</option>
+                                                    <option>Savings</option>
+                                                    <option>Fun</option>
+                                                </select>
+                                            </div>
+                                        </form>
                                     </div>
                                 </section>
                                 <!--Category controls-->
