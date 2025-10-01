@@ -46,8 +46,8 @@
             </div>
             <!-- Control panel -->
             <div class="container">
-                <div class="d-flex flex-row justify-content-between">
-                    <div class="card w-25 h-100">
+                <div class="d-flex flex-column flex-sm-row justify-content-between">
+                    <div class="card">
                         <div class="card-header text-center">
                             <!-- Control selection -->
                             <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
@@ -92,17 +92,15 @@
                                                         <option>Create New +</option>
                                                     </select>
                                                 </div>
-                                                <div class="card-body">
                                                 <!--TODO: make this area scrollable-->
                                                 <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
                                                 <!--https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap-->
-                                                    <!--Ability to edit values-->
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item">Tithing: 10%</li>
-                                                        <li class="list-group-item">Savings: 70%</li>
-                                                        <li class="list-group-item">Fun: 20%</li>
-                                                    </ul>
-                                                </div>
+                                                <!--Ability to edit values-->
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Tithing: 10%</li>
+                                                    <li class="list-group-item">Savings: 70%</li>
+                                                    <li class="list-group-item">Fun: 20%</li>
+                                                </ul>
                                                 <div class="card-footer">
                                                     <button type="button" class="btn btn-primary">Edit</button>
                                                     <button type="button" class="btn btn-primary">Save</button>
@@ -230,39 +228,39 @@
                         </section>
                     </section>
                     <!--Logs-->
-                    <section>
+                    <div class="card">
                         <!--Log selection-->
-                        <section>
-                            <button type="button">&lt;</button>
+                        <div class="card-header">
+                            <button type="button" class="btn btn-outline-dark">&lt;</button>
                             <span>Category Log</span>
-                            <button type="button">&gt;</button>
-                        </section>
-                        <hr>
+                            <button type="button" class="btn btn-outline-dark">&gt;</button>
+                        </div>
                         <!--Log entries-->
+
                         <!--TODO: make scrollable-->
-                        <section>
-                            <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
                                 <span>9/20/25</span><span style="color: red;">-$10.00</span>
                                 <div>
                                     Note
-                                    <button type="button">v</button>
-                                    <div>
+                                    <button type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#note-1">v</button>
+                                    <div id="note-1" class="collapse">
                                         Example note content.
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </li>
+                            <li class="list-group-item">
                                 <span>9/18/25</span><span style="color: green;">$10.00</span>
                                 <div>
                                     Note
-                                    <button type="button">v</button>
-                                    <div>
-                                        Example note content.
+                                    <button type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#note-0">v</button>
+                                    <div id="note-0" class="collapse">
+                                        Really long example note content.
                                     </div>
                                 </div>
-                            </div>
+                            </li>
                         </section>
-                    </section>
+                    </div>
                 </div>
             </div>
         </main>
