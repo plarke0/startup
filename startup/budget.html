@@ -47,7 +47,7 @@
             <!-- Control panel -->
             <div class="container">
                 <div class="d-flex flex-column flex-sm-row justify-content-between">
-                    <div class="card">
+                    <div class="card w-100 mb-2">
                         <div class="card-header text-center">
                             <!-- Control selection -->
                             <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
@@ -208,27 +208,30 @@
                         </div>
                     </div>
                     <!--Category breakdown-->
-                    <section>
+                    <div class="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
                         <h4>Category Breakdown</h4>
                         <section>
                             <!--TODO: make functional and animate-->
                             <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
                             <svg width="230" height="230">
                                 <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
-                                <text fill="#000000" font-size="45" justify="center" font-family="Monospace" x="50" y="50%">$0.00</text>
+                                <text fill="#000000" font-size="40" justify="center" font-family="Monospace" x="40" y="125">$10.00</text>
                             </svg>
                         </section>
-                        <section>
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h5>Categories:</h5>
+                            </div>
                             <!--TODO: make scrolable-->
-                            <ul>
-                                <li>Tithing: $0.00</li>
-                                <li>Savings: $0.00</li>
-                                <li>Fun: $0.00</li>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Tithing: $0.00</li>
+                                <li class="list-group-item">Savings: $0.00</li>
+                                <li class="list-group-item">Fun: $0.00</li>
                             </ul>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
                     <!--Logs-->
-                    <div class="card">
+                    <div class="card w-100">
                         <!--Log selection-->
                         <div class="card-header text-center">
                             <button type="button" class="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
