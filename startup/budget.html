@@ -177,48 +177,65 @@
                                 </section>
                                 <!--Category controls-->
                                 <section class="carousel-item">
-                                    <h4>Category Controls</h4>
-                                    <!--Create category-->
-                                    <section>
-                                        <input type="text" placeholder="Name">
-                                        <button type="button">Create</button>
-                                    </section>
-                                    <br><br>
-                                    <!--Rename category-->
-                                    <section>
-                                        <div>
-                                            <input type="text" placeholder="New Name">
-                                            <button type="button">Rename</button>
-                                        </div>
-                                        <div>
-                                            <select name="rename-dropdown">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                    <br><br>
-                                    <!--Merge categories-->
-                                    <section>
-                                        <div>
-                                            <label>Source</label>
-                                            <select name="merge-source">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                            <label>Destination</label>
-                                            <select name="merge-destination">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <button type="button">Merge</button>
-                                        </div>
-                                    </section>
+                                    <div class="card-body">
+                                        <form>
+                                            <h4>Category Controls</h4>
+                                            <ul class="list-group list-group-flush">
+                                                <!--Create category-->
+                                                <li class="list-group-item">
+                                                    <h6>Create Category:</h6>
+                                                    <div class="row g-1">
+                                                        <div class="col">
+                                                            <input type="text" placeholder="Name" class="form-control">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button"  class="btn btn-primary">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--Rename category-->
+                                                <li class="list-group-item">
+                                                    <h6>Rename:</h6>
+                                                    <div>
+                                                        <select id="rename-dropdown" class="form-select mb-2">
+                                                            <option>Tithing</option>
+                                                            <option>Savings</option>
+                                                            <option>Fun</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="row g-1">
+                                                        <div class="col">
+                                                            <input type="text" placeholder="New Name" class="form-control">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button"  class="btn btn-primary">Rename</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--Merge categories-->
+                                                <li class="list-group-item">
+                                                    <h6>Merge:</h6>
+                                                    <div>
+                                                        <label for="merge-source">Source</label>
+                                                        <select id="merge-source" class="form-select mb-2">
+                                                            <option>Tithing</option>
+                                                            <option>Savings</option>
+                                                            <option>Fun</option>
+                                                        </select>
+                                                        <label for="merge-destination">Destination</label>
+                                                        <select id="merge-destination" class="form-select mb-2">
+                                                            <option>Tithing</option>
+                                                            <option>Savings</option>
+                                                            <option>Fun</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" class="btn btn-primary">Merge</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
                                 </section>
                             </div>
                         </div>
