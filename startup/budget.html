@@ -111,24 +111,32 @@
                                 </section>
                                 <!--Withdraw controls-->
                                 <section class="carousel-item">
-                                    <h4>Withdraw</h4>
-                                    <div>
-                                        <input type="number" placeholder="Amount">
-                                        <button type="button">Withdraw</button>
-                                    </div>
-                                    <div>
-                                        <label>Date</label>
-                                        <input type="date">
-                                        <label>Note</label>
-                                        <input type="text">
-                                    </div>
-                                    <div>
-                                        <label>Source</label>
-                                        <select name="withdraw-category">
-                                            <option>Tithing</option>
-                                            <option>Savings</option>
-                                            <option>Fun</option>
-                                        </select>
+                                    <div class="card-body">
+                                        <form>
+                                            <h4>Withdraw</h4>
+                                                <div class="row g-1">
+                                                    <div class="col">
+                                                        <input type="number" placeholder="Amount" class="form-control">
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-primary">Withdraw</button>
+                                                    </div>
+                                                </div>
+                                            <div>
+                                                <label for="withdraw-date">Date</label>
+                                                <input id="withdraw-date" type="date" class="form-control">
+                                                <label for="withdraw-note">Note</label>
+                                                <input id="withdraw-note" type="text" class="form-control">
+                                            </div>
+                                            <div>
+                                                <label for="withdraw-category">Source</label>
+                                                <select id="withdraw-category" class="form-select">
+                                                    <option>Tithing</option>
+                                                    <option>Savings</option>
+                                                    <option>Fun</option>
+                                                </select>
+                                            </div>
+                                        </form>
                                     </div>
                                 </section>
                                 <!--Transfer controls-->
