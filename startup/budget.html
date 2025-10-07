@@ -10,348 +10,319 @@
     </head>
     <body>
         <!-- Header -->
-        <div class="container">
-            <header class="d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
-                <a href="index.html" class="mb-1 text-dark text-decoration-none">
-                    <h1>Plarke.net</h1>
-                </a>
-                <menu class="nav mb-1 justify-content-center">
-                    <li><a href="index.html" class="nav-link link-dark">Home</a></li>
-                    <li><a href="budget.html" class="nav-link link-secondary">Budget Center</a></li>
-                    <li><a href="login.html" class="nav-link link-dark">Login</a></li>
-                    <li><a href="signup.html" class="nav-link link-dark">Signup</a></li>
-                    <li><a href="about.html" class="nav-link link-dark">About</a></li>
-                </menu>
-            </header>
+        <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
+            <a href="index.html" class="mb-1 text-dark text-decoration-none">
+                <h1>Plarke.net</h1>
+            </a>
+            <menu class="nav mb-1 justify-content-center">
+                <li><a href="index.html" class="nav-link link-dark">Home</a></li>
+                <li><a href="budget.html" class="nav-link link-secondary">Budget Center</a></li>
+                <li><a href="login.html" class="nav-link link-dark">Login</a></li>
+                <li><a href="signup.html" class="nav-link link-dark">Signup</a></li>
+                <li><a href="about.html" class="nav-link link-dark">About</a></li>
+            </menu>
+        </div>
+        <!-- Action Bar -->
+        <div class="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
+            <div class="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
+                <button type="button" class="btn">Undo</button>
+                <button type="button" class="btn">Redo</button>
+                <button type="button" class="btn">Save</button>
+                <button type="button" class="btn">Log Out</button>
+            </div>
+            <div id="username" class="d-flex justify-content-center order-last order-sm-1">
+                <b>Username</b>
+            </div>
+            <div class="d-flex col-sm-5 justify-content-center justify-content-sm-end order-2">
+                <!-- Live user count through websocket -->
+                <div class="mx-2">Total users: <span id="total-users">0</span></div>
+                <div class="mx-2">Active now: <span id="active-users">0</span></div>
+            </div>
         </div>
         <main>
-            <!-- Action Bar -->
-            <div class="container mb-2">
-                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom">
-                    <section class="d-flex justify-content-center order-0">
-                        <button type="button" class="btn">Undo</button>
-                        <button type="button" class="btn">Redo</button>
-                        <button type="button" class="btn">Save</button>
-                        <button type="button" class="btn">Log Out</button>
-                    </section>
-                    <!-- set end flexes to the same width to center corecctly -->
-                    <section id="username" class="d-flex justify-content-center order-last order-sm-1">
-                        <b>Username</b>
-                    </section>
-                    <section class="d-flex justify-content-center order-2">
-                        <!-- Live user count through websocket -->
-                        <div class="mx-2">Total users: <span id="total-users">0</span></div>
-                        <div class="mx-2">Active now: <span id="active-users">0</span></div>
-                    </section>
-                </div>
-            </div>
-            <!-- Control panel -->
-            <div class="container">
-                <div class="d-flex flex-column flex-sm-row justify-content-between">
-                    <div class="card w-100 mb-2">
-                        <div class="card-header text-center">
-                            <!-- Control selection -->
-                            <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
-                            <label>Control Type</label>
-                            <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
-                        </div>
-                        <div id="control-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
-                            <div class="carousel-inner">
-                                <section class="carousel-item active">
-                                    <!-- Deposit controls -->
-                                    <div class="card-body">
-                                        <form>
-                                            <h4>Deposit</h4>
+            <!-- Main div -->
+            <div class="container d-flex flex-column flex-sm-row justify-content-between">
+                <!-- Control panel -->
+                <div class="card w-100 mb-2">
+                    <!-- Control selection -->
+                    <div class="card-header text-center">
+                        <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
+                        <label>Control Type</label>
+                        <button type="button" class="btn btn-outline-dark" type="button" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
+                    </div>
+                    <!-- Control panels -->
+                    <div id="control-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <!-- Deposit controls -->
+                            <div class="carousel-item card-body active">
+                                <form>
+                                    <h4>Deposit</h4>
+                                    <div class="row g-1">
+                                        <div class="col">
+                                            <input type="number" placeholder="Amount" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary">Deposit</button>
+                                        </div>
+                                    </div>
+                                    <label for="deposit-date">Date</label>
+                                    <input id="deposit-date" type="date" class="form-control">
+                                    <label for="deposit-note">Note</label>
+                                    <input id="deposit-note" type="text" class="form-control">
+                                    <label for="deposit-destination">Destination</label>
+                                    <select id="deposit-destination" class="form-select">
+                                        <option>Deposit Ratio</option>
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                    <div class="card mt-2">
+                                        <div class="card-header">
+                                            <label for="category-splits">Deposit Ratios</label>
+                                            <select id="category-splits" class="form-select">
+                                                <option>Default</option>
+                                                <option>Create New +</option>
+                                            </select>
+                                        </div>
+                                        <!-- TODO: make this area scrollable -->
+                                        <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
+                                        <!--https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap-->
+                                        <!-- Ability to edit values -->
+                                        <!-- overflow-x/y/auto -->
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Tithing: 10%</li>
+                                            <li class="list-group-item">Savings: 70%</li>
+                                            <li class="list-group-item">Fun: 20%</li>
+                                        </ul>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Withdraw controls -->
+                            <div class="carousel-item card-body">
+                                <form>
+                                    <h4>Withdraw</h4>
+                                    <div class="row g-1">
+                                        <div class="col">
+                                            <input type="number" placeholder="Amount" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary">Withdraw</button>
+                                        </div>
+                                    </div>
+                                    <label for="withdraw-date">Date</label>
+                                    <input id="withdraw-date" type="date" class="form-control">
+                                    <label for="withdraw-note">Note</label>
+                                    <input id="withdraw-note" type="text" class="form-control">
+                                    <label for="withdraw-category">Source</label>
+                                    <select id="withdraw-category" class="form-select">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <!-- Transfer controls -->
+                            <div class="carousel-item card-body">
+                                <form>
+                                    <h4>Transfer</h4>
+                                    <div class="row g-1">
+                                        <div class="col">
+                                            <input type="number" placeholder="Amount" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary">Transfer</button>
+                                        </div>
+                                    </div>
+                                    <label for="transfer-date">Date</label>
+                                    <input id="transfer-date" type="date" class="form-control">
+                                    <label for="transfer-note">Note</label>
+                                    <input id="transfer-note" type="text" class="form-control">
+                                    <label for="transfer-source">Source</label>
+                                    <select id="transfer-source" class="form-select">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                    <label for="transfer-destination">Destination</label>
+                                    <select id="transfer-destination" class="form-select">
+                                        <option>Tithing</option>
+                                        <option>Savings</option>
+                                        <option>Fun</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <!-- Category controls -->
+                            <div class="carousel-item card-body">
+                                <form>
+                                    <h4>Category Controls</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <!-- Create category -->
+                                        <li class="list-group-item">
+                                            <h6>Create Category:</h6>
                                             <div class="row g-1">
                                                 <div class="col">
-                                                    <input type="number" placeholder="Amount" class="form-control">
+                                                    <input type="text" placeholder="Name" class="form-control">
                                                 </div>
                                                 <div class="col">
-                                                    <button type="button" class="btn btn-primary">Deposit</button>
+                                                    <button type="button"  class="btn btn-primary">Create</button>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <label for="deposit-date">Date</label>
-                                                <input id="deposit-date" type="date" class="form-control">
-                                                <label for="deposit-note">Note</label>
-                                                <input id="deposit-note" type="text" class="form-control">
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="deposit-destination">Destination</label>
-                                                <select id="deposit-destination" class="form-select">
-                                                    <option>Deposit Ratio</option>
-                                                    <option>Tithing</option>
-                                                    <option>Savings</option>
-                                                    <option>Fun</option>
-                                                </select>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <label for="category-splits">Deposit Ratios</label>
-                                                    <select id="category-splits" class="form-select">
-                                                        <option>Default</option>
-                                                        <option>Create New +</option>
-                                                    </select>
+                                        </li>
+                                        <!-- Rename category -->
+                                        <li class="list-group-item">
+                                            <h6>Rename:</h6>
+                                            <select id="rename-dropdown" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <div class="row g-1">
+                                                <div class="col">
+                                                    <input type="text" placeholder="New Name" class="form-control">
                                                 </div>
-                                                <!--TODO: make this area scrollable-->
-                                                <!--https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is-->
-                                                <!--https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap-->
-                                                <!--Ability to edit values-->
-                                                <!-- overflow-x/y/auto -->
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Tithing: 10%</li>
-                                                    <li class="list-group-item">Savings: 70%</li>
-                                                    <li class="list-group-item">Fun: 20%</li>
-                                                </ul>
-                                                <div class="card-footer">
-                                                    <button type="button" class="btn btn-primary">Edit</button>
-                                                    <button type="button" class="btn btn-primary">Save</button>
+                                                <div class="col">
+                                                    <button type="button"  class="btn btn-primary">Rename</button>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </section>
-                                <!--Withdraw controls-->
-                                <section class="carousel-item">
-                                    <div class="card-body">
-                                        <form>
-                                            <h4>Withdraw</h4>
-                                                <div class="row g-1">
-                                                    <div class="col">
-                                                        <input type="number" placeholder="Amount" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-primary">Withdraw</button>
-                                                    </div>
-                                                </div>
-                                            <div>
-                                                <label for="withdraw-date">Date</label>
-                                                <input id="withdraw-date" type="date" class="form-control">
-                                                <label for="withdraw-note">Note</label>
-                                                <input id="withdraw-note" type="text" class="form-control">
-                                            </div>
-                                            <div>
-                                                <label for="withdraw-category">Source</label>
-                                                <select id="withdraw-category" class="form-select">
-                                                    <option>Tithing</option>
-                                                    <option>Savings</option>
-                                                    <option>Fun</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </section>
-                                <!--Transfer controls-->
-                                <section class="carousel-item">
-                                    <div class="card-body">
-                                        <form>
-                                            <h4>Transfer</h4>
-                                                <div class="row g-1">
-                                                    <div class="col">
-                                                        <input type="number" placeholder="Amount" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-primary">Transfer</button>
-                                                    </div>
-                                                </div>
-                                            <div>
-                                                <label for="transfer-date">Date</label>
-                                                <input id="transfer-date" type="date" class="form-control">
-                                                <label for="transfer-note">Note</label>
-                                                <input id="transfer-note" type="text" class="form-control">
-                                            </div>
-                                            <div>
-                                                <label for="transfer-source">Source</label>
-                                                <select id="transfer-source" class="form-select">
-                                                    <option>Tithing</option>
-                                                    <option>Savings</option>
-                                                    <option>Fun</option>
-                                                </select>
-                                                <label for="transfer-destination">Destination</label>
-                                                <select id="transfer-destination" class="form-select">
-                                                    <option>Tithing</option>
-                                                    <option>Savings</option>
-                                                    <option>Fun</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </section>
-                                <!--Category controls-->
-                                <section class="carousel-item">
-                                    <div class="card-body">
-                                        <form>
-                                            <h4>Category Controls</h4>
-                                            <ul class="list-group list-group-flush">
-                                                <!--Create category-->
-                                                <li class="list-group-item">
-                                                    <h6>Create Category:</h6>
-                                                    <div class="row g-1">
-                                                        <div class="col">
-                                                            <input type="text" placeholder="Name" class="form-control">
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button"  class="btn btn-primary">Create</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <!--Rename category-->
-                                                <li class="list-group-item">
-                                                    <h6>Rename:</h6>
-                                                    <div>
-                                                        <select id="rename-dropdown" class="form-select mb-2">
-                                                            <option>Tithing</option>
-                                                            <option>Savings</option>
-                                                            <option>Fun</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="row g-1">
-                                                        <div class="col">
-                                                            <input type="text" placeholder="New Name" class="form-control">
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="button"  class="btn btn-primary">Rename</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <!--Merge categories-->
-                                                <li class="list-group-item">
-                                                    <h6>Merge:</h6>
-                                                    <div>
-                                                        <label for="merge-source">Source</label>
-                                                        <select id="merge-source" class="form-select mb-2">
-                                                            <option>Tithing</option>
-                                                            <option>Savings</option>
-                                                            <option>Fun</option>
-                                                        </select>
-                                                        <label for="merge-destination">Destination</label>
-                                                        <select id="merge-destination" class="form-select mb-2">
-                                                            <option>Tithing</option>
-                                                            <option>Savings</option>
-                                                            <option>Fun</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" class="btn btn-primary">Merge</button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </form>
-                                    </div>
-                                </section>
+                                        </li>
+                                        <!-- Merge categories -->
+                                        <li class="list-group-item">
+                                            <h6>Merge:</h6>
+                                            <label for="merge-source">Source</label>
+                                            <select id="merge-source" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <label for="merge-destination">Destination</label>
+                                            <select id="merge-destination" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <button type="button" class="btn btn-primary">Merge</button>
+                                        </li>
+                                    </ul>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <!--Category breakdown-->
-                    <div class="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
-                        <h4>Category Breakdown</h4>
-                        <section>
-                            <!--TODO: make functional and animate-->
-                            <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
-                            <svg width="230" height="230">
-                                <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
-                                <text fill="#000000" font-size="40" justify="center" font-family="Monospace" x="40" y="125">$10.00</text>
-                            </svg>
-                        </section>
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h5>Categories:</h5>
-                            </div>
-                            <!--TODO: make scrolable-->
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Tithing: $0.00</li>
-                                <li class="list-group-item">Savings: $0.00</li>
-                                <li class="list-group-item">Fun: $0.00</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--Logs-->
-                    <div class="card w-100">
-                        <!--Log selection-->
+                </div>
+                <!-- Category breakdown -->
+                <div class="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
+                    <h4>Category Breakdown</h4>
+                    <!-- TODO: make functional and animate -->
+                    <!--https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js-->
+                    <svg width="230" height="230">
+                        <circle cx="110" cy="110" r="80" stroke="green" stroke-width="40" fill="#ffffff"/>
+                        <text fill="#000000" font-size="40" justify="center" font-family="Monospace" x="40" y="125">$10.00</text>
+                    </svg>
+                    <div class="card col-11 col-lg-8 col-xl-6">
                         <div class="card-header text-center">
-                            <button type="button" class="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
-                            <span>Category Log</span>
-                            <button type="button" class="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="next">&gt;</button>
+                            <h5>Categories:</h5>
                         </div>
-                        <!--Log entries-->
-                        <div id="log-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="card-header text-center">
-                                        <h4>Savings</h4>
-                                    </div>
-                                    <!--TODO: make scrollable-->
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>9/20/25</span>
-                                                <span style="color: red;">-$10.00</span>
-                                            </div>
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>
-                                                    <button id="savings-note-1-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-1">Note</button>
-                                                </span>
-                                                <span style="color: gray;">$0.00</span>
-                                            </div>
-                                            <div id="savings-note-1" class="collapse">
-                                                Example note content.
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>9/18/25</span>
-                                                <span style="color: green;">$10.00</span>
-                                            </div>
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>
-                                                    <button id="savings-note-0-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-0">Note</button>
-                                                </span>
-                                                <span style="color: gray;">$10.00</span>
-                                            </div>
-                                            <div id="savings-note-0" class="collapse">
-                                                Really long example note content.
-                                            </div>
-                                        </li>
-                                    </ul>
+                        <!-- TODO: make scrolable -->
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Tithing: $0.00</li>
+                            <li class="list-group-item">Savings: $0.00</li>
+                            <li class="list-group-item">Fun: $0.00</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Logs -->
+                <div class="card w-100">
+                    <!-- Log selection -->
+                    <div class="card-header text-center">
+                        <button type="button" class="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
+                        <span>Category Log</span>
+                        <button type="button" class="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="next">&gt;</button>
+                    </div>
+                    <!-- Log entries -->
+                    <div id="log-carousel" class="carousel carousel-dark-slide" data-bs-ride="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <!-- Log title -->
+                                <div class="card-header text-center">
+                                    <h4>Savings</h4>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="card-header text-center">
-                                        <h4>Fun</h4>
-                                    </div>
-                                    <!--TODO: make scrollable-->
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>9/20/25</span>
-                                                <span style="color: red;">-$5.00</span>
-                                            </div>
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>
-                                                    <button id="fun-note-1-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-1">Note</button>
-                                                </span>
-                                                <span style="color: gray;">$10.00</span>
-                                            </div>
-                                            <div id="fun-note-1" class="collapse">
-                                                Example note content.
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>9/18/25</span>
-                                                <span style="color: green;">$15.00</span>
-                                            </div>
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <span>
-                                                    <button id="fun-note-0-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-0">Note</button>
-                                                </span>
-                                                <span style="color: gray;">$15.00</span>
-                                            </div>
-                                            <div id="fun-note-0" class="collapse">
-                                                Really long example note content.
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <!-- TODO: make scrollable -->
+                                <!-- Log entries -->
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>9/20/25</span>
+                                            <span style="color: red;">-$10.00</span>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>
+                                                <button id="savings-note-1-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-1">Note</button>
+                                            </span>
+                                            <span style="color: gray;">$0.00</span>
+                                        </div>
+                                        <div id="savings-note-1" class="collapse">
+                                            Example note content.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>9/18/25</span>
+                                            <span style="color: green;">$10.00</span>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>
+                                                <button id="savings-note-0-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-0">Note</button>
+                                            </span>
+                                            <span style="color: gray;">$10.00</span>
+                                        </div>
+                                        <div id="savings-note-0" class="collapse">
+                                            Really long example note content.
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="carousel-item">
+                                <!-- Log title -->
+                                <div class="card-header text-center">
+                                    <h4>Fun</h4>
                                 </div>
+                                <!-- TODO: make scrollable -->
+                                <!-- Log entries -->
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>9/20/25</span>
+                                            <span style="color: red;">-$5.00</span>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>
+                                                <button id="fun-note-1-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-1">Note</button>
+                                            </span>
+                                            <span style="color: gray;">$10.00</span>
+                                        </div>
+                                        <div id="fun-note-1" class="collapse">
+                                            Example note content.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>9/18/25</span>
+                                            <span style="color: green;">$15.00</span>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <span>
+                                                <button id="fun-note-0-btn" type="button" class="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-0">Note</button>
+                                            </span>
+                                            <span style="color: gray;">$15.00</span>
+                                        </div>
+                                        <div id="fun-note-0" class="collapse">
+                                            Really long example note content.
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
