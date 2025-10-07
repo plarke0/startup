@@ -10,41 +10,36 @@
     </head>
     <body>
         <!-- Header -->
-        <div class="container">
-            <header class="d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
-                <a href="index.html" class="mb-1 text-dark text-decoration-none">
-                    <h1>Plarke.net</h1>
-                </a>
-                <menu class="nav mb-1 justify-content-center">
-                    <li><a href="index.html" class="nav-link link-dark">Home</a></li>
-                    <li><a href="budget.html" class="nav-link link-secondary">Budget Center</a></li>
-                    <li><a href="login.html" class="nav-link link-dark">Login</a></li>
-                    <li><a href="signup.html" class="nav-link link-dark">Signup</a></li>
-                    <li><a href="about.html" class="nav-link link-dark">About</a></li>
-                </menu>
-            </header>
+        <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
+            <a href="index.html" class="mb-1 text-dark text-decoration-none">
+                <h1>Plarke.net</h1>
+            </a>
+            <menu class="nav mb-1 justify-content-center">
+                <li><a href="index.html" class="nav-link link-dark">Home</a></li>
+                <li><a href="budget.html" class="nav-link link-secondary">Budget Center</a></li>
+                <li><a href="login.html" class="nav-link link-dark">Login</a></li>
+                <li><a href="signup.html" class="nav-link link-dark">Signup</a></li>
+                <li><a href="about.html" class="nav-link link-dark">About</a></li>
+            </menu>
+        </div>
+        <!-- Action Bar -->
+        <div class="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
+            <div class="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
+                <button type="button" class="btn">Undo</button>
+                <button type="button" class="btn">Redo</button>
+                <button type="button" class="btn">Save</button>
+                <button type="button" class="btn">Log Out</button>
+            </div>
+            <div id="username" class="d-flex justify-content-center order-last order-sm-1">
+                <b>Username</b>
+            </div>
+            <div class="d-flex col-sm-5 justify-content-center justify-content-sm-end order-2">
+                <!-- Live user count through websocket -->
+                <div class="mx-2">Total users: <span id="total-users">0</span></div>
+                <div class="mx-2">Active now: <span id="active-users">0</span></div>
+            </div>
         </div>
         <main>
-            <!-- Action Bar -->
-            <div class="container mb-2">
-                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom">
-                    <section class="d-flex justify-content-center order-0">
-                        <button type="button" class="btn">Undo</button>
-                        <button type="button" class="btn">Redo</button>
-                        <button type="button" class="btn">Save</button>
-                        <button type="button" class="btn">Log Out</button>
-                    </section>
-                    <!-- set end flexes to the same width to center corecctly -->
-                    <section id="username" class="d-flex justify-content-center order-last order-sm-1">
-                        <b>Username</b>
-                    </section>
-                    <section class="d-flex justify-content-center order-2">
-                        <!-- Live user count through websocket -->
-                        <div class="mx-2">Total users: <span id="total-users">0</span></div>
-                        <div class="mx-2">Active now: <span id="active-users">0</span></div>
-                    </section>
-                </div>
-            </div>
             <!-- Control panel -->
             <div class="container">
                 <div class="d-flex flex-column flex-sm-row justify-content-between">
