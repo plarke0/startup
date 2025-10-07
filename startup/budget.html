@@ -156,67 +156,59 @@
                                 </form>
                             </div>
                             <!--Category controls-->
-                            <section class="carousel-item">
-                                <div class="card-body">
-                                    <form>
-                                        <h4>Category Controls</h4>
-                                        <ul class="list-group list-group-flush">
-                                            <!--Create category-->
-                                            <li class="list-group-item">
-                                                <h6>Create Category:</h6>
-                                                <div class="row g-1">
-                                                    <div class="col">
-                                                        <input type="text" placeholder="Name" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button"  class="btn btn-primary">Create</button>
-                                                    </div>
+                            <div class="carousel-item card-body">
+                                <form>
+                                    <h4>Category Controls</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <!--Create category-->
+                                        <li class="list-group-item">
+                                            <h6>Create Category:</h6>
+                                            <div class="row g-1">
+                                                <div class="col">
+                                                    <input type="text" placeholder="Name" class="form-control">
                                                 </div>
-                                            </li>
-                                            <!--Rename category-->
-                                            <li class="list-group-item">
-                                                <h6>Rename:</h6>
-                                                <div>
-                                                    <select id="rename-dropdown" class="form-select mb-2">
-                                                        <option>Tithing</option>
-                                                        <option>Savings</option>
-                                                        <option>Fun</option>
-                                                    </select>
+                                                <div class="col">
+                                                    <button type="button"  class="btn btn-primary">Create</button>
                                                 </div>
-                                                <div class="row g-1">
-                                                    <div class="col">
-                                                        <input type="text" placeholder="New Name" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button"  class="btn btn-primary">Rename</button>
-                                                    </div>
+                                            </div>
+                                        </li>
+                                        <!--Rename category-->
+                                        <li class="list-group-item">
+                                            <h6>Rename:</h6>
+                                            <select id="rename-dropdown" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <div class="row g-1">
+                                                <div class="col">
+                                                    <input type="text" placeholder="New Name" class="form-control">
                                                 </div>
-                                            </li>
-                                            <!--Merge categories-->
-                                            <li class="list-group-item">
-                                                <h6>Merge:</h6>
-                                                <div>
-                                                    <label for="merge-source">Source</label>
-                                                    <select id="merge-source" class="form-select mb-2">
-                                                        <option>Tithing</option>
-                                                        <option>Savings</option>
-                                                        <option>Fun</option>
-                                                    </select>
-                                                    <label for="merge-destination">Destination</label>
-                                                    <select id="merge-destination" class="form-select mb-2">
-                                                        <option>Tithing</option>
-                                                        <option>Savings</option>
-                                                        <option>Fun</option>
-                                                    </select>
+                                                <div class="col">
+                                                    <button type="button"  class="btn btn-primary">Rename</button>
                                                 </div>
-                                                <div>
-                                                    <button type="button" class="btn btn-primary">Merge</button>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </section>
+                                            </div>
+                                        </li>
+                                        <!--Merge categories-->
+                                        <li class="list-group-item">
+                                            <h6>Merge:</h6>
+                                            <label for="merge-source">Source</label>
+                                            <select id="merge-source" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <label for="merge-destination">Destination</label>
+                                            <select id="merge-destination" class="form-select mb-2">
+                                                <option>Tithing</option>
+                                                <option>Savings</option>
+                                                <option>Fun</option>
+                                            </select>
+                                            <button type="button" class="btn btn-primary">Merge</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
