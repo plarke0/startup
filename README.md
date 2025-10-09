@@ -23,9 +23,9 @@ Have you ever struggled to stick to a budget? Have you ever wanted to cut down o
 
 ### Design
 
-![Sign up design image](./images/SignUp.png)
-![Login design image](./images/Login.png)
-![Budget design image](./images/Budget.JPG)
+![Sign up design image](./readme-images/SignUp.png)
+![Login design image](./readme-images/Login.png)
+![Budget design image](./readme-images/Budget.JPG)
 
 Here is a sequence diagram that shows how you would interact with the server to make a deposit and a withdrawl:
 
@@ -99,9 +99,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** - I bundled my site using Vite.
+- [X] **Components** - I made each of the bodies of the pages in my web site into React ccomponents. I also separated the header and footer into seperate components to make the structure cleaner.
+- [X] **Router** - I modified my navigation bar to change it to NavLinks and to use the React Router.
 
 ## 🚀 React part 2: Reactivity deliverable
 
