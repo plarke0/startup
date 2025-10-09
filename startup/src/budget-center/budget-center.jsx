@@ -24,15 +24,16 @@ function ActionBar() {
 export function BudgetCenter() {
   return (
     <main>
+        <ActionBar />
         {/* Main div */}
         <div className="container d-flex flex-column flex-sm-row justify-content-between">
             {/* Control panel */}
             <div className="card w-100 mb-2">
                 {/* Control selection */}
                 <div className="card-header text-center">
-                    <button type="button" className="btn btn-outline-dark" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
+                    <button type="button" className="btn btn-outline-dark me-1" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
                     <label>Control Type</label>
-                    <button type="button" className="btn btn-outline-dark" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
+                    <button type="button" className="btn btn-outline-dark ms-1" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
                 </div>
                 {/* Control panels */}
                 <div id="control-carousel" className="carousel carousel-dark-slide" data-bs-ride="false">
@@ -79,7 +80,7 @@ export function BudgetCenter() {
                                         <li className="list-group-item">Fun: 20%</li>
                                     </ul>
                                     <div className="card-footer">
-                                        <button type="button" className="btn btn-primary">Edit</button>
+                                        <button type="button" className="btn btn-primary me-1">Edit</button>
                                         <button type="button" className="btn btn-primary">Save</button>
                                     </div>
                                 </div>
@@ -221,9 +222,9 @@ export function BudgetCenter() {
             <div className="card w-100">
                 {/* Log selection */}
                 <div className="card-header text-center">
-                    <button type="button" className="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
+                    <button type="button" className="btn btn-outline-dark me-1" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
                     <span>Category Log</span>
-                    <button type="button" className="btn btn-outline-dark" data-bs-target="#log-carousel" data-bs-slide="next">&gt;</button>
+                    <button type="button" className="btn btn-outline-dark ms-1" data-bs-target="#log-carousel" data-bs-slide="next">&gt;</button>
                 </div>
                 {/* Log entries */}
                 <div id="log-carousel" className="carousel carousel-dark-slide" data-bs-ride="false">
