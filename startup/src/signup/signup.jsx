@@ -1,5 +1,8 @@
 import React from 'react';
 
+//TODO: Fix button functionality
+//TODO: Change <a> to NavLink
+
 export function Signup() {
   return (
     <main>
