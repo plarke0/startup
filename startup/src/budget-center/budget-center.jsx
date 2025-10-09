@@ -21,6 +21,9 @@ function ActionBar() {
     );
 }
 
+//TODO: Break BudgetCenter into components
+//TODO: Fix button functionality
+
 export function BudgetCenter() {
   return (
     <main>
