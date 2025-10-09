@@ -1,5 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { About } from './about/about';
+import { Home } from './home/home';
+import { BudgetCenter } from './budget-center/budget-center';
+import { Login } from './login/login';
+import { Signup } from './signup/signup';
 
 function Header() {
     return (
@@ -8,11 +14,21 @@ function Header() {
                 <h1>Plarke.net</h1>
             </a>
             <menu className="nav mb-1 justify-content-center">
-                <li><a href="index.html" className="nav-link link-secondary">Home</a></li>
-                <li><a href="budget.html" className="nav-link link-dark">Budget Center</a></li>
-                <li><a href="login.html" className="nav-link link-dark">Login</a></li>
-                <li><a href="signup.html" className="nav-link link-dark">Signup</a></li>
-                <li><a href="about.html" className="nav-link link-dark">About</a></li>
+                <li className="nav-item">
+                    <NavLink className="nav-link link-secondary" to="">Home</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link link-dark" to="budget-center">Budget Center</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link link-dark" to="login">Login</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link link-dark" to="signup">Signup</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link link-dark" to="about">About</NavLink>
+                </li>
             </menu>
         </div>
     );
@@ -30,14 +46,27 @@ function Footer() {
     );
 }
 
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+}
+
 export default function App() {
   return (
-    <div>
+    <BrowserRouter>
         <Header />
-        <main>
-            
-        </main>
+
+        <main></main>
+
+        <Routes>
+            <Route path='/' element={<Home />} exact />
+            <Route path='/about' element={<About />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/budget-center' element={<BudgetCenter />} />
+            <Route path='*' element={<NotFound />} />
+        </Routes>
+
         <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
