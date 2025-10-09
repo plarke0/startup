@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+//TODO: Make an image link component
+
 export function Home() {
   return (
     <main>
