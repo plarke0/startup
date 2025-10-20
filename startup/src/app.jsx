@@ -7,6 +7,7 @@ import { BudgetCenter } from './budget-center/budget-center';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
 import { AuthState } from './auth/authState';
+import { LockedContent } from './auth/lockedContent';
 
 function ReactiveNavLink({ destination, title }) {
     return (
@@ -20,10 +21,6 @@ function ReactiveNavLink({ destination, title }) {
             </NavLink>
         </li>
     );
-}
-
-function LockedContent({ children, currentState, requiredState }) {
-    return currentState === requiredState ? children : null;
 }
 
 function Header({ authState }) {
