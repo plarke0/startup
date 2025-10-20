@@ -15,7 +15,7 @@ function Header() {
             </a>
             <menu className="nav mb-1 justify-content-center">
                 <li className="nav-item">
-                    <NavLink className="nav-link link-secondary" to="">Home</NavLink>
+                    <NavLink className="nav-link link-dark" to="">Home</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link link-dark" to="budget-center">Budget Center</NavLink>
