@@ -26,7 +26,7 @@ function ActionBar() {
 //TODO: Break BudgetCenter into components
 //TODO: Fix button functionality
 
-export function BudgetCenter({ authState }) {
+export function BudgetCenter({ user, authState }) {
     const navigate = useNavigate();
 
     useEffect(() => {
