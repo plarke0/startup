@@ -37,7 +37,6 @@ export function BudgetCenter({ user, authState }) {
 
     return (
         <main>
-            <link rel="icon" href="/public/plarke-icon.ico"/>
             <ActionBar />
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">

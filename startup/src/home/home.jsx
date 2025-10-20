@@ -12,7 +12,6 @@ function ImageLink({ src, alt, destination }) {
 export function Home() {
     return (
         <main>
-            <link rel="icon" href="/public/plarke-icon.ico"/>
             <div className="container d-flex flex-column align-content-normal">
                 <div className="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-start g-2">
                     <ImageLink src="./temp.jpg" alt="Budget Central" destination="login"/>

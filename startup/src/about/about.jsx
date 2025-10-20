@@ -12,7 +12,6 @@ function AboutSection({ title, content }) {
 export function About() {
     return (
         <main>
-            <link rel="icon" href="/public/plarke-icon.ico"/>
             <div className="container">
                 <div className="d-flex justify-content-center">
                     <h2>About:</h2>

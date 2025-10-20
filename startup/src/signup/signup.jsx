@@ -16,7 +16,6 @@ export function Signup({ authState }) {
 
     return (
         <main>
-            <link rel="icon" href="/public/plarke-icon.ico"/>
             <FormCard>
                 <form className="px-3 py-3">
                     <aside className="mb-2">

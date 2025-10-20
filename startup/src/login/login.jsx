@@ -16,7 +16,6 @@ export function Login({ userName, authState, onAuthChange }) {
 
     return (
         <main>
-            <link rel="icon" href="/public/plarke-icon.ico"/>
             <FormCard>
                 <form className="px-3 py-3">
                     <div className="mb-3">
