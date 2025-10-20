@@ -8,6 +8,7 @@ import FormCard from '../templates/formCard';
 export function Signup({ user, authState, onAuthChange }) {
     const [userName, setUserName] = React.useState(user);
     const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
     const navigate = useNavigate();
 
@@ -22,6 +23,10 @@ export function Signup({ user, authState, onAuthChange }) {
         onAuthChange(userName, AuthState.Authenticated);
     }
 
+    function arePasswordsEqual() {
+        return password == confirmPassword;
+    }
+
     return (
         <main>
             <FormCard>
@@ -31,15 +36,18 @@ export function Signup({ user, authState, onAuthChange }) {
                     </aside>
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">Username:</label>
-                        <input id="username" type="text" placeholder="Username" className="form-control"/>
+                        <input id="username" type="text" placeholder="Username" className="form-control" onChange={(e) => setUserName(e.target.value)}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Password:</label>
-                        <input id="password" type="password" placeholder="Password" className="form-control"/>
+                        <input id="password" type="password" placeholder="Password" className="form-control" onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="confirm-password" className="form-label">Confirm Password:</label>
-                        <input id="confirm-password" type="password" placeholder="Password" className="form-control"/>
+                        <input id="confirm-password" type="password" placeholder="Password" className={`form-control${!arePasswordsEqual() ? " is-invalid" : ""}`} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                        <small className={`text-danger${arePasswordsEqual() ? " d-none" : ""}`}>
+                            Passwords must match.
+                        </small>
                     </div>
                     <div className="mb-3">
                         <div className="form-check">
@@ -47,7 +55,14 @@ export function Signup({ user, authState, onAuthChange }) {
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
                     </div>
-                    <Button varient="primary" id="sign-up" onClick={() => console.log("Sign up")}>Sign Up</Button>
+                    <Button
+                        varient="primary"
+                        id="sign-up"
+                        onClick={() => console.log("Sign up")}
+                        disabled={!userName || !password || !arePasswordsEqual()}
+                    >
+                        Sign Up
+                    </Button>
                 </form>
                 <span>Already have an account? <Link to="../login">Log in</Link></span>
             </FormCard>
