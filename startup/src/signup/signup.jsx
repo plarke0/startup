@@ -5,7 +5,10 @@ import { AuthState } from '../auth/authState';
 import FormCard from '../templates/formCard';
 
 
-export function Signup({ authState }) {
+export function Signup({ user, authState, onAuthChange }) {
+    const [userName, setUserName] = React.useState(user);
+    const [password, setPassword] = React.useState('');
+    const [displayError, setDisplayError] = React.useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,6 +16,11 @@ export function Signup({ authState }) {
             navigate("/budget-center")
         }
     }, [authState, navigate]);
+
+    async function createUser() {
+        localStorage.setItem("userName", userName);
+        onAuthChange(userName, AuthState.Authenticated);
+    }
 
     return (
         <main>
