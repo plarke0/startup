@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Link, Route, Routes } from 'react-router-dom';
 import { About } from './about/about';
 import { Home } from './home/home';
 import { BudgetCenter } from './budget-center/budget-center';
@@ -24,9 +24,9 @@ function ReactiveNavLink({ destination, title }) {
 function Header() {
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
-            <a href="index.html" className="mb-1 text-dark text-decoration-none">
+            <Link to="" className="mb-1 text-dark text-decoration-none">
                 <h1>Plarke.net</h1>
-            </a>
+            </Link>
             <menu className="nav mb-1 justify-content-center">
                 <ReactiveNavLink destination= "" title= "Home"/>
                 <ReactiveNavLink destination= "budget-center" title= "Budget Center"/>
