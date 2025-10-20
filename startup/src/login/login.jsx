@@ -1,9 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-//TODO: Fix button functionality
-//TODO: Change <a> to NavLink
 
 export function Login() {
     return (
@@ -28,7 +26,7 @@ export function Login() {
                             </div>
                             <Button varient="primary" id="log-in" onClick={() => console.log("Login")}>Log In</Button>
                         </form>
-                        <span>Don't have an account? <NavLink className="link" to="../signup">Sign up</NavLink></span>
+                        <span>Don't have an account? <Link className="link" to="../signup">Sign up</Link></span>
                     </div>
                 </div>
             </div>
