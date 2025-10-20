@@ -6,6 +6,7 @@ import { Home } from './home/home';
 import { BudgetCenter } from './budget-center/budget-center';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
+import { AuthState } from './auth/authState';
 
 function ReactiveNavLink({ destination, title }) {
     return (
@@ -21,7 +22,11 @@ function ReactiveNavLink({ destination, title }) {
     );
 }
 
-function Header() {
+function LockedContent({ children, currentState, requiredState }) {
+    return currentState === requiredState ? children : null;
+}
+
+function Header({ authState }) {
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
             <Link to="" className="mb-1 text-dark text-decoration-none">
@@ -29,7 +34,9 @@ function Header() {
             </Link>
             <menu className="nav mb-1 justify-content-center">
                 <ReactiveNavLink destination= "" title= "Home"/>
-                <ReactiveNavLink destination= "budget-center" title= "Budget Center"/>
+                <LockedContent currentState={authState} requiredState={AuthState.Authenticated}>
+                    <ReactiveNavLink destination= "budget-center" title= "Budget Center"/>
+                </LockedContent>
                 <ReactiveNavLink destination= "login" title= "Login"/>
                 <ReactiveNavLink destination= "signup" title= "Signup"/>
                 <ReactiveNavLink destination= "about" title= "About"/>
@@ -55,20 +62,24 @@ function NotFound() {
 }
 
 export default function App() {
-  return (
-    <BrowserRouter>
-        <Header />
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
 
-        <Routes>
-            <Route path='/' element={<Home />} exact />
-            <Route path='/about' element={<About />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/budget-center' element={<BudgetCenter />} />
-            <Route path='*' element={<NotFound />} />
-        </Routes>
+    return (
+        <BrowserRouter>
+            <Header authState={authState}/>
 
-        <Footer />
-    </BrowserRouter>
-  );
+            <Routes>
+                <Route path='/' element={<Home />} exact />
+                <Route path='/about' element={<About />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/budget-center' element={<BudgetCenter />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
+
+            <Footer />
+        </BrowserRouter>
+    );
 }
