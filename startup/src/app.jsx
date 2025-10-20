@@ -51,7 +51,7 @@ function Footer() {
 }
 
 function NotFound() {
-  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+  return <main className="container-fluid text-center">404: Return to sender. Address unknown.</main>;
 }
 
 export default function App() {
