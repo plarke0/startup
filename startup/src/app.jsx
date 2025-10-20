@@ -70,9 +70,9 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<Home />} exact />
                 <Route path='/about' element={<About />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/budget-center' element={<BudgetCenter />} />
+                <Route path='/login' element={<Login authState={authState} />} />
+                <Route path='/signup' element={<Signup authState={authState} />} />
+                <Route path='/budget-center' element={<BudgetCenter authState={authState} />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
 

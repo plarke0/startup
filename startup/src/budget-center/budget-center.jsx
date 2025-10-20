@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthState } from '../auth/authState';
 
 function ActionBar() {
     return (
@@ -24,7 +26,15 @@ function ActionBar() {
 //TODO: Break BudgetCenter into components
 //TODO: Fix button functionality
 
-export function BudgetCenter() {
+export function BudgetCenter({ authState }) {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authState === AuthState.Unauthenticated) {
+            navigate("/login")
+        }
+    }, [authState, navigate]);
+
     return (
         <main>
             <link rel="icon" href="/public/plarke-icon.ico"/>

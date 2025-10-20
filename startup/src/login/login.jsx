@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthState } from '../auth/authState';
 
 
-export function Login() {
+export function Login({ authState }) {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authState === AuthState.Authenticated) {
+            navigate("/budget-center")
+        }
+    }, [authState, navigate]);
+
     return (
         <main>
             <link rel="icon" href="/public/plarke-icon.ico"/>
