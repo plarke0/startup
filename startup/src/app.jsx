@@ -7,6 +7,20 @@ import { BudgetCenter } from './budget-center/budget-center';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
 
+function ReactiveNavLink({ destination, title }) {
+    return (
+        <li className="nav-item">
+            <NavLink className={({ isActive }) => 
+                `nav-link link-${isActive ? "secondary" : "dark"}`
+                }
+                to={destination}
+            >
+                {title}
+            </NavLink>
+        </li>
+    );
+}
+
 function Header() {
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center border-bottom mb-3">
@@ -14,21 +28,11 @@ function Header() {
                 <h1>Plarke.net</h1>
             </a>
             <menu className="nav mb-1 justify-content-center">
-                <li className="nav-item">
-                    <NavLink className="nav-link link-dark" to="">Home</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link link-dark" to="budget-center">Budget Center</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link link-dark" to="login">Login</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link link-dark" to="signup">Signup</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link link-dark" to="about">About</NavLink>
-                </li>
+                <ReactiveNavLink destination= "" title= "Home"/>
+                <ReactiveNavLink destination= "budget-center" title= "Budget Center"/>
+                <ReactiveNavLink destination= "login" title= "Login"/>
+                <ReactiveNavLink destination= "signup" title= "Signup"/>
+                <ReactiveNavLink destination= "about" title= "About"/>
             </menu>
         </div>
     );
@@ -40,7 +44,7 @@ function Footer() {
             <footer className="row justify-content-between border-top mt-3">
                 <span className="col text-start mt-2"><p>Preston Clarke</p></span>
                 <span className="col text-end mt-2"><a href="https://github.com/plarke0/startup" className="text-decoration-none link-dark">GitHub</a></span>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossOrigin="anonymous"></script>
             </footer>
         </div>
     );
