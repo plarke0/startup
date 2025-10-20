@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 export function Signup() {
     return (
         <main>
+            <link rel="icon" href="/public/plarke-icon.ico"/>
             <div className="container d-flex justify-content-center">
                 <div className="card col-12 col-sm-6 col-xl-4">
                     <div className="card-body">

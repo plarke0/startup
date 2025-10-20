@@ -27,6 +27,7 @@ function ActionBar() {
 export function BudgetCenter() {
     return (
         <main>
+            <link rel="icon" href="/public/plarke-icon.ico"/>
             <ActionBar />
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
