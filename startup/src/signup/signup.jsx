@@ -58,7 +58,7 @@ export function Signup({ user, authState, onAuthChange }) {
                     <Button
                         varient="primary"
                         id="sign-up"
-                        onClick={() => console.log("Sign up")}
+                        onClick={() => createUser()}
                         disabled={!userName || !password || !arePasswordsEqual()}
                     >
                         Sign Up

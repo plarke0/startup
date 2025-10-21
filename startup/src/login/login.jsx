@@ -44,7 +44,7 @@ export function Login({ user, authState, onAuthChange }) {
                     <Button
                         variant="primary"
                         id="log-in"
-                        onClick={() => console.log(remember)}
+                        onClick={() => loginUser()}
                         disabled={!userName || !password}
                     >
                         Log In

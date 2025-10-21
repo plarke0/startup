@@ -112,8 +112,26 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<Home />} exact />
                 <Route path='/about' element={<About />} />
-                <Route path='/login' element={<Login authState={authState} />} />
-                <Route path='/signup' element={<Signup authState={authState} />} />
+                <Route path='/login' element={
+                    <Login
+                        userName={userName}
+                        authState={authState}
+                        onAuthChange={(userName, authState) => {
+                            setAuthState(authState);
+                            setUserName(userName);
+                        }}
+                    />}
+                />
+                <Route path='/signup' element={
+                    <Signup
+                        userName={userName}
+                        authState={authState}
+                        onAuthChange={(userName, authState) => {
+                            setAuthState(authState);
+                            setUserName(userName);
+                        }}
+                    />}
+                />
                 <Route path='/budget-center' element={<BudgetCenter authState={authState} />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
