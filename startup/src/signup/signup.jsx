@@ -9,7 +9,7 @@ export function Signup({ user, authState, onAuthChange }) {
     const [userName, setUserName] = React.useState(user);
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
-    const [displayError, setDisplayError] = React.useState(null);
+    const [displayError, setDisplayError] = React.useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,13 +18,23 @@ export function Signup({ user, authState, onAuthChange }) {
         }
     }, [authState, navigate]);
 
+    useEffect(() => {
+        //TODO: Generalize to accept where the error occurs, make an error file.
+        if (password !== confirmPassword) {
+            console.log({displayError});
+            setError("Passwords must match.");
+        } else if (displayError !== false) {
+            setError(false);
+        }
+    }, [userName, password, confirmPassword]);
+
     async function createUser() {
         localStorage.setItem("userName", userName);
         onAuthChange(userName, AuthState.Authenticated);
     }
 
-    function arePasswordsEqual() {
-        return password == confirmPassword;
+    function setError(message) {
+        setDisplayError(message);
     }
 
     return (
@@ -44,9 +54,9 @@ export function Signup({ user, authState, onAuthChange }) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="confirm-password" className="form-label">Confirm Password:</label>
-                        <input id="confirm-password" type="password" placeholder="Password" className={`form-control${!arePasswordsEqual() ? " is-invalid" : ""}`} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                        <small className={`text-danger${arePasswordsEqual() ? " d-none" : ""}`}>
-                            Passwords must match.
+                        <input id="confirm-password" type="password" placeholder="Password" className={`form-control${displayError ? " is-invalid" : ""}`} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                        <small id="confirm-password-error" className={`text-danger${!displayError ? " d-none" : ""}`}>
+                            {displayError}
                         </small>
                     </div>
                     <div className="mb-3">
@@ -59,7 +69,7 @@ export function Signup({ user, authState, onAuthChange }) {
                         varient="primary"
                         id="sign-up"
                         onClick={() => createUser()}
-                        disabled={!userName || !password || !arePasswordsEqual()}
+                        disabled={!userName || !password || !confirmPassword}
                     >
                         Sign Up
                     </Button>
