@@ -9,7 +9,7 @@ export function Login({ user, authState, onAuthChange }) {
     const [userName, setUserName] = React.useState(user);
     const [password, setPassword] = React.useState('');
     const [remember, setRemember] = React.useState(false);
-    const [displayError, setDisplayError] = React.useState(null);
+    const [displayError, setDisplayError] = React.useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,8 +19,10 @@ export function Login({ user, authState, onAuthChange }) {
     }, [authState, navigate]);
 
     async function loginUser() {
-        localStorage.setItem("userName", userName);
-        onAuthChange(userName, AuthState.Authenticated);
+        if (!displayError) {
+            localStorage.setItem("userName", userName);
+            onAuthChange(userName, AuthState.Authenticated);
+        }
     }
 
     return (

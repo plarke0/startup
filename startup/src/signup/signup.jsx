@@ -29,11 +29,13 @@ export function Signup({ user, authState, onAuthChange }) {
     }, [userName, password, confirmPassword]);
 
     async function createUser() {
-        localStorage.setItem("userName", userName);
-        onAuthChange(userName, AuthState.Authenticated);
+        if (!displayError) {
+            localStorage.setItem("userName", userName);
+            onAuthChange(userName, AuthState.Authenticated);
+        }
     }
 
-    function setError(message) {
+    async function setError(message) {
         setDisplayError(message);
     }
 
