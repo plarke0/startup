@@ -68,7 +68,7 @@ export function Signup({ user, authState, onAuthChange }) {
                         </div>
                     </div>
                     <Button
-                        varient="primary"
+                        variant="primary"
                         id="sign-up"
                         onClick={() => createUser()}
                         disabled={!userName || !password || !confirmPassword}
