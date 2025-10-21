@@ -3,14 +3,14 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 
-function ActionBar({ onLogout, userName }) {
+function ActionBar({ save, onLogout, userName }) {
 
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
-                <button type="button" className="btn">Undo</button>
-                <button type="button" className="btn">Redo</button>
-                <button type="button" className="btn">Save</button>
+                <Button variant="link" onClick={() => null} className="text-decoration-none link-dark">Undo</Button>
+                <Button variant="link" onClick={() => null} className="text-decoration-none link-dark">Redo</Button>
+                <Button variant="link" onClick={() => save()} className="text-decoration-none link-dark">Save</Button>
                 <Button variant="link" onClick={() => onLogout()} className="text-decoration-none link-dark">Log Out</Button>
             </div>
             <div id="username" className="d-flex justify-content-center order-last order-sm-1">
@@ -42,9 +42,15 @@ export function BudgetCenter({ userName, authState, onAuthChange }) {
         onAuthChange(userName, AuthState.Unauthenticated);
     }
 
+    async function save() {
+        setTimeout(() => {
+            console.log("Saved!");
+        }, 1500);
+    }
+
     return (
         <main>
-            <ActionBar onLogout={onLogout}/>
+            <ActionBar save={save} onLogout={onLogout} userName={userName}/>
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
