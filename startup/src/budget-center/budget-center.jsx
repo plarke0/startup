@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 
-function ActionBar() {
+function ActionBar({ onLogout, userName }) {
+
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
                 <button type="button" className="btn">Undo</button>
                 <button type="button" className="btn">Redo</button>
                 <button type="button" className="btn">Save</button>
-                <button type="button" className="btn">Log Out</button>
+                <Button variant="link" onClick={() => onLogout()} className="text-decoration-none link-dark">Log Out</Button>
             </div>
             <div id="username" className="d-flex justify-content-center order-last order-sm-1">
-                <b>Username</b>
+                <b>{userName}</b>
             </div>
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-end order-2">
                 {/* Live user count through websocket */}
@@ -26,7 +28,7 @@ function ActionBar() {
 //TODO: Break BudgetCenter into components
 //TODO: Fix button functionality
 
-export function BudgetCenter({ user, authState }) {
+export function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,9 +37,14 @@ export function BudgetCenter({ user, authState }) {
         }
     }, [authState, navigate]);
 
+    function onLogout() {
+        localStorage.removeItem("userName");
+        onAuthChange(userName, AuthState.Unauthenticated);
+    }
+
     return (
         <main>
-            <ActionBar />
+            <ActionBar onLogout={onLogout}/>
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}

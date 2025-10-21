@@ -132,7 +132,16 @@ export default function App() {
                         }}
                     />}
                 />
-                <Route path='/budget-center' element={<BudgetCenter authState={authState} />} />
+                <Route path='/budget-center' element={
+                    <BudgetCenter
+                        userName={userName}
+                        authState={authState}
+                        onAuthChange={(userName, authState) => {
+                            setAuthState(authState);
+                            setUserName(userName);
+                        }}
+                    />}
+                />
                 <Route path='*' element={<NotFound />} />
             </Routes>
 
