@@ -28,9 +28,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function undo() {
-        setTimeout(() => {
-            console.log("Undone!");
-        }, 1500);
+        console.log("Undone!");
     }
 
     function redo() {
