@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageLink from '../component-templates/imageLink';
+import ImageLink from './imageLink';
 
 export default function Home() {
     return (
