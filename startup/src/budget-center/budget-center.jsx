@@ -3,13 +3,13 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 
-function ActionBar({ save, onLogout, userName }) {
+function ActionBar({ undo, redo, save, onLogout, userName }) {
 
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
-                <Button variant="link" onClick={() => null} className="text-decoration-none link-dark">Undo</Button>
-                <Button variant="link" onClick={() => null} className="text-decoration-none link-dark">Redo</Button>
+                <Button variant="link" onClick={() => undo()} className="text-decoration-none link-dark">Undo</Button>
+                <Button variant="link" onClick={() => redo()} className="text-decoration-none link-dark">Redo</Button>
                 <Button variant="link" onClick={() => save()} className="text-decoration-none link-dark">Save</Button>
                 <Button variant="link" onClick={() => onLogout()} className="text-decoration-none link-dark">Log Out</Button>
             </div>
@@ -25,8 +25,38 @@ function ActionBar({ save, onLogout, userName }) {
     );
 }
 
-//TODO: Break BudgetCenter into components
-//TODO: Fix button functionality
+function CarouselMenu() {
+    return (
+        null
+    );
+}
+
+function CarouselPage() {
+    return (
+        null
+    );
+}
+
+function CategoryLog() {
+    return (
+        null
+    );
+}
+
+function LogEntry() {
+    return (
+        null
+    );
+}
+
+function CategoryBreakdown() {
+    return (
+        null
+    );
+}
+
+//TODO: Add user count mock-up
+
 
 export function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
@@ -48,18 +78,28 @@ export function BudgetCenter({ userName, authState, onAuthChange }) {
         }, 1500);
     }
 
+    function undo() {
+        setTimeout(() => {
+            console.log("Undone!");
+        }, 1500);
+    }
+
+    function redo() {
+        console.log("Redone!");
+    }
+
     return (
         <main>
-            <ActionBar save={save} onLogout={onLogout} userName={userName}/>
+            <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
                 <div className="card w-100 mb-2">
                     {/* Control selection */}
                     <div className="card-header text-center">
-                        <button type="button" className="btn btn-outline-dark me-1" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</button>
+                        <Button variant="outline-dark" className="me-1" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</Button>
                         <label>Control Type</label>
-                        <button type="button" className="btn btn-outline-dark ms-1" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</button>
+                        <Button variant="outline-dark" className="ms-1" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</Button>
                     </div>
                     {/* Control panels */}
                     <div id="control-carousel" className="carousel carousel-dark-slide" data-bs-ride="false">
