@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
-import FormCard from '../templates/formCard';
+import FormCard from '../component-templates/formCard';
 
 
-export function Login({ user, authState, onAuthChange }) {
+export default function Login({ user, authState, onAuthChange }) {
     const [userName, setUserName] = React.useState(user);
     const [password, setPassword] = React.useState('');
     const [remember, setRemember] = React.useState(false);

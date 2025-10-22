@@ -58,7 +58,7 @@ function CategoryBreakdown() {
 //TODO: Add user count mock-up
 
 
-export function BudgetCenter({ userName, authState, onAuthChange }) {
+export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
 
     useEffect(() => {

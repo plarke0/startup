@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, NavLink, Link, Route, Routes, useLocation } from 'react-router-dom';
-import { About } from './about/about';
-import { Home } from './home/home';
-import { BudgetCenter } from './budget-center/budget-center';
-import { Login } from './login/login';
-import { Signup } from './signup/signup';
 import { AuthState } from './auth/authState';
-import { LockedContent } from './auth/lockedContent';
+import About from './about/about';
+import Home from './home/home';
+import BudgetCenter from './budget-center/budget-center';
+import Login from './login/login';
+import Signup from './signup/signup';
+import LockedContent from './component-templates/lockedContent';
 
 function PageMeta() {
     const location = useLocation();

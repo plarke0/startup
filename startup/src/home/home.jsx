@@ -1,15 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ImageLink from '../component-templates/imageLink';
 
-function ImageLink({ src, alt, destination }) {
-    return(
-        <Link to={destination}>
-            <img src={src} alt={alt} className="img-fluid shadow"/>
-        </Link>
-    );
-}
-
-export function Home() {
+export default function Home() {
     return (
         <main>
             <div className="container d-flex flex-column align-content-normal">
