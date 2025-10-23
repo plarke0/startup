@@ -1,30 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import ImageLink from './imageLink';
 
-//TODO: Make an image link component
-
-export function Home() {
-  return (
-    <main>
-        <div class="container d-flex flex-column align-content-normal">
-            <div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-start g-2">
-                <NavLink to="login">
-                    <img src="./temp.jpg" alt="Budget Central" class="img-fluid shadow"/>
-                </NavLink>
-                <NavLink to="login">
-                    <img src="./temp.jpg" alt="Budget Central" class="img-fluid shadow"/>
-                </NavLink>
-                <NavLink to="login">
-                    <img src="./temp.jpg" alt="Budget Central" class="img-fluid shadow"/>
-                </NavLink>
-                <NavLink to="login">
-                    <img src="./temp.jpg" alt="Budget Central" class="img-fluid shadow"/>
-                </NavLink>
-                <NavLink to="login">
-                    <img src="./temp.jpg" alt="Budget Central" class="img-fluid shadow"/>
-                </NavLink>
+export default function Home() {
+    return (
+        <main>
+            <div className="container d-flex flex-column align-content-normal">
+                <div className="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-start g-2">
+                    <ImageLink src="./temp.jpg" alt="Budget Central" destination="login"/>
+                    <ImageLink src="./temp.jpg" alt="Temp" destination="temp"/>
+                    <ImageLink src="./temp.jpg" alt="Temp" destination="temp"/>
+                    <ImageLink src="./temp.jpg" alt="Temp" destination="temp"/>
+                    <ImageLink src="./temp.jpg" alt="Temp" destination="temp"/>
+                </div>
             </div>
-        </div>
-    </main>
-  );
+        </main>
+    );
 }
