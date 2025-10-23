@@ -9,6 +9,7 @@ import WithdrawControls from './withdrawControls';
 import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
+import LogEntry from './logEntry';
 
 //TODO: Add user count mock-up
 
@@ -95,7 +96,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
-                <CarouselMenu numberOfPages={4}>
+                <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
                         <DepositControls/>
                     </Carousel.Item>
@@ -115,8 +116,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
                 {/* Category breakdown */}
                 <CategoryBreakdown/>
-                
+
                 {/* Logs */}
+                
                 <div className="card w-100">
                     {/* Log selection */}
                     <div className="card-header text-center">
@@ -135,6 +137,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                                 {/* TODO: make scrollable */}
                                 {/* Log entries */}
                                 <ul className="list-group list-group-flush">
+                                    <LogEntry id="test" date="10/10/13" delta={-1000} newAmount={2000} note="Hope this works"/>
                                     <li className="list-group-item">
                                         <div className="d-flex flex-row justify-content-between">
                                             <span>9/20/25</span>
