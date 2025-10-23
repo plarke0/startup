@@ -90,9 +90,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
-                <CarouselMenu carouselName="control">
+                <CarouselMenu numberOfPages={4}>
                     {/* Deposit controls */}
-                    <Carousel.Item className="card-body active">
+                    <Carousel.Item key={0} className="card-body">
                         <form>
                             <h4>Deposit</h4>
                             <div className="row g-1">
@@ -140,7 +140,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                         </form>
                     </Carousel.Item>
                     {/* Withdraw controls */}
-                    <Carousel.Item className="card-body">
+                    <Carousel.Item key={1} className="card-body">
                         <form>
                             <h4>Withdraw</h4>
                             <div className="row g-1">
@@ -164,7 +164,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                         </form>
                     </Carousel.Item>
                     {/* Transfer controls */}
-                    <div className="carousel-item card-body">
+                    <Carousel.Item key={2} className="card-body">
                         <form>
                             <h4>Transfer</h4>
                             <div className="row g-1">
@@ -192,9 +192,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                                 <option>Fun</option>
                             </select>
                         </form>
-                    </div>
+                    </Carousel.Item>
                     {/* Category controls */}
-                    <div className="carousel-item card-body">
+                    <Carousel.Item key={3} className="card-body">
                         <form>
                             <h4>Category Controls</h4>
                             <ul className="list-group list-group-flush">
@@ -246,7 +246,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                                 </li>
                             </ul>
                         </form>
-                    </div>
+                    </Carousel.Item>
                 </CarouselMenu>
                 {/* Category breakdown */}
                 <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
