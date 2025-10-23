@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 import ActionBar from './actionBar';
+import CarouselMenu from './CarouselMenu';
 
 //TODO: Add user count mock-up
 
@@ -89,175 +90,164 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             {/* Main div */}
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
-                <div className="card w-100 mb-2">
-                    {/* Control selection */}
-                    <div className="card-header text-center">
-                        <Button variant="outline-dark" className="me-1" data-bs-target="#control-carousel" data-bs-slide="previous">&lt;</Button>
-                        <label>Control Type</label>
-                        <Button variant="outline-dark" className="ms-1" data-bs-target="#control-carousel" data-bs-slide="next">&gt;</Button>
+                <CarouselMenu carouselName="control">
+                    {/* Deposit controls */}
+                    <Carousel.Item className="card-body active">
+                        <form>
+                            <h4>Deposit</h4>
+                            <div className="row g-1">
+                                <div className="col">
+                                    <input type="number" placeholder="Amount" className="form-control"/>
+                                </div>
+                                <div className="col">
+                                    <button type="button" className="btn btn-primary">Deposit</button>
+                                </div>
+                            </div>
+                            <label htmlFor="deposit-date">Date</label>
+                            <input id="deposit-date" type="date" className="form-control"/>
+                            <label htmlFor="deposit-note">Note</label>
+                            <input id="deposit-note" type="text" className="form-control"/>
+                            <label htmlFor="deposit-destination">Destination</label>
+                            <select id="deposit-destination" className="form-select">
+                                <option>Deposit Ratio</option>
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                            <div className="card mt-2">
+                                <div className="card-header">
+                                    <label htmlFor="category-splits">Deposit Ratios</label>
+                                    <select id="category-splits" className="form-select">
+                                        <option>Default</option>
+                                        <option>Create New +</option>
+                                    </select>
+                                </div>
+                                {/* TODO: make this area scrollable */}
+                                {/*https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is*/}
+                                {/*https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap*/}
+                                {/* Ability to edit values */}
+                                {/* overflow-x/y/auto */}
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item">Tithing: 10%</li>
+                                    <li className="list-group-item">Savings: 70%</li>
+                                    <li className="list-group-item">Fun: 20%</li>
+                                </ul>
+                                <div className="card-footer">
+                                    <button type="button" className="btn btn-primary me-1">Edit</button>
+                                    <button type="button" className="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </Carousel.Item>
+                    {/* Withdraw controls */}
+                    <Carousel.Item className="card-body">
+                        <form>
+                            <h4>Withdraw</h4>
+                            <div className="row g-1">
+                                <div className="col">
+                                    <input type="number" placeholder="Amount" className="form-control"/>
+                                </div>
+                                <div className="col">
+                                    <button type="button" className="btn btn-primary">Withdraw</button>
+                                </div>
+                            </div>
+                            <label htmlFor="withdraw-date">Date</label>
+                            <input id="withdraw-date" type="date" className="form-control"/>
+                            <label htmlFor="withdraw-note">Note</label>
+                            <input id="withdraw-note" type="text" className="form-control"/>
+                            <label htmlFor="withdraw-category">Source</label>
+                            <select id="withdraw-category" className="form-select">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                        </form>
+                    </Carousel.Item>
+                    {/* Transfer controls */}
+                    <div className="carousel-item card-body">
+                        <form>
+                            <h4>Transfer</h4>
+                            <div className="row g-1">
+                                <div className="col">
+                                    <input type="number" placeholder="Amount" className="form-control"/>
+                                </div>
+                                <div className="col">
+                                    <button type="button" className="btn btn-primary">Transfer</button>
+                                </div>
+                            </div>
+                            <label htmlFor="transfer-date">Date</label>
+                            <input id="transfer-date" type="date" className="form-control"/>
+                            <label htmlFor="transfer-note">Note</label>
+                            <input id="transfer-note" type="text" className="form-control"/>
+                            <label htmlFor="transfer-source">Source</label>
+                            <select id="transfer-source" className="form-select">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                            <label htmlFor="transfer-destination">Destination</label>
+                            <select id="transfer-destination" className="form-select">
+                                <option>Tithing</option>
+                                <option>Savings</option>
+                                <option>Fun</option>
+                            </select>
+                        </form>
                     </div>
-                    {/* Control panels */}
-                    <div id="control-carousel" className="carousel carousel-dark-slide" data-bs-ride="false">
-                        <div className="carousel-inner">
-                            {/* Deposit controls */}
-                            <div className="carousel-item card-body active">
-                                <form>
-                                    <h4>Deposit</h4>
+                    {/* Category controls */}
+                    <div className="carousel-item card-body">
+                        <form>
+                            <h4>Category Controls</h4>
+                            <ul className="list-group list-group-flush">
+                                {/* Create category */}
+                                <li className="list-group-item">
+                                    <h6>Create Category:</h6>
                                     <div className="row g-1">
                                         <div className="col">
-                                            <input type="number" placeholder="Amount" className="form-control"/>
+                                            <input type="text" placeholder="Name" className="form-control"/>
                                         </div>
                                         <div className="col">
-                                            <button type="button" className="btn btn-primary">Deposit</button>
+                                            <button type="button"  className="btn btn-primary">Create</button>
                                         </div>
                                     </div>
-                                    <label htmlFor="deposit-date">Date</label>
-                                    <input id="deposit-date" type="date" className="form-control"/>
-                                    <label htmlFor="deposit-note">Note</label>
-                                    <input id="deposit-note" type="text" className="form-control"/>
-                                    <label htmlFor="deposit-destination">Destination</label>
-                                    <select id="deposit-destination" className="form-select">
-                                        <option>Deposit Ratio</option>
+                                </li>
+                                {/* Rename category */}
+                                <li className="list-group-item">
+                                    <h6>Rename:</h6>
+                                    <select id="rename-dropdown" className="form-select mb-2">
                                         <option>Tithing</option>
                                         <option>Savings</option>
                                         <option>Fun</option>
                                     </select>
-                                    <div className="card mt-2">
-                                        <div className="card-header">
-                                            <label htmlFor="category-splits">Deposit Ratios</label>
-                                            <select id="category-splits" className="form-select">
-                                                <option>Default</option>
-                                                <option>Create New +</option>
-                                            </select>
-                                        </div>
-                                        {/* TODO: make this area scrollable */}
-                                        {/*https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is*/}
-                                        {/*https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap*/}
-                                        {/* Ability to edit values */}
-                                        {/* overflow-x/y/auto */}
-                                        <ul className="list-group list-group-flush">
-                                            <li className="list-group-item">Tithing: 10%</li>
-                                            <li className="list-group-item">Savings: 70%</li>
-                                            <li className="list-group-item">Fun: 20%</li>
-                                        </ul>
-                                        <div className="card-footer">
-                                            <button type="button" className="btn btn-primary me-1">Edit</button>
-                                            <button type="button" className="btn btn-primary">Save</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            {/* Withdraw controls */}
-                            <div className="carousel-item card-body">
-                                <form>
-                                    <h4>Withdraw</h4>
                                     <div className="row g-1">
                                         <div className="col">
-                                            <input type="number" placeholder="Amount" className="form-control"/>
+                                            <input type="text" placeholder="New Name" className="form-control"/>
                                         </div>
                                         <div className="col">
-                                            <button type="button" className="btn btn-primary">Withdraw</button>
+                                            <button type="button"  className="btn btn-primary">Rename</button>
                                         </div>
                                     </div>
-                                    <label htmlFor="withdraw-date">Date</label>
-                                    <input id="withdraw-date" type="date" className="form-control"/>
-                                    <label htmlFor="withdraw-note">Note</label>
-                                    <input id="withdraw-note" type="text" className="form-control"/>
-                                    <label htmlFor="withdraw-category">Source</label>
-                                    <select id="withdraw-category" className="form-select">
+                                </li>
+                                {/* Merge categories */}
+                                <li className="list-group-item">
+                                    <h6>Merge:</h6>
+                                    <label htmlFor="merge-source">Source</label>
+                                    <select id="merge-source" className="form-select mb-2">
                                         <option>Tithing</option>
                                         <option>Savings</option>
                                         <option>Fun</option>
                                     </select>
-                                </form>
-                            </div>
-                            {/* Transfer controls */}
-                            <div className="carousel-item card-body">
-                                <form>
-                                    <h4>Transfer</h4>
-                                    <div className="row g-1">
-                                        <div className="col">
-                                            <input type="number" placeholder="Amount" className="form-control"/>
-                                        </div>
-                                        <div className="col">
-                                            <button type="button" className="btn btn-primary">Transfer</button>
-                                        </div>
-                                    </div>
-                                    <label htmlFor="transfer-date">Date</label>
-                                    <input id="transfer-date" type="date" className="form-control"/>
-                                    <label htmlFor="transfer-note">Note</label>
-                                    <input id="transfer-note" type="text" className="form-control"/>
-                                    <label htmlFor="transfer-source">Source</label>
-                                    <select id="transfer-source" className="form-select">
+                                    <label htmlFor="merge-destination">Destination</label>
+                                    <select id="merge-destination" className="form-select mb-2">
                                         <option>Tithing</option>
                                         <option>Savings</option>
                                         <option>Fun</option>
                                     </select>
-                                    <label htmlFor="transfer-destination">Destination</label>
-                                    <select id="transfer-destination" className="form-select">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                </form>
-                            </div>
-                            {/* Category controls */}
-                            <div className="carousel-item card-body">
-                                <form>
-                                    <h4>Category Controls</h4>
-                                    <ul className="list-group list-group-flush">
-                                        {/* Create category */}
-                                        <li className="list-group-item">
-                                            <h6>Create Category:</h6>
-                                            <div className="row g-1">
-                                                <div className="col">
-                                                    <input type="text" placeholder="Name" className="form-control"/>
-                                                </div>
-                                                <div className="col">
-                                                    <button type="button"  className="btn btn-primary">Create</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        {/* Rename category */}
-                                        <li className="list-group-item">
-                                            <h6>Rename:</h6>
-                                            <select id="rename-dropdown" className="form-select mb-2">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                            <div className="row g-1">
-                                                <div className="col">
-                                                    <input type="text" placeholder="New Name" className="form-control"/>
-                                                </div>
-                                                <div className="col">
-                                                    <button type="button"  className="btn btn-primary">Rename</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        {/* Merge categories */}
-                                        <li className="list-group-item">
-                                            <h6>Merge:</h6>
-                                            <label htmlFor="merge-source">Source</label>
-                                            <select id="merge-source" className="form-select mb-2">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                            <label htmlFor="merge-destination">Destination</label>
-                                            <select id="merge-destination" className="form-select mb-2">
-                                                <option>Tithing</option>
-                                                <option>Savings</option>
-                                                <option>Fun</option>
-                                            </select>
-                                            <button type="button" className="btn btn-primary">Merge</button>
-                                        </li>
-                                    </ul>
-                                </form>
-                            </div>
-                        </div>
+                                    <button type="button" className="btn btn-primary">Merge</button>
+                                </li>
+                            </ul>
+                        </form>
                     </div>
-                </div>
+                </CarouselMenu>
                 {/* Category breakdown */}
                 <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
                     <h4>Category Breakdown</h4>
