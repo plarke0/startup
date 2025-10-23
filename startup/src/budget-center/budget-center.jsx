@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Carousel } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 import ActionBar from './actionBar';
@@ -9,7 +9,6 @@ import WithdrawControls from './withdrawControls';
 import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
-import LogEntry from './logEntry';
 import CategoryLog from './CategoryLog';
 
 //TODO: Add user count mock-up
@@ -65,12 +64,50 @@ const testData = {
 
 export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
-
     useEffect(() => {
         if (authState === AuthState.Unauthenticated) {
             navigate("/login")
         }
     }, [authState, navigate]);
+
+    const [data, setData] = useState({});
+    const [categoryLogs, setCategoryLogs] = useState([]);
+    useEffect(() => {
+        getData();
+    }, [])
+
+    useEffect(() => {
+        if (data.logs) {
+            (async () => {
+                const logs = await generateLogList();
+                setCategoryLogs(logs);
+            })();
+        }
+    }, [data]);
+
+    async function generateLogList() {
+        const logList = [];
+        const logs = data.logs;
+        let i = 0;
+        for (const [name, log] of Object.entries(logs)) {
+            logList.push(
+                <Carousel.Item key={`${name}-${i}`}>
+                    <CategoryLog
+                        logName={name}
+                        logContent={log}
+                    />
+                </Carousel.Item>
+            );
+            i++;
+        }
+        return logList;
+    }
+
+    async function getData() {
+        setTimeout(() => {
+            setData(testData);
+        }, 1000);
+    }
 
     function onLogout() {
         localStorage.removeItem("userName");
@@ -119,100 +156,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 <CategoryBreakdown/>
 
                 {/* Logs */}
-                <div className="card w-100">
-                    {/* Log selection */}
-                    <div className="card-header text-center">
-                        <button type="button" className="btn btn-outline-dark me-1" data-bs-target="#log-carousel" data-bs-slide="previous">&lt;</button>
-                        <span>Category Log</span>
-                        <button type="button" className="btn btn-outline-dark ms-1" data-bs-target="#log-carousel" data-bs-slide="next">&gt;</button>
-                    </div>
-                    {/* Log entries */}
-                    <div id="log-carousel" className="carousel carousel-dark-slide" data-bs-ride="false">
-                        <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                {/* Log title */}
-                                <div className="card-header text-center">
-                                    <h4>Savings</h4>
-                                </div>
-                                {/* TODO: make scrollable */}
-                                {/* Log entries */}
-                                <ul className="list-group list-group-flush">
-                                    <LogEntry id="test" date="10/10/13" delta={-1000} newAmount={2000} note="Hope this works"/>
-                                    <li className="list-group-item">
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>9/20/25</span>
-                                            <span style={{color: "red"}}>-$10.00</span>
-                                        </div>
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>
-                                                <button id="savings-note-1-btn" type="button" className="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-1">Note</button>
-                                            </span>
-                                            <span style={{color: "gray"}}>$0.00</span>
-                                        </div>
-                                        <div id="savings-note-1" className="collapse">
-                                            Example note content.
-                                        </div>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>9/18/25</span>
-                                            <span style={{color: "green"}}>$10.00</span>
-                                        </div>
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>
-                                                <button id="savings-note-0-btn" type="button" className="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#savings-note-0">Note</button>
-                                            </span>
-                                            <span style={{color: "gray"}}>$10.00</span>
-                                        </div>
-                                        <div id="savings-note-0" className="collapse">
-                                            Really long example note content.
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="carousel-item">
-                                {/* Log title */}
-                                <div className="card-header text-center">
-                                    <h4>Fun</h4>
-                                </div>
-                                {/* TODO: make scrollable */}
-                                {/* Log entries */}
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>9/20/25</span>
-                                            <span style={{color: "red"}}>-$5.00</span>
-                                        </div>
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>
-                                                <button id="fun-note-1-btn" type="button" className="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-1">Note</button>
-                                            </span>
-                                            <span style={{color: "gray"}}>$10.00</span>
-                                        </div>
-                                        <div id="fun-note-1" className="collapse">
-                                            Example note content.
-                                        </div>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>9/18/25</span>
-                                            <span style={{color: "green"}}>$15.00</span>
-                                        </div>
-                                        <div className="d-flex flex-row justify-content-between">
-                                            <span>
-                                                <button id="fun-note-0-btn" type="button" className="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target="#fun-note-0">Note</button>
-                                            </span>
-                                            <span style={{color: "gray"}}>$15.00</span>
-                                        </div>
-                                        <div id="fun-note-0" className="collapse">
-                                            Really long example note content.
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>
+                    {categoryLogs}
+                </CarouselMenu>
             </div>
         </main>
     );
