@@ -16,11 +16,8 @@ export default function ActionBar({ undo, redo, save, onLogout, userName }) {
             setTotalUsers(prevTotal => {
                 const shouldIncrement = Math.random() > 0.75;
                 const newTotal = shouldIncrement ? prevTotal + 1 : prevTotal;
-
-                // Update active users based on new total
+                
                 setActiveUsers(Math.ceil(Math.random() * newTotal));
-
-                // Continue the loop
                 setUsers();
 
                 return newTotal;

@@ -11,7 +11,6 @@ import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
 import CategoryLog from './CategoryLog';
 
-//TODO: Add user count mock-up
 
 const testData = {
     categoryNames: ["Savings", "Tithing", "Rent", "Fun"],
@@ -135,6 +134,14 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     function redo() {
         console.log("Redone!");
+    }
+
+    function createLog() {
+
+    }
+
+    function deposit(date, value, distribution, note) {
+
     }
 
     return (
