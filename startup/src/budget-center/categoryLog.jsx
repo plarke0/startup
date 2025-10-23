@@ -1,4 +1,5 @@
 import React from "react";
+import LogEntry from "./logEntry";
 
 
 //TODO: make scrollable
@@ -6,10 +7,26 @@ import React from "react";
 export default function CategoryLog({ logName, logContent }) {
     const logEntries = [];
 
-    if (logContent) {
+    if (logContent.length > 0) {
         for (const entry of logContent) {
-            logEntries.push();
+            logEntries.unshift(
+                <LogEntry
+                    date={entry.date}
+                    delta={entry.delta}
+                    newAmount={entry.newAmount}
+                    note={entry.note}
+                />
+            );
         }
+    } else {
+        logEntries.unshift(
+            <LogEntry
+                date="mm/dd/yy"
+                delta={0}
+                newAmount={0}
+                note="No entries"
+            />
+        );
     }
 
     return (

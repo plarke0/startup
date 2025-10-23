@@ -1,8 +1,10 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Collapse } from "react-bootstrap";
 
 
-export default function LogEntry({ id, date, delta, newAmount, note }) {
+export default function LogEntry({ date, delta, newAmount, note }) {
+    const [open, setOpen] = useState(false);
+
     function deltaColor() {
         if (delta < 0) {
             return "red";
@@ -28,13 +30,15 @@ export default function LogEntry({ id, date, delta, newAmount, note }) {
             </div>
             <div className="d-flex flex-row justify-content-between">
                 <span>
-                    <Button id={`${id}-btn`} type="button" className="btn btn-outline-dark btn-sm collapsed" data-bs-toggle="collapse" data-bs-target={`#${id}`}>Note</Button>
+                    <Button variant="outline-dark" size="sm" onClick={() => setOpen(!open)}>Note</Button>
                 </span>
                 <span style={{color: "gray"}}>{stringifyMoney(newAmount)}</span>
             </div>
-            <div id={id} className="collapse">
-                {note}
-            </div>
+            <Collapse in={open}>
+                <div>
+                    {note}
+                </div>
+            </Collapse>
         </li>
     );
 }

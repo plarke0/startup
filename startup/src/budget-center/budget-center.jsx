@@ -10,6 +10,7 @@ import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
 import LogEntry from './logEntry';
+import CategoryLog from './CategoryLog';
 
 //TODO: Add user count mock-up
 
@@ -118,7 +119,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 <CategoryBreakdown/>
 
                 {/* Logs */}
-                
                 <div className="card w-100">
                     {/* Log selection */}
                     <div className="card-header text-center">
