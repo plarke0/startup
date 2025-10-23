@@ -107,8 +107,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - While there is still some polishing to do, I mocked out the functionality of my website.
+- [X] **Hooks** - I added useEffect and useState in various places throughout my website.
 
 ## 🚀 Service deliverable
 
