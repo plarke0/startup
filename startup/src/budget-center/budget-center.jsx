@@ -5,6 +5,9 @@ import { AuthState } from '../auth/authState';
 import ActionBar from './actionBar';
 import CarouselMenu from './CarouselMenu';
 import DepositControls from './depositControls';
+import WithdrawControls from './withdrawControls';
+import TransferControls from './transferControls';
+import CategoryControls from './categoryControls';
 
 //TODO: Add user count mock-up
 
@@ -95,113 +98,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     <Carousel.Item key={0}>
                         <DepositControls/>
                     </Carousel.Item>
-                    {/* Withdraw controls */}
-                    <Carousel.Item key={1} className="card-body">
-                        <form>
-                            <h4>Withdraw</h4>
-                            <div className="row g-1">
-                                <div className="col">
-                                    <input type="number" placeholder="Amount" className="form-control"/>
-                                </div>
-                                <div className="col">
-                                    <button type="button" className="btn btn-primary">Withdraw</button>
-                                </div>
-                            </div>
-                            <label htmlFor="withdraw-date">Date</label>
-                            <input id="withdraw-date" type="date" className="form-control"/>
-                            <label htmlFor="withdraw-note">Note</label>
-                            <input id="withdraw-note" type="text" className="form-control"/>
-                            <label htmlFor="withdraw-category">Source</label>
-                            <select id="withdraw-category" className="form-select">
-                                <option>Tithing</option>
-                                <option>Savings</option>
-                                <option>Fun</option>
-                            </select>
-                        </form>
+
+                    <Carousel.Item key={1}>
+                        <WithdrawControls/>
                     </Carousel.Item>
-                    {/* Transfer controls */}
-                    <Carousel.Item key={2} className="card-body">
-                        <form>
-                            <h4>Transfer</h4>
-                            <div className="row g-1">
-                                <div className="col">
-                                    <input type="number" placeholder="Amount" className="form-control"/>
-                                </div>
-                                <div className="col">
-                                    <button type="button" className="btn btn-primary">Transfer</button>
-                                </div>
-                            </div>
-                            <label htmlFor="transfer-date">Date</label>
-                            <input id="transfer-date" type="date" className="form-control"/>
-                            <label htmlFor="transfer-note">Note</label>
-                            <input id="transfer-note" type="text" className="form-control"/>
-                            <label htmlFor="transfer-source">Source</label>
-                            <select id="transfer-source" className="form-select">
-                                <option>Tithing</option>
-                                <option>Savings</option>
-                                <option>Fun</option>
-                            </select>
-                            <label htmlFor="transfer-destination">Destination</label>
-                            <select id="transfer-destination" className="form-select">
-                                <option>Tithing</option>
-                                <option>Savings</option>
-                                <option>Fun</option>
-                            </select>
-                        </form>
+
+                    <Carousel.Item key={2}>
+                        <TransferControls/>
                     </Carousel.Item>
-                    {/* Category controls */}
-                    <Carousel.Item key={3} className="card-body">
-                        <form>
-                            <h4>Category Controls</h4>
-                            <ul className="list-group list-group-flush">
-                                {/* Create category */}
-                                <li className="list-group-item">
-                                    <h6>Create Category:</h6>
-                                    <div className="row g-1">
-                                        <div className="col">
-                                            <input type="text" placeholder="Name" className="form-control"/>
-                                        </div>
-                                        <div className="col">
-                                            <button type="button"  className="btn btn-primary">Create</button>
-                                        </div>
-                                    </div>
-                                </li>
-                                {/* Rename category */}
-                                <li className="list-group-item">
-                                    <h6>Rename:</h6>
-                                    <select id="rename-dropdown" className="form-select mb-2">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                    <div className="row g-1">
-                                        <div className="col">
-                                            <input type="text" placeholder="New Name" className="form-control"/>
-                                        </div>
-                                        <div className="col">
-                                            <button type="button"  className="btn btn-primary">Rename</button>
-                                        </div>
-                                    </div>
-                                </li>
-                                {/* Merge categories */}
-                                <li className="list-group-item">
-                                    <h6>Merge:</h6>
-                                    <label htmlFor="merge-source">Source</label>
-                                    <select id="merge-source" className="form-select mb-2">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                    <label htmlFor="merge-destination">Destination</label>
-                                    <select id="merge-destination" className="form-select mb-2">
-                                        <option>Tithing</option>
-                                        <option>Savings</option>
-                                        <option>Fun</option>
-                                    </select>
-                                    <button type="button" className="btn btn-primary">Merge</button>
-                                </li>
-                            </ul>
-                        </form>
+                    
+                    <Carousel.Item key={3}>
+                        <CategoryControls/>
                     </Carousel.Item>
                 </CarouselMenu>
                 {/* Category breakdown */}

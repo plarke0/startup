@@ -23,7 +23,7 @@ export default function DepositControls() {
                         <input type="number" placeholder="Amount" className="form-control"/>
                     </div>
                     <div className="col">
-                        <Button variant="primary">Deposit</Button>
+                        <Button variant="primary" onClick={deposit}>Deposit</Button>
                     </div>
                 </div>
                 <label htmlFor="deposit-date">Date</label>
@@ -56,8 +56,8 @@ export default function DepositControls() {
                         <li className="list-group-item">Fun: 20%</li>
                     </ul>
                     <div className="card-footer">
-                        <Button variant="primary" className="me-1">Edit</Button>
-                        <Button variant="primary">Save</Button>
+                        <Button variant="primary" onClick={editCurrentDepositRatio} className="me-1">Edit</Button>
+                        <Button variant="primary" onClick={saveNewDepositRatio}>Save</Button>
                     </div>
                 </div>
             </form>
