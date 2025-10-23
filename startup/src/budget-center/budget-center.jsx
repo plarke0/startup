@@ -70,14 +70,14 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }, [authState, navigate]);
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
     const [categoryLogs, setCategoryLogs] = useState([]);
     useEffect(() => {
         getData();
     }, [])
 
     useEffect(() => {
-        if (data.logs) {
+        if (data) {
             (async () => {
                 const logs = await generateLogList();
                 setCategoryLogs(logs);
@@ -101,6 +101,10 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             i++;
         }
         return logList;
+    }
+
+    async function generateBreakdownObject() {
+        return {categoryNames: data.categoryNames, categoryValues: data.categoryValues};
     }
 
     async function getData() {
