@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 import ActionBar from './actionBar';
 import CarouselMenu from './CarouselMenu';
+import DepositControls from './depositControls';
 
 //TODO: Add user count mock-up
 
@@ -91,53 +92,8 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             <div className="container d-flex flex-column flex-sm-row justify-content-between">
                 {/* Control panel */}
                 <CarouselMenu numberOfPages={4}>
-                    {/* Deposit controls */}
-                    <Carousel.Item key={0} className="card-body">
-                        <form>
-                            <h4>Deposit</h4>
-                            <div className="row g-1">
-                                <div className="col">
-                                    <input type="number" placeholder="Amount" className="form-control"/>
-                                </div>
-                                <div className="col">
-                                    <button type="button" className="btn btn-primary">Deposit</button>
-                                </div>
-                            </div>
-                            <label htmlFor="deposit-date">Date</label>
-                            <input id="deposit-date" type="date" className="form-control"/>
-                            <label htmlFor="deposit-note">Note</label>
-                            <input id="deposit-note" type="text" className="form-control"/>
-                            <label htmlFor="deposit-destination">Destination</label>
-                            <select id="deposit-destination" className="form-select">
-                                <option>Deposit Ratio</option>
-                                <option>Tithing</option>
-                                <option>Savings</option>
-                                <option>Fun</option>
-                            </select>
-                            <div className="card mt-2">
-                                <div className="card-header">
-                                    <label htmlFor="category-splits">Deposit Ratios</label>
-                                    <select id="category-splits" className="form-select">
-                                        <option>Default</option>
-                                        <option>Create New +</option>
-                                    </select>
-                                </div>
-                                {/* TODO: make this area scrollable */}
-                                {/*https://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is*/}
-                                {/*https://stackoverflow.com/questions/64400122/how-make-a-fixed-content-scrollable-in-bootstrap*/}
-                                {/* Ability to edit values */}
-                                {/* overflow-x/y/auto */}
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">Tithing: 10%</li>
-                                    <li className="list-group-item">Savings: 70%</li>
-                                    <li className="list-group-item">Fun: 20%</li>
-                                </ul>
-                                <div className="card-footer">
-                                    <button type="button" className="btn btn-primary me-1">Edit</button>
-                                    <button type="button" className="btn btn-primary">Save</button>
-                                </div>
-                            </div>
-                        </form>
+                    <Carousel.Item key={0}>
+                        <DepositControls/>
                     </Carousel.Item>
                     {/* Withdraw controls */}
                     <Carousel.Item key={1} className="card-body">
