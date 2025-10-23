@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from 'react-bootstrap';
 
 
 export default function ActionBar({ undo, redo, save, onLogout, userName }) {
+    const [totalUsers, setTotalUsers] = useState(10);
+    const [activeUsers, setActiveUsers] = useState(2);
+
+    useEffect(() => {
+        setUsers();
+    }, []);
+
+    
+    async function setUsers() {
+        setTimeout(() => {
+            setTotalUsers(prevTotal => {
+                const shouldIncrement = Math.random() > 0.75;
+                const newTotal = shouldIncrement ? prevTotal + 1 : prevTotal;
+
+                // Update active users based on new total
+                setActiveUsers(Math.ceil(Math.random() * newTotal));
+
+                // Continue the loop
+                setUsers();
+
+                return newTotal;
+            });
+        }, 10000);
+    }
+
 
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">
@@ -17,8 +42,8 @@ export default function ActionBar({ undo, redo, save, onLogout, userName }) {
             </div>
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-end order-2">
                 {/* Live user count through websocket */}
-                <div className="mx-2">Total users: <span id="total-users">0</span></div>
-                <div className="mx-2">Active now: <span id="active-users">0</span></div>
+                <div className="mx-2">Total users: <span id="total-users">{totalUsers}</span></div>
+                <div className="mx-2">Active now: <span id="active-users">{activeUsers}</span></div>
             </div>
         </div>
     );
