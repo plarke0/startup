@@ -71,7 +71,8 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }, [authState, navigate]);
 
     const [data, setData] = useState(null);
-    const [categoryLogs, setCategoryLogs] = useState([]);
+    const [categoryLogs, setCategoryLogs] = useState(null);
+    const [breakdownObject, setBreakdownObject] = useState({names: []})
     useEffect(() => {
         getData();
     }, [])
@@ -81,6 +82,10 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             (async () => {
                 const logs = await generateLogList();
                 setCategoryLogs(logs);
+            })();
+            (async () => {
+                const breakdown = await generateBreakdownObject();
+                setBreakdownObject(breakdown);
             })();
         }
     }, [data]);
@@ -104,7 +109,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function generateBreakdownObject() {
-        return {categoryNames: data.categoryNames, categoryValues: data.categoryValues};
+        return {names: data.categoryNames, values: data.categoryValues};
     }
 
     async function getData() {
@@ -157,7 +162,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 </CarouselMenu>
 
                 {/* Category breakdown */}
-                <CategoryBreakdown/>
+                <CategoryBreakdown categoryNames={breakdownObject.names} categoryValues={breakdownObject.values}/>
 
                 {/* Logs */}
                 <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>
