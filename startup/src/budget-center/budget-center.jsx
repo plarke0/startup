@@ -8,6 +8,7 @@ import DepositControls from './depositControls';
 import WithdrawControls from './withdrawControls';
 import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
+import CategoryBreakdown from './categoryBreakdown';
 
 //TODO: Add user count mock-up
 
@@ -106,32 +107,15 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     <Carousel.Item key={2}>
                         <TransferControls/>
                     </Carousel.Item>
-                    
+
                     <Carousel.Item key={3}>
                         <CategoryControls/>
                     </Carousel.Item>
                 </CarouselMenu>
+
                 {/* Category breakdown */}
-                <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
-                    <h4>Category Breakdown</h4>
-                    {/* TODO: make functional and animate */}
-                    {/*https://stackoverflow.com/questions/59921845/math-to-create-svg-pie-chart-without-using-css-or-js*/}
-                    <svg width="230" height="230">
-                        <circle cx="110" cy="110" r="80" stroke="green" strokeWidth="40" fill="#ffffff"/>
-                        <text fill="#000000" fontSize="40" justify="center" fontFamily="Monospace" x="40" y="125">$10.00</text>
-                    </svg>
-                    <div className="card col-11 col-lg-8 col-xl-6">
-                        <div className="card-header text-center">
-                            <h5>Categories:</h5>
-                        </div>
-                        {/* TODO: make scrolable */}
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Tithing: $0.00</li>
-                            <li className="list-group-item">Savings: $0.00</li>
-                            <li className="list-group-item">Fun: $0.00</li>
-                        </ul>
-                    </div>
-                </div>
+                <CategoryBreakdown/>
+                
                 {/* Logs */}
                 <div className="card w-100">
                     {/* Log selection */}
