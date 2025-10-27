@@ -491,3 +491,29 @@ coinToss
 //    Toss completed
 ```
 
+##Debugging the Backend
+###pm2
+####Useful Commands
+```bash
+pm2 ls
+```
+
+```bash
+pm2 stop {service}
+```
+
+```bash
+pm2 start {service}
+```
+
+```bash
+pm2 delete {service}
+```
+
+```bash
+pm2 logs
+```
+
+```bash
+ps -ef
+```
