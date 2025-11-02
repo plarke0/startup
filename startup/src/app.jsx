@@ -12,6 +12,7 @@ import Login from './login/login';
 import Signup from './signup/signup';
 import NotFound from './app-components/notFound';
 
+//TODO: Remove login and signup navlinks when logged in
 
 export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
