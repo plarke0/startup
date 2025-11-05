@@ -46,9 +46,15 @@ apiRouter.post('auth/login', async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' })
 });
 
-//TODO
 //Logout current user
-
+apiRouter.delete('auth/logout', async (req, res) => {
+    const user = findUser('email', req.body.email);
+    if (user) {
+        delete user.token;
+    }
+    res.clearCookie(authCookieName);
+    res.status(204).end();
+});
 
 //TODO
 //Middleware to verify that the user is authenticated
