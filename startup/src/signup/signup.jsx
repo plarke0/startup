@@ -44,8 +44,20 @@ export default function Signup({ user, authState, onAuthChange }) {
             await setError("Username contains profanity.");
         };
         if (!displayError && !containsProfanity) {
-            localStorage.setItem("userName", userName);
-            onAuthChange(userName, AuthState.Authenticated);
+            const response = await fetch("api/auth/create", {
+                method: "post",
+                body: JSON.stringify({ email: userName, password: password }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+            });
+            if (response?.status === 200) {
+                localStorage.setItem("userName", userName);
+                onAuthChange(userName, AuthState.Authenticated);
+            } else {
+                const body = await response.json();
+                setError(body.msg);
+            }
         }
     }
 
