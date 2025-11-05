@@ -21,15 +21,29 @@ export default function Signup({ user, authState, onAuthChange }) {
     useEffect(() => {
         //TODO: Generalize to accept where the error occurs, make an error file.
         if (password !== confirmPassword) {
-            console.log({displayError});
             setError("Passwords must match.");
         } else if (displayError !== false) {
             setError(false);
         }
     }, [userName, password, confirmPassword]);
 
+    async function usernameContainsProfanity(username) {
+        try {
+            const response = await fetch(`https://www.purgomalum.com/service/containsprofanity?text=${username}`);
+            return response.json();
+        } catch (error) {
+            console.log("ERROR");
+            return false;
+        }
+    }
+
     async function createUser() {
-        if (!displayError) {
+        const containsProfanity = await usernameContainsProfanity(userName);
+        if (containsProfanity === true) {
+            //TODO: Modify for generalization
+            await setError("Username contains profanity.");
+        };
+        if (!displayError && !containsProfanity) {
             localStorage.setItem("userName", userName);
             onAuthChange(userName, AuthState.Authenticated);
         }
