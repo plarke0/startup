@@ -20,7 +20,6 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-//TODO
 //Create new user
 apiRouter.post('/auth/create', async (req, res) => {
     if (await findUser('email', req.body.email)) {
@@ -33,9 +32,19 @@ apiRouter.post('/auth/create', async (req, res) => {
     }
 });
 
-//TODO
 //Login exisiting user
-
+apiRouter.post('auth/login', async (req, res) => {
+    const user = await findUser('email', req.body.email);
+    if (user) {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            user.token = uuid.v4();
+            setAuthCookie(res, user.token);
+            res.send({ email: user.email });
+            return;
+        }
+    }
+    res.status(401).send({ msg: 'Unauthorized' })
+});
 
 //TODO
 //Logout current user
