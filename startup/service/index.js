@@ -33,7 +33,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 //Login exisiting user
-apiRouter.post('auth/login', async (req, res) => {
+apiRouter.post('/auth/login', async (req, res) => {
     const user = await findUser('email', req.body.email);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
@@ -47,7 +47,7 @@ apiRouter.post('auth/login', async (req, res) => {
 });
 
 //Logout current user
-apiRouter.delete('auth/logout', async (req, res) => {
+apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('email', req.body.email);
     if (user) {
         delete user.token;
