@@ -48,7 +48,7 @@ apiRouter.post('auth/login', async (req, res) => {
 
 //Logout current user
 apiRouter.delete('auth/logout', async (req, res) => {
-    const user = findUser('email', req.body.email);
+    const user = await findUser('email', req.body.email);
     if (user) {
         delete user.token;
     }
@@ -56,9 +56,15 @@ apiRouter.delete('auth/logout', async (req, res) => {
     res.status(204).end();
 });
 
-//TODO
 //Middleware to verify that the user is authenticated
-
+const verifyAuth = async (req, res, next) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({ msg: 'Unauthorized' });
+    }
+};
 
 // Default error handler
 app.use(function (err, req, res, next) {
