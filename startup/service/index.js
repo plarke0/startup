@@ -7,6 +7,7 @@ const app = express();
 const authCookieName = 'token';
 
 let users = [];
+let budgetData = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -21,7 +22,16 @@ app.use('/api', apiRouter);
 
 //TODO
 //Create new user
+apiRouter.post('/auth/create', async (req, res) => {
+    if (await findUser('email', req.body.email)) {
+        res.status(409).send({ msg: 'Existing user' })
+    } else {
+        const user = await createUser(req.body.email, req.body.password);
 
+        setAuthCookie(res, user.token);
+        res.send({ email: user.email });
+    }
+});
 
 //TODO
 //Login exisiting user
