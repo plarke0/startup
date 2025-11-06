@@ -119,7 +119,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [X] **Calls to third party endpoints** - I called purgomalum to filter profane usernames.
 - [X] **Backend service endpoints** - I added backend service endpoints.
 - [X] **Frontend calls service endpoints** - I called my backend endpoints .
-- [X] **Supports registration, login, logout, and restricted endpoint** - I implemented authentication and authenticated data retrieval.
+- [X] **Supports registration, login, logout, and restricted endpoint** - I implemented authentication and restricted data retrieval.
 
 
 ## 🚀 DB deliverable
