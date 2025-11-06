@@ -82,18 +82,20 @@ async function initializeBudgetData(email) {
         },
         unusedLogs: {}
     };
-    budgetData.push(budgetData);
-    return newData;
+    budgetData.push(budgetEntry);
+    return budgetEntry;
 }
 
 //Retrieve budget data
 apiRouter.get('/budget/userdata', verifyAuth, async (req, res) => {
-    const data = await findData('email', req.body.email);
+    const user = await findUser('token', req.cookies[authCookieName]);
+    const userName = user.email;
+    let data = await findData('email', userName);
     if (!data) {
-        newData = await initializeBudgetData(req.body.email);
+        newData = await initializeBudgetData(userName);
         res.send(newData);
     } else {
-        res.send(await data.json());
+        res.send(data);
     }
 });
 

@@ -112,9 +112,11 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function getData() {
-        setTimeout(() => {
-            setData(testData);
-        }, 1000);
+        const fetchedData = await fetch("api/budget/userdata", {
+            method: "get",
+            credentials: "include"
+        });
+        setData(await fetchedData.json());
     }
 
     async function onLogout() {
