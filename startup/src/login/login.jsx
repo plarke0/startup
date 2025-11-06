@@ -20,8 +20,21 @@ export default function Login({ user, authState, onAuthChange }) {
 
     async function loginUser() {
         if (!displayError) {
-            localStorage.setItem("userName", userName);
-            onAuthChange(userName, AuthState.Authenticated);
+            const response = await fetch("api/auth/login", {
+                method: "post",
+                body: JSON.stringify({ email: userName, password: password }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+            });
+            if (response?.status === 200) {
+                localStorage.setItem("userName", userName);
+                onAuthChange(userName, AuthState.Authenticated);
+            } else {
+                const body = await response.json();
+                //TODO: Error handling
+                console.log("BAD LOGIN");
+            }
         }
     }
 

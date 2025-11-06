@@ -112,14 +112,26 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function getData() {
-        setTimeout(() => {
-            setData(testData);
-        }, 1000);
+        const fetchedData = await fetch("api/budget/userdata", {
+            method: "get",
+            credentials: "include"
+        });
+        setData(await fetchedData.json());
     }
 
-    function onLogout() {
-        localStorage.removeItem("userName");
-        onAuthChange(userName, AuthState.Unauthenticated);
+    async function onLogout() {
+        try {
+            const response = await fetch("api/auth/logout", {
+                method: "delete",
+            });
+            if (response?.status === 204) {
+                localStorage.removeItem("userName");
+                onAuthChange(userName, AuthState.Unauthenticated);
+            }
+        } catch {
+            //TODO: Error handling
+            console.log("EROOR LOGGING OUT");
+        }
     }
 
     async function save() {
