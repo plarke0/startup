@@ -114,12 +114,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - I set up Node.js and express.
+- [X] **Static middleware for frontend** - I added middleware to serve the frontend.
+- [X] **Calls to third party endpoints** - I called purgomalum to filter profane usernames.
+- [X] **Backend service endpoints** - I added backend service endpoints.
+- [X] **Frontend calls service endpoints** - I called my backend endpoints .
+- [X] **Supports registration, login, logout, and restricted endpoint** - I implemented authentication and authenticated data retrieval.
 
 
 ## 🚀 DB deliverable
