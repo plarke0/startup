@@ -112,11 +112,20 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function getData() {
-        const fetchedData = await fetch("api/budget/userdata", {
-            method: "get",
-            credentials: "include"
-        });
-        setData(await fetchedData.json());
+        try {
+            const fetchedData = await fetch("api/budget/userdata", {
+                method: "get",
+                credentials: "include"
+            });
+            if (fetchedData.status === 401) {
+                onAuthChange(userName, AuthState.Unauthenticated);
+                return;
+            }
+
+            setData(await fetchedData.json());
+        } catch {
+            console.log("UNAUTHORIZED");
+        }
     }
 
     async function onLogout() {
