@@ -66,6 +66,37 @@ const verifyAuth = async (req, res, next) => {
     }
 };
 
+//Initialize budget data
+async function initializeBudgetData(email) {
+    let budgetEntry = {
+        email: email,
+        categoryNames: ['Savings'],
+        categoryValues: { 'Savings': 0 },
+        depositRatios: {
+            'Even': {
+                'Savings': 1000
+            }
+        },
+        logs: {
+            'Savings': []
+        },
+        unusedLogs: {}
+    };
+    budgetData.push(budgetData);
+    return newData;
+}
+
+//Retrieve budget data
+apiRouter.get('/budget/userdata', verifyAuth, async (req, res) => {
+    const data = await findData('email', req.body.email);
+    if (!data) {
+        newData = await initializeBudgetData(req.body.email);
+        res.send(newData);
+    } else {
+        res.send(await data.json());
+    }
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
@@ -75,9 +106,6 @@ app.use(function (err, req, res, next) {
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
-
-
-
 
 async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -96,6 +124,12 @@ async function findUser(field, value) {
     if (!value) return null;
 
     return users.find((u) => u[field] === value);
+}
+
+async function findData(field, value) {
+    if (!value) return null;
+
+    return budgetData.find((u) => u[field] === value);
 }
 
 // setAuthCookie in the HTTP response
