@@ -10,6 +10,7 @@ import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
 import CategoryLog from './CategoryLog';
+const utils = require('./utils.js');
 
 
 const testData = {
