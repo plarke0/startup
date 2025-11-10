@@ -6,11 +6,12 @@ function getValueFrom(inputId, valueType) {
     }
 
     if (valueType === "money") {
-        
+        return convertValueToMoney(rawValue);
     }
 
     if (valueType === "date") {
-
+        //TODO: Test date formatting.
+        return rawValue;
     }
 }
 
@@ -43,5 +44,5 @@ function validateDate() {
 
 
 module.exports = {
-  
+    getValueFrom,
 };

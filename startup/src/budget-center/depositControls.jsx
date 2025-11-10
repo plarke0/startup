@@ -20,7 +20,7 @@ export default function DepositControls() {
                 <h4>Deposit</h4>
                 <div className="row g-1">
                     <div className="col">
-                        <input type="number" placeholder="Amount" className="form-control"/>
+                        <input id="deposit-amount" type="number" placeholder="Amount" className="form-control"/>
                     </div>
                     <div className="col">
                         <Button variant="primary" onClick={deposit}>Deposit</Button>

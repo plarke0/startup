@@ -142,7 +142,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function deposit(date, value, distribution, note) {
-
+        const amountValue = utils.getValueFrom("deposit-amount", "money");
     }
 
     return (
