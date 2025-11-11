@@ -16,7 +16,7 @@ import testData from './testData.json'
 
 export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
-    {/** TODO: Add auth token to auth check **/}
+    //TODO: Add auth token to auth check
     useEffect(() => {
         if (authState === AuthState.Unauthenticated) {
             navigate("/login")
@@ -24,28 +24,42 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }, [authState, navigate]);
 
     const [data, setData] = useState(null);
-    const [categoryLogs, setCategoryLogs] = useState(null);
-    const [breakdownObject, setBreakdownObject] = useState({names: []})
     useEffect(() => {
         getData();
     }, [])
 
+    const [categoryNames, setCategoryNames] = useState([]);
+    const [categoryValues, setCategoryValues] = useState({});
+    const [depositRatios, setDepositRatios] = useState({});
+    const [logs, setLogs] = useState({});
+    const [unusedLogs, setUnusedLogs] = useState({});
+
+    const [categoryLogs, setCategoryLogs] = useState(null);
+
     useEffect(() => {
-        if (data) {
-            (async () => {
-                const logs = await generateLogList();
-                setCategoryLogs(logs);
-            })();
-            (async () => {
-                const breakdown = await generateBreakdownObject();
-                setBreakdownObject(breakdown);
-            })();
-        }
+        updateDataComponents();
     }, [data]);
+
+    async function updateDataComponents() {
+        if (data) {
+            setCategoryNames(data.categoryNames);
+            setCategoryValues(data.categoryValues);
+            setDepositRatios(data.depositRatios);
+            setLogs(data.logs);
+            setUnusedLogs(data.unusedLogs);
+        }
+    }
+
+    //Update log list
+    useEffect(() => {
+        (async () => {
+                const logList = await generateLogList();
+                setCategoryLogs(logList);
+        })()
+    }, [logs]);
 
     async function generateLogList() {
         const logList = [];
-        const logs = data.logs;
         let i = 0;
         for (const [name, log] of Object.entries(logs)) {
             logList.push(
@@ -59,10 +73,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             i++;
         }
         return logList;
-    }
-
-    async function generateBreakdownObject() {
-        return {names: data.categoryNames, values: data.categoryValues};
     }
 
     async function getData() {
@@ -144,7 +154,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 </CarouselMenu>
 
                 {/* Category breakdown */}
-                <CategoryBreakdown categoryNames={breakdownObject.names} categoryValues={breakdownObject.values}/>
+                <CategoryBreakdown categoryNames={categoryNames} categoryValues={categoryValues}/>
 
                 {/* Logs */}
                 <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>
