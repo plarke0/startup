@@ -10,7 +10,7 @@ import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
 import CategoryLog from './CategoryLog';
-const utils = require('./utils.js');
+import * as utils from './utils';
 
 
 const testData = {
@@ -141,8 +141,27 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     }
 
-    function deposit(date, value, distribution, note) {
+    function getDepositRatio() {
+        const ratioKey = utils.getValueFrom("");
+    }
+
+    function deposit() {
         const amountValue = utils.getValueFrom("deposit-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            return;
+        }
+        const dateValue = utils.getValueFrom("deposit-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            return;
+        }
+        const noteValue = utils.getValueFrom("deposit-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            return;
+        }
+        
     }
 
     return (
@@ -153,7 +172,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 {/* Control panel */}
                 <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
-                        <DepositControls/>
+                        <DepositControls depositFunction={deposit}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>

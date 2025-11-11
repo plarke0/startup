@@ -1,7 +1,12 @@
-function getValueFrom(inputId, valueType) {
+export function getValueFrom(inputId, valueType) {
+    console.log("GETTING VALUE");
     const rawValue = document.getElementById(inputId).value;
 
     if (valueType === "note") {
+        return rawValue;
+    }
+
+    if (valueType === "key") {
         return rawValue;
     }
 
@@ -30,10 +35,10 @@ function convertValueToMoney(value) {
         } else if (centLength === 2) {
             return dollarValue + centValue;
         } else {
-            //ERROR
+            return null;
         }
     } else {
-        //ERROR
+        return null;
     }
 
 }
@@ -41,8 +46,3 @@ function convertValueToMoney(value) {
 function validateDate() {
 
 }
-
-
-module.exports = {
-    getValueFrom,
-};

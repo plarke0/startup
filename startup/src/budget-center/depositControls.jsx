@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function DepositControls() {
+export default function DepositControls({ depositFunction }) {
     function editCurrentDepositRatio() {
         //TODO
     }
@@ -11,7 +11,7 @@ export default function DepositControls() {
     }
 
     function deposit() {
-        //TODO
+        depositFunction();
     }
 
     return (
