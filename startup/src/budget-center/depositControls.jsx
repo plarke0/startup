@@ -32,13 +32,14 @@ export default function DepositControls({ depositFunction }) {
                 <input id="deposit-note" type="text" className="form-control"/>
                 <label htmlFor="deposit-destination">Destination</label>
                 <select id="deposit-destination" className="form-select">
-                    <option>Deposit Ratio</option>
-                    <option>Tithing</option>
-                    <option>Savings</option>
-                    <option>Fun</option>
+                    <option value="ratio">Deposit Ratio</option>
+                    <option value="Tithing">Tithing</option>
+                    <option value="Savings">Savings</option>
+                    <option value="Fun">Fun</option>
                 </select>
                 <div className="card mt-2">
                     <div className="card-header">
+                        {/** TODO: Simplify ratios to 'Even' and 'Custom' **/}
                         <label htmlFor="category-splits">Deposit Ratios</label>
                         <select id="category-splits" className="form-select">
                             <option>Default</option>

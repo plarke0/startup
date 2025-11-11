@@ -1,5 +1,4 @@
 export function getValueFrom(inputId, valueType) {
-    console.log("GETTING VALUE");
     const rawValue = document.getElementById(inputId).value;
 
     if (valueType === "note") {
