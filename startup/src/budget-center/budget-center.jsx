@@ -106,8 +106,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     function getDepositRatio() {
         const ratioKey = utils.getValueFrom("deposit-destination", "key");
-        console.log(ratioKey);
-        return ratioKey;
+        if (ratioKey in depositRatios) {
+            return { key: ratioKey, type: "ratio" };
+        }
+        if (ratioKey in categoryNames) {
+            return { key: ratioKey, type: "single" };
+        }
+        return null;
     }
 
     function deposit() {
@@ -126,7 +131,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             //ERROR
             return;
         }
-        const ratioKey = getDepositRatio();
+        const ratioObject = getDepositRatio();
+        if (ratioObject === null) {
+            //ERROR
+            return;
+        }
+        const ratioKey = ratioObject.key;
+        const ratioType = ratioObject.type;
     }
 
     return (
