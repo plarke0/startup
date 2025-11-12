@@ -106,38 +106,77 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     function getDepositRatio() {
         const ratioKey = utils.getValueFrom("deposit-destination", "key");
-        if (ratioKey in depositRatios) {
-            return { key: ratioKey, type: "ratio" };
+        if (ratioKey === "ratio") {
+            const ratioName = utils.getValueFrom("category-splits", "key");
+            if (ratioName in depositRatios) {
+                return { key: ratioName, type: "ratio" };
+            }
         }
-        if (ratioKey in categoryNames) {
+        if (categoryNames.includes(ratioKey)) {
             return { key: ratioKey, type: "single" };
         }
         return null;
     }
 
-    function deposit() {
+    function depositToCategory(amount, categoryName, date, note) {
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: prevValues[categoryName] + amount
+        }));
+        //Add log
+        //Add to action list for undo
+    }
+
+    async function deposit() {
         const amountValue = utils.getValueFrom("deposit-amount", "money");
         if (amountValue === null) {
             //ERROR
+            console.log("AMOUNT ERROR");
             return;
         }
         const dateValue = utils.getValueFrom("deposit-date", "date");
         if (dateValue === null) {
             //ERROR
+            console.log("DATE ERROR");
             return;
         }
         const noteValue = utils.getValueFrom("deposit-note", "note");
         if (noteValue === null) {
             //ERROR
+            console.log("NOTE ERROR");
             return;
         }
         const ratioObject = getDepositRatio();
         if (ratioObject === null) {
             //ERROR
+            console.log("RATIO ERROR");
             return;
         }
         const ratioKey = ratioObject.key;
         const ratioType = ratioObject.type;
+
+        if (ratioType === "single") {
+            depositToCategory(amountValue, ratioKey, dateValue, noteValue);
+        } else if (ratioType === "ratio") {
+            let remainingAmount = amountValue;
+            let depositAmounts = {};
+            for (const [category, ratio] of Object.entries(depositRatios[ratioKey])) {
+                const categoryAmount = Math.floor(amountValue * ratio / 10000);
+                depositAmounts[category] = categoryAmount;
+                remainingAmount -= categoryAmount;
+            }
+            if (remainingAmount !== 0) {
+                for (const [category, amount] of Object.entries(depositAmounts)) {
+                    if (amount !== 0) {
+                        depositAmounts[category] += remainingAmount;
+                        break;
+                    }
+                }
+            }
+            for (const [category, amount] of Object.entries(depositAmounts)) {
+                depositToCategory(amount, category, dateValue, noteValue);
+            }
+        }
     }
 
     return (
