@@ -42,8 +42,8 @@ export default function DepositControls({ depositFunction }) {
                         {/** TODO: Simplify ratios to 'Even' and 'Custom' **/}
                         <label htmlFor="category-splits">Deposit Ratios</label>
                         <select id="category-splits" className="form-select">
-                            <option>Default</option>
-                            <option>Create New +</option>
+                            <option>Even</option>
+                            <option>Custom</option>
                         </select>
                     </div>
                     {/* TODO: make this area scrollable */}
@@ -52,9 +52,10 @@ export default function DepositControls({ depositFunction }) {
                     {/* Ability to edit values */}
                     {/* overflow-x/y/auto */}
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Tithing: 10%</li>
-                        <li className="list-group-item">Savings: 70%</li>
-                        <li className="list-group-item">Fun: 20%</li>
+                        <li className="list-group-item">Savings: 25%</li>
+                        <li className="list-group-item">Tithing: 25%</li>
+                        <li className="list-group-item">Rent: 25%</li>
+                        <li className="list-group-item">Fun: 25%</li>
                     </ul>
                     <div className="card-footer">
                         <Button variant="primary" onClick={editCurrentDepositRatio} className="me-1">Edit</Button>
