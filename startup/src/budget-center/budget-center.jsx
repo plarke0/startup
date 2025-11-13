@@ -214,7 +214,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     </Carousel.Item>
 
                     <Carousel.Item key={3}>
-                        <CategoryControls/>
+                        <CategoryControls selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
                 </CarouselMenu>
 
