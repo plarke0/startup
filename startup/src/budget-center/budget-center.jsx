@@ -102,9 +102,14 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function save() {
-        setTimeout(() => {
-            console.log("Saved!");
-        }, 1500);
+        const newData = {
+            "categoryNames": categoryNames,
+            "categoryValues": categoryValues,
+            "depositRatios": depositRatios,
+            "logs": logs,
+            "unusedLogs": unusedLogs
+        };
+        setData(newData);
     }
 
     function undo() {
