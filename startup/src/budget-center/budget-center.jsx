@@ -39,6 +39,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     useEffect(() => {
         updateDataComponents();
+
     }, [data]);
 
     async function updateDataComponents() {
@@ -118,7 +119,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             }
         } catch {
             //TODO: Error handling
-            console.log("EROOR LOGGING OUT");
+            console.log("ERROR LOGGING OUT");
         }
     }
 
@@ -131,6 +132,18 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             "unusedLogs": unusedLogs
         };
         setData(newData);
+        try {
+            await fetch("api/budget/userdata", {
+                method: "post",
+                body: JSON.stringify({ data: newData }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                },
+                credentials: "include"
+            });
+        } catch {
+            console.log("ERROR SAVING")
+        }
     }
 
     function undo() {
