@@ -206,7 +206,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>
-                        <WithdrawControls/>
+                        <WithdrawControls selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
