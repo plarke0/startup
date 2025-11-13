@@ -20,6 +20,9 @@ export function getValueFrom(inputId, valueType) {
 }
 
 function convertValueToMoney(value) {
+    if (value.length === 0) {
+        return null;
+    }
     let splitValueList = value.split(".");
     const length = splitValueList.length;
     let dollarValue = length !== 0 ? (parseInt(splitValueList[0]) * 100) : 0;
