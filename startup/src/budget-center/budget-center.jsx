@@ -35,6 +35,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const [unusedLogs, setUnusedLogs] = useState({});
 
     const [categoryLogs, setCategoryLogs] = useState(null);
+    const [categorySelectOptions, setCategorySelectOptions] = useState([]);
 
     useEffect(() => {
         updateDataComponents();
@@ -74,6 +75,20 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
         return logList;
     }
+
+    //Update select options
+    useEffect(() => {
+        if (Object.keys(categoryNames).length === 0) {
+            setCategorySelectOptions([]);
+        } else {
+            let options = [];
+            for (const categoryName of categoryNames) {
+                let optionObject = { value: categoryName, label: categoryName }
+                options.push(optionObject);
+            }
+            setCategorySelectOptions(options);
+        }
+    }, [categoryNames])
 
     async function getData() {
         setTimeout(() => {
@@ -187,7 +202,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 {/* Control panel */}
                 <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
-                        <DepositControls depositFunction={deposit}/>
+                        <DepositControls depositFunction={deposit} selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>

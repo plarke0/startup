@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function DepositControls({ depositFunction }) {
+export default function DepositControls({ depositFunction, selectOptions }) {
+    const depositOptions = [{ value: "ratio", label: "Deposit Ratio" }].concat(selectOptions);
+
     function editCurrentDepositRatio() {
         //TODO
     }
@@ -32,10 +34,7 @@ export default function DepositControls({ depositFunction }) {
                 <input id="deposit-note" type="text" className="form-control"/>
                 <label htmlFor="deposit-destination">Destination</label>
                 <select id="deposit-destination" className="form-select">
-                    <option value="ratio">Deposit Ratio</option>
-                    <option value="Tithing">Tithing</option>
-                    <option value="Savings">Savings</option>
-                    <option value="Fun">Fun</option>
+                    {depositOptions.map((depositOption) => <option value={depositOption.value}>{depositOption.label}</option>)}
                 </select>
                 <div className="card mt-2">
                     <div className="card-header">
