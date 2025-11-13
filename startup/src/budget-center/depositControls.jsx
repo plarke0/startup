@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function DepositControls() {
+export default function DepositControls({ depositFunction, selectOptions }) {
+    const depositOptions = [{ value: "ratio", label: "Deposit Ratio" }].concat(selectOptions);
+
     function editCurrentDepositRatio() {
         //TODO
     }
@@ -11,7 +13,7 @@ export default function DepositControls() {
     }
 
     function deposit() {
-        //TODO
+        depositFunction();
     }
 
     return (
@@ -20,7 +22,7 @@ export default function DepositControls() {
                 <h4>Deposit</h4>
                 <div className="row g-1">
                     <div className="col">
-                        <input type="number" placeholder="Amount" className="form-control"/>
+                        <input id="deposit-amount" type="number" placeholder="Amount" className="form-control"/>
                     </div>
                     <div className="col">
                         <Button variant="primary" onClick={deposit}>Deposit</Button>
@@ -32,17 +34,15 @@ export default function DepositControls() {
                 <input id="deposit-note" type="text" className="form-control"/>
                 <label htmlFor="deposit-destination">Destination</label>
                 <select id="deposit-destination" className="form-select">
-                    <option>Deposit Ratio</option>
-                    <option>Tithing</option>
-                    <option>Savings</option>
-                    <option>Fun</option>
+                    {depositOptions.map((depositOption) => <option value={depositOption.value}>{depositOption.label}</option>)}
                 </select>
                 <div className="card mt-2">
                     <div className="card-header">
+                        {/** TODO: Simplify ratios to 'Even' and 'Custom' **/}
                         <label htmlFor="category-splits">Deposit Ratios</label>
                         <select id="category-splits" className="form-select">
-                            <option>Default</option>
-                            <option>Create New +</option>
+                            <option>Even</option>
+                            <option>Custom</option>
                         </select>
                     </div>
                     {/* TODO: make this area scrollable */}
@@ -51,9 +51,10 @@ export default function DepositControls() {
                     {/* Ability to edit values */}
                     {/* overflow-x/y/auto */}
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Tithing: 10%</li>
-                        <li className="list-group-item">Savings: 70%</li>
-                        <li className="list-group-item">Fun: 20%</li>
+                        <li className="list-group-item">Savings: 25%</li>
+                        <li className="list-group-item">Tithing: 25%</li>
+                        <li className="list-group-item">Rent: 25%</li>
+                        <li className="list-group-item">Fun: 25%</li>
                     </ul>
                     <div className="card-footer">
                         <Button variant="primary" onClick={editCurrentDepositRatio} className="me-1">Edit</Button>

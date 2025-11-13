@@ -10,59 +10,13 @@ import TransferControls from './transferControls';
 import CategoryControls from './categoryControls';
 import CategoryBreakdown from './categoryBreakdown';
 import CategoryLog from './CategoryLog';
+import * as utils from './utils';
+import testData from './testData.json'
 
-
-const testData = {
-    categoryNames: ["Savings", "Tithing", "Rent", "Fun"],
-    categoryValues: {
-        "Savings": 22000,
-        "Tithing": 3000,
-        "Rent": 10000,
-        "Fun": 100,
-    },
-    depositRatios: {
-        "Even": {
-            "Savings": 2500,
-            "Tithing": 2500,
-            "Rent": 2500,
-            "Fun": 2500,
-        },
-        "Default": {
-            "Savings": 3000,
-            "Tithing": 1000,
-            "Rent": 5000,
-            "Fun": 1000,
-        }
-    },
-    logs: {
-        "Savings": [
-            {id: "250918-0", date: "9/18/25", delta: 1000, newAmount: 1000, note: "Just started saving!"},
-            {id: "250918-1", date: "9/18/25", delta: 100, newAmount: 1100, note: "A dollar saved."},
-            {id: "250920-0", date: "9/20/25", delta: -1100, newAmount: 0, note: "My money!! :'("},
-            {id: "251010-0", date: "10/10/25", delta: 22000, newAmount: 22000, note: "making it make sense"},
-        ],
-        "Tithing": [
-            {id: "250918-0", date: "9/18/25", delta: 100, newAmount: 100, note: "Deposit to 'Tithing'"},
-            {id: "250922-0", date: "9/22/25", delta: -100, newAmount: 0, note: "Paid my thithing"},
-            {id: "251001-0", date: "10/1/25", delta: 3000, newAmount: 3000, note: "making it make sense"},
-        ],
-        "Rent": [
-            {id: "251009-0", date: "10/9/25", delta: 10000, newAmount: 10000, note: "making it make sense"},
-        ],
-        "Fun": [
-            {id: "250918-0", date: "9/18/25", delta: 50, newAmount: 50, note: "Maybe I'll have fun someday. I'm also going to use this note as a test for really long notes. Why you would add a note like this, idk, but I want it to look okay if someone does. I think this is long enough."},
-            {id: "250918-1", date: "9/18/25", delta: 50, newAmount: 100, note: "making it make sense"},
-        ]
-    },
-    unusedLogs: {
-        "Dates-MERGED": [
-            {id: "250920-0", date: "9/20/25", delta: 0, newAmount: 0, note: "EXAMPLE"},
-        ]
-    }
-}
 
 export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const navigate = useNavigate();
+    //TODO: Add auth token to auth check
     useEffect(() => {
         if (authState === AuthState.Unauthenticated) {
             navigate("/login")
@@ -70,28 +24,43 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }, [authState, navigate]);
 
     const [data, setData] = useState(null);
-    const [categoryLogs, setCategoryLogs] = useState(null);
-    const [breakdownObject, setBreakdownObject] = useState({names: []})
     useEffect(() => {
         getData();
     }, [])
 
+    const [categoryNames, setCategoryNames] = useState([]);
+    const [categoryValues, setCategoryValues] = useState({});
+    const [depositRatios, setDepositRatios] = useState({});
+    const [logs, setLogs] = useState({});
+    const [unusedLogs, setUnusedLogs] = useState({});
+
+    const [categoryLogs, setCategoryLogs] = useState(null);
+    const [categorySelectOptions, setCategorySelectOptions] = useState([]);
+
     useEffect(() => {
-        if (data) {
-            (async () => {
-                const logs = await generateLogList();
-                setCategoryLogs(logs);
-            })();
-            (async () => {
-                const breakdown = await generateBreakdownObject();
-                setBreakdownObject(breakdown);
-            })();
-        }
+        updateDataComponents();
     }, [data]);
+
+    async function updateDataComponents() {
+        if (data) {
+            setCategoryNames(data.categoryNames);
+            setCategoryValues(data.categoryValues);
+            setDepositRatios(data.depositRatios);
+            setLogs(data.logs);
+            setUnusedLogs(data.unusedLogs);
+        }
+    }
+
+    //Update log list
+    useEffect(() => {
+        (async () => {
+                const logList = await generateLogList();
+                setCategoryLogs(logList);
+        })()
+    }, [logs]);
 
     async function generateLogList() {
         const logList = [];
-        const logs = data.logs;
         let i = 0;
         for (const [name, log] of Object.entries(logs)) {
             logList.push(
@@ -107,9 +76,19 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         return logList;
     }
 
-    async function generateBreakdownObject() {
-        return {names: data.categoryNames, values: data.categoryValues};
-    }
+    //Update select options
+    useEffect(() => {
+        if (Object.keys(categoryNames).length === 0) {
+            setCategorySelectOptions([]);
+        } else {
+            let options = [];
+            for (const categoryName of categoryNames) {
+                let optionObject = { value: categoryName, label: categoryName }
+                options.push(optionObject);
+            }
+            setCategorySelectOptions(options);
+        }
+    }, [categoryNames])
 
     async function getData() {
         try {
@@ -144,9 +123,14 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function save() {
-        setTimeout(() => {
-            console.log("Saved!");
-        }, 1500);
+        const newData = {
+            "categoryNames": categoryNames,
+            "categoryValues": categoryValues,
+            "depositRatios": depositRatios,
+            "logs": logs,
+            "unusedLogs": unusedLogs
+        };
+        setData(newData);
     }
 
     function undo() {
@@ -161,8 +145,79 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     }
 
-    function deposit(date, value, distribution, note) {
+    function getDepositRatio() {
+        const ratioKey = utils.getValueFrom("deposit-destination", "key");
+        if (ratioKey === "ratio") {
+            const ratioName = utils.getValueFrom("category-splits", "key");
+            if (ratioName in depositRatios) {
+                return { key: ratioName, type: "ratio" };
+            }
+        }
+        if (categoryNames.includes(ratioKey)) {
+            return { key: ratioKey, type: "single" };
+        }
+        return null;
+    }
 
+    function depositToCategory(amount, categoryName, date, note) {
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: prevValues[categoryName] + amount
+        }));
+        //Add log
+        //Add to action list for undo
+    }
+
+    async function deposit() {
+        const amountValue = utils.getValueFrom("deposit-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            console.log("AMOUNT ERROR");
+            return;
+        }
+        const dateValue = utils.getValueFrom("deposit-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            console.log("DATE ERROR");
+            return;
+        }
+        const noteValue = utils.getValueFrom("deposit-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            console.log("NOTE ERROR");
+            return;
+        }
+        const ratioObject = getDepositRatio();
+        if (ratioObject === null) {
+            //ERROR
+            console.log("RATIO ERROR");
+            return;
+        }
+        const ratioKey = ratioObject.key;
+        const ratioType = ratioObject.type;
+
+        if (ratioType === "single") {
+            depositToCategory(amountValue, ratioKey, dateValue, noteValue);
+        } else if (ratioType === "ratio") {
+            let remainingAmount = amountValue;
+            let depositAmounts = {};
+            for (const [category, ratio] of Object.entries(depositRatios[ratioKey])) {
+                const categoryAmount = Math.floor(amountValue * ratio / 10000);
+                depositAmounts[category] = categoryAmount;
+                remainingAmount -= categoryAmount;
+            }
+            if (remainingAmount !== 0) {
+                for (const [category, amount] of Object.entries(depositAmounts)) {
+                    if (amount !== 0) {
+                        depositAmounts[category] += remainingAmount;
+                        break;
+                    }
+                }
+            }
+            for (const [category, amount] of Object.entries(depositAmounts)) {
+                depositToCategory(amount, category, dateValue, noteValue);
+            }
+        }
     }
 
     return (
@@ -173,24 +228,24 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 {/* Control panel */}
                 <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
-                        <DepositControls/>
+                        <DepositControls depositFunction={deposit} selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>
-                        <WithdrawControls/>
+                        <WithdrawControls selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
-                        <TransferControls/>
+                        <TransferControls selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={3}>
-                        <CategoryControls/>
+                        <CategoryControls selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
                 </CarouselMenu>
 
                 {/* Category breakdown */}
-                <CategoryBreakdown categoryNames={breakdownObject.names} categoryValues={breakdownObject.values}/>
+                <CategoryBreakdown categoryNames={categoryNames} categoryValues={categoryValues}/>
 
                 {/* Logs */}
                 <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>

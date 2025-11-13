@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function WithdrawControls() {
+export default function WithdrawControls({ selectOptions }) {
     function withdraw() {
         //TODO
     }
@@ -24,9 +24,7 @@ export default function WithdrawControls() {
                 <input id="withdraw-note" type="text" className="form-control"/>
                 <label htmlFor="withdraw-category">Source</label>
                 <select id="withdraw-category" className="form-select">
-                    <option>Tithing</option>
-                    <option>Savings</option>
-                    <option>Fun</option>
+                    {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                 </select>
             </form>
         </div>

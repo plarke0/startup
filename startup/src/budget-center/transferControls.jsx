@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function TransferControls() {
+export default function TransferControls({ selectOptions }) {
     function transfer() {
         //TODO
     }
@@ -24,15 +24,11 @@ export default function TransferControls() {
                 <input id="transfer-note" type="text" className="form-control"/>
                 <label htmlFor="transfer-source">Source</label>
                 <select id="transfer-source" className="form-select">
-                    <option>Tithing</option>
-                    <option>Savings</option>
-                    <option>Fun</option>
+                    {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                 </select>
                 <label htmlFor="transfer-destination">Destination</label>
                 <select id="transfer-destination" className="form-select">
-                    <option>Tithing</option>
-                    <option>Savings</option>
-                    <option>Fun</option>
+                    {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                 </select>
             </form>
         </div>

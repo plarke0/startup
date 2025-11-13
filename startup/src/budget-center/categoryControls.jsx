@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function CategoryControls() {
+export default function CategoryControls({ selectOptions }) {
     function createCategory() {
         //TODO
     }
@@ -34,10 +34,8 @@ export default function CategoryControls() {
                     {/* Rename category */}
                     <li className="list-group-item">
                         <h6>Rename:</h6>
-                        <select id="rename-dropdown" className="form-select mb-2">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
+                        <select id="rename-select" className="form-select">
+                            {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                         </select>
                         <div className="row g-1">
                             <div className="col">
@@ -52,16 +50,12 @@ export default function CategoryControls() {
                     <li className="list-group-item">
                         <h6>Merge:</h6>
                         <label htmlFor="merge-source">Source</label>
-                        <select id="merge-source" className="form-select mb-2">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
+                        <select id="merge-source" className="form-select">
+                            {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                         </select>
                         <label htmlFor="merge-destination">Destination</label>
-                        <select id="merge-destination" className="form-select mb-2">
-                            <option>Tithing</option>
-                            <option>Savings</option>
-                            <option>Fun</option>
+                        <select id="merge-destination" className="form-select">
+                            {selectOptions.map((selectOption) => <option value={selectOption.value}>{selectOption.label}</option>)}
                         </select>
                         <Button variant="primary" onClick={mergeCategory}>Merge</Button>
                     </li>

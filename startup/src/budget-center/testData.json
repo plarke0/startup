@@ -1,0 +1,48 @@
+{
+    "categoryNames": ["Savings", "Tithing", "Rent", "Fun"],
+    "categoryValues": {
+        "Savings": 22000,
+        "Tithing": 3000,
+        "Rent": 10000,
+        "Fun": 100
+    },
+    "depositRatios": {
+        "Even": {
+            "Savings": 2500,
+            "Tithing": 2500,
+            "Rent": 2500,
+            "Fun": 2500
+        },
+        "Default": {
+            "Savings": 3000,
+            "Tithing": 1000,
+            "Rent": 5000,
+            "Fun": 1000
+        }
+    },
+    "logs": {
+        "Savings": [
+            {"id": "250918-0", "date": "9/18/25", "delta": 1000, "newAmount": 1000, "note": "Just started saving!"},
+            {"id": "250918-1", "date": "9/18/25", "delta": 100, "newAmount": 1100, "note": "A dollar saved."},
+            {"id": "250920-0", "date": "9/20/25", "delta": -1100, "newAmount": 0, "note": "My money!! :'("},
+            {"id": "251010-0", "date": "10/10/25", "delta": 22000, "newAmount": 22000, "note": "making it make sense"}
+        ],
+        "Tithing": [
+            {"id": "250918-0", "date": "9/18/25", "delta": 100, "newAmount": 100, "note": "Deposit to 'Tithing'"},
+            {"id": "250922-0", "date": "9/22/25", "delta": -100, "newAmount": 0, "note": "Paid my thithing"},
+            {"id": "251001-0", "date": "10/1/25", "delta": 3000, "newAmount": 3000, "note": "making it make sense"}
+        ],
+        "Rent": [
+            {"id": "251009-0", "date": "10/9/25", "delta": 10000, "newAmount": 10000, "note": "making it make sense"}
+        ],
+        "Fun": [
+            {"id": "250918-0", "date": "9/18/25", "delta": 50, "newAmount": 50, "note": "Maybe I'll have fun someday. I'm also going to use this note as a test for really long notes. Why you would add a note like this, idk, but I want it to look okay if someone does. I think this is long enough."},
+            {"id": "250918-1", "date": "9/18/25", "delta": 50, "newAmount": 100, "note": "making it make sense"}
+        ]
+    },
+    "unusedLogs": {
+        "Dates-MERGED": [
+            {"id": "250920-0", "date": "9/20/25", "delta": 0, "newAmount": 0, "note": "EXAMPLE"}
+        ]
+    }
+}
