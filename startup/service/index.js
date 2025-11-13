@@ -3,11 +3,9 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
-
-let users = [];
-let budgetData = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -38,6 +36,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
+            await DB.updateUser(user);
             setAuthCookie(res, user.token);
             res.send({ email: user.email });
             return;
@@ -51,6 +50,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
+        DB.updateUser(user);
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
@@ -67,9 +67,9 @@ const verifyAuth = async (req, res, next) => {
 };
 
 //Initialize budget data
-async function initializeBudgetData(email) {
+async function initializeBudgetData(userName) {
     let budgetEntry = {
-        email: email,
+        userName: userName,
         categoryNames: ['Savings'],
         categoryValues: { 'Savings': 0 },
         depositRatios: {
@@ -82,21 +82,30 @@ async function initializeBudgetData(email) {
         },
         unusedLogs: {}
     };
-    budgetData.push(budgetEntry);
+    DB.addData(budgetEntry);
     return budgetEntry;
 }
 
 //Retrieve budget data
 apiRouter.get('/budget/userdata', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    const userName = user.email;
-    let data = await findData('email', userName);
+    const userName = user.userName;
+    let data = await findData(userName);
     if (!data) {
         newData = await initializeBudgetData(userName);
         res.send(newData);
     } else {
         res.send(data);
     }
+});
+
+//Update budget data
+apiRouter.post('/budget/userdata', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    const userName = user.userName;
+    let data = req.body.data;
+    data.userName = userName;
+    updateData(data);
 });
 
 // Default error handler
@@ -113,11 +122,11 @@ async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const user = {
-        email: email,
+        userName: email,
         password: passwordHash,
         token: uuid.v4(),
     };
-    users.push(user);
+    await DB.addUser(user);
 
     return user;
 }
@@ -125,13 +134,19 @@ async function createUser(email, password) {
 async function findUser(field, value) {
     if (!value) return null;
 
-    return users.find((u) => u[field] === value);
+    if (field === "token") {
+        return DB.getUserByToken(value);
+    } else {
+        return DB.getUser(value);
+    }
 }
 
-async function findData(field, value) {
-    if (!value) return null;
+async function findData(userName) {
+    return await DB.getData(userName);
+}
 
-    return budgetData.find((u) => u[field] === value);
+async function updateData(data) {
+    await DB.updateData(data);
 }
 
 // setAuthCookie in the HTTP response
