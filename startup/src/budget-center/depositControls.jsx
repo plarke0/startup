@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 export default function DepositControls({ depositFunction, selectOptions }) {
     const depositOptions = [{ value: "ratio", label: "Deposit Ratio" }].concat(selectOptions);
 
-    function editCurrentDepositRatio() {
+    function editCustomDepositRatio() {
         //TODO
     }
 
@@ -57,7 +57,7 @@ export default function DepositControls({ depositFunction, selectOptions }) {
                         <li className="list-group-item">Fun: 25%</li>
                     </ul>
                     <div className="card-footer">
-                        <Button variant="primary" onClick={editCurrentDepositRatio} className="me-1">Edit</Button>
+                        <Button variant="primary" onClick={editCustomDepositRatio} className="me-1">Edit</Button>
                         <Button variant="primary" onClick={saveNewDepositRatio}>Save</Button>
                     </div>
                 </div>

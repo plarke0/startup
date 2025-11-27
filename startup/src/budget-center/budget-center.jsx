@@ -233,6 +233,42 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }
 
+    function withdrawFromCategory(amount, categoryName, date, note) {
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: prevValues[categoryName] - amount
+        }));
+        //Add log
+        //Add to action list for undo
+    }
+
+    async function withdraw() {
+        const amountValue = utils.getValueFrom("withdraw-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            console.log("AMOUNT ERROR");
+            return;
+        }
+        const dateValue = utils.getValueFrom("withdraw-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            console.log("DATE ERROR");
+            return;
+        }
+        const noteValue = utils.getValueFrom("withdraw-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            console.log("NOTE ERROR");
+            return;
+        }
+        const sourceValue = utils.getValueFrom("deposit-destination", "key");
+        if (sourceValue === null) {
+            //ERROR
+            console.log("SOURCE ERROR");
+            return;
+        }
+    }
+
     return (
         <main>
             <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>

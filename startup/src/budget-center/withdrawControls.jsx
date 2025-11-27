@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function WithdrawControls({ selectOptions }) {
+export default function WithdrawControls({ withdrawFunction, selectOptions }) {
     function withdraw() {
-        //TODO
+        withdrawFunction()
     }
 
     return (
