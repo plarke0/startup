@@ -267,6 +267,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("SOURCE ERROR");
             return;
         }
+        withdrawFromCategory(amountValue, sourceValue, dateValue, noteValue);
     }
 
     return (
@@ -281,7 +282,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>
-                        <WithdrawControls selectOptions={categorySelectOptions}/>
+                        <WithdrawControls withdrawFunction={withdraw} selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
