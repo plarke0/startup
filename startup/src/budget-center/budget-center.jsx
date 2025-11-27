@@ -37,6 +37,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const [categoryLogs, setCategoryLogs] = useState(null);
     const [categorySelectOptions, setCategorySelectOptions] = useState([]);
 
+    const [undoList, setUndoList] = useState([]);
+    const [redoList, setRedoList] = useState([]);
+
     useEffect(() => {
         updateDataComponents();
 
