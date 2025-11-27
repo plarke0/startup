@@ -278,8 +278,8 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     function transferBetweenCategories(amount, sourceCategoryName, destinationCategoryName, date, note) {
         setCategoryValues(prevValues => ({
             ...prevValues,
-            [categoryName]: prevValues[destinationCategoryName] + amount,
-            [categoryName]: prevValues[sourceCategoryName] - amount
+            [destinationCategoryName]: prevValues[destinationCategoryName] + amount,
+            [sourceCategoryName]: prevValues[sourceCategoryName] - amount
         }));
         //Add log
         //Add to action list for undo
