@@ -275,6 +275,51 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         withdrawFromCategory(amountValue, sourceValue, dateValue, noteValue);
     }
 
+    function transferBetweenCategories(amount, sourceCategoryName, destinationCategoryName, date, note) {
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: prevValues[destinationCategoryName] + amount,
+            [categoryName]: prevValues[sourceCategoryName] - amount
+        }));
+        //Add log
+        //Add to action list for undo
+    }
+
+    async function transfer() {
+        const amountValue = utils.getValueFrom("transfer-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            console.log("AMOUNT ERROR");
+            return;
+        }
+        const dateValue = utils.getValueFrom("transfer-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            console.log("DATE ERROR");
+            return;
+        }
+        const noteValue = utils.getValueFrom("transfer-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            console.log("NOTE ERROR");
+            return;
+        }
+        const sourceValue = utils.getValueFrom("transfer-source", "key");
+        if (sourceValue === null) {
+            //ERROR
+            console.log("SOURCE ERROR");
+            return;
+        }
+        const destinationValue = utils.getValueFrom("transfer-destination", "key");
+        if (sourceValue === null) {
+            //ERROR
+            console.log("DESTINATION ERROR");
+            return;
+        }
+        transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
+    }
+
+
     return (
         <main>
             <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>
@@ -291,7 +336,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
-                        <TransferControls selectOptions={categorySelectOptions}/>
+                        <TransferControls transferFunction={transfer} selectOptions={categorySelectOptions}/>
                     </Carousel.Item>
 
                     <Carousel.Item key={3}>
