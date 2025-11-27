@@ -46,5 +46,9 @@ function convertValueToMoney(value) {
 }
 
 function validateDate() {
+    //TODO
+}
 
+function cleanTextInput() {
+    //TODO
 }
