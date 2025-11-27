@@ -311,9 +311,14 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             return;
         }
         const destinationValue = utils.getValueFrom("transfer-destination", "key");
-        if (sourceValue === null) {
+        if (destinationValue === null) {
             //ERROR
             console.log("DESTINATION ERROR");
+            return;
+        }
+        if (sourceValue === destinationValue) {
+            //ERROR
+            console.log("SAME CATEGORY");
             return;
         }
         transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
