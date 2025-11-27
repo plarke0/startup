@@ -261,7 +261,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("NOTE ERROR");
             return;
         }
-        const sourceValue = utils.getValueFrom("deposit-destination", "key");
+        const sourceValue = utils.getValueFrom("withdraw-category", "key");
         if (sourceValue === null) {
             //ERROR
             console.log("SOURCE ERROR");

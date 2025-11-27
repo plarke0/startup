@@ -12,7 +12,7 @@ export default function WithdrawControls({ withdrawFunction, selectOptions }) {
                 <h4>Withdraw</h4>
                 <div className="row g-1">
                     <div className="col">
-                        <input type="number" placeholder="Amount" className="form-control"/>
+                        <input id="withdraw-amount" type="number" placeholder="Amount" className="form-control"/>
                     </div>
                     <div className="col">
                         <Button variant="primary" onClick={withdraw}>Withdraw</Button>
