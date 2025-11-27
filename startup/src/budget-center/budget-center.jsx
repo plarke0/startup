@@ -150,15 +150,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function undo() {
+        //TODO
         console.log("Undone!");
     }
 
     function redo() {
+        //TODO
         console.log("Redone!");
     }
 
     function createLog() {
-
+        //TODO
     }
 
     function getDepositRatio() {
