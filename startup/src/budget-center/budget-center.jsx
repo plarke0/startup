@@ -400,15 +400,24 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 {/* Control panel */}
                 <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
-                        <DepositControls depositFunction={deposit} selectOptions={categorySelectOptions}/>
+                        <DepositControls
+                            depositFunction={deposit}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>
-                        <WithdrawControls withdrawFunction={withdraw} selectOptions={categorySelectOptions}/>
+                        <WithdrawControls
+                            withdrawFunction={withdraw}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
-                        <TransferControls transferFunction={transfer} selectOptions={categorySelectOptions}/>
+                        <TransferControls
+                            transferFunction={transfer}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={3}>
@@ -422,7 +431,10 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 </CarouselMenu>
 
                 {/* Category breakdown */}
-                <CategoryBreakdown categoryNames={categoryNames} categoryValues={categoryValues}/>
+                <CategoryBreakdown
+                    categoryNames={categoryNames}
+                    categoryValues={categoryValues}
+                />
 
                 {/* Logs */}
                 <CarouselMenu controlTitle="Category Logs" numberOfPages={categoryNames.length}>
