@@ -1,17 +1,17 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function CategoryControls({ selectOptions }) {
+export default function CategoryControls({ createFunction, renameFunction, mergeFunction, selectOptions }) {
     function createCategory() {
-        //TODO
+        createFunction();
     }
     
     function renameCategory() {
-        //TODO
+        renameFunction();
     }
     
     function mergeCategory() {
-        //TODO
+        mergeFunction();
     }
 
     return (
