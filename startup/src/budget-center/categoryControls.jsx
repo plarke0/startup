@@ -24,7 +24,7 @@ export default function CategoryControls({ selectOptions }) {
                         <h6>Create Category:</h6>
                         <div className="row g-1">
                             <div className="col">
-                                <input type="text" placeholder="Name" className="form-control"/>
+                                <input id="create-category-input" type="text" placeholder="Name" className="form-control"/>
                             </div>
                             <div className="col">
                                 <Button variant="primary" onClick={createCategory}>Create</Button>
@@ -39,7 +39,7 @@ export default function CategoryControls({ selectOptions }) {
                         </select>
                         <div className="row g-1">
                             <div className="col">
-                                <input type="text" placeholder="New Name" className="form-control"/>
+                                <input id="rename-value-input" type="text" placeholder="New Name" className="form-control"/>
                             </div>
                             <div className="col">
                                 <Button variant="primary" onClick={renameCategory}>Rename</Button>

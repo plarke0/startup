@@ -325,11 +325,21 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function createNewCategory(categoryName) {
-
+        
     }
 
     async function create() {
-        
+        const categoryName = utils.getValueFrom("transfer-amount", "key");
+        if (categoryName === null) {
+            //ERROR
+            console.log("NAME ERROR");
+            return;
+        }
+        if (categoryNames.includes(categoryName)) {
+            //ERROR
+            console.log("NAME ALREADY USED ERROR")
+        }
+        createNewCategory(categoryName);
     }
 
     function renameCategory(categoryName, newCategoryName) {
@@ -337,7 +347,24 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function rename() {
-        
+        const categoryName = utils.getValueFrom("transfer-amount", "key");
+        if (categoryName === null) {
+            //ERROR
+            console.log("CATEGORY ERROR");
+            return;
+        }
+        const newCategoryName = utils.getValueFrom("transfer-amount", "key");
+        if (newCategoryName === null) {
+            //ERROR
+            console.log("NEW NAME ERROR");
+            return;
+        }
+        if (categoryNames.includes(newCategoryName)) {
+            //ERROR
+            console.log("NAME ALREADY IN USE ERROR");
+            return;
+        }
+        renameCategory(categoryName, newCategoryName);
     }
 
     function mergeCategories(firstCategoryName, secondCategoryName) {
@@ -345,7 +372,24 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function merge() {
-        
+        const firstCategoryName = utils.getValueFrom("transfer-amount", "key");
+        if (firstCategoryName === null) {
+            //ERROR
+            console.log("FIRST CATEGORY ERROR");
+            return;
+        }
+        const secondCategoryName = utils.getValueFrom("transfer-amount", "key");
+        if (secondCategoryName === null) {
+            //ERROR
+            console.log("SECOND CATEGORY ERROR");
+            return;
+        }
+        if (firstCategoryName === secondCategoryName) {
+            //ERROR
+            console.log("SAME CATEGORY");
+            return;
+        }
+        mergeCategories(firstCategoryName, secondCategoryName);
     }
 
     return (
