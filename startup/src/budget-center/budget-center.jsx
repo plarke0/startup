@@ -324,7 +324,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
     }
 
-
     return (
         <main>
             <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>
@@ -353,7 +352,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 <CategoryBreakdown categoryNames={categoryNames} categoryValues={categoryValues}/>
 
                 {/* Logs */}
-                <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>
+                <CarouselMenu controlTitle="Category Logs" numberOfPages={categoryNames.length}>
                     {categoryLogs}
                 </CarouselMenu>
             </div>
