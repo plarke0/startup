@@ -325,7 +325,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function createNewCategory(categoryName) {
-        
+        setCategoryNames(prevValues => ([
+            ...prevValues,
+            categoryName
+        ]));
+        //Update category values
+        //Update logs
+        //Update all deposit ratio lists
     }
 
     async function create() {
