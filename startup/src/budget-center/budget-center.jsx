@@ -324,6 +324,30 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
     }
 
+    function createNewCategory(categoryName) {
+
+    }
+
+    async function create() {
+        
+    }
+
+    function renameCategory(categoryName, newCategoryName) {
+
+    }
+
+    async function rename() {
+        
+    }
+
+    function mergeCategories(firstCategoryName, secondCategoryName) {
+
+    }
+
+    async function merge() {
+        
+    }
+
     return (
         <main>
             <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>
