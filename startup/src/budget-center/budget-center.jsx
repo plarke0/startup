@@ -324,6 +324,22 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
     }
 
+    function setEvenValues(newEvenRatio) {
+        const totalCategories = Object.keys(newEvenRatio).length;
+        const evenRatio = Math.floor(10000 / totalCategories)
+        const firstRatio = 10000 - evenRatio * (totalCategories - 1)
+        let isFirstCategory = true;
+        for (const [key, value] of Object.entries(newEvenRatio)) {
+            if (isFirstCategory) {
+                newEvenRatio[key] = firstRatio;
+                isFirstCategory = false;
+            } else {
+                newEvenRatio[key] = evenRatio;
+            }
+        }
+        return newEvenRatio;
+    }
+
     function addToRatios(categoryName) {
         let newDepositRatios = {};
         for (const [key, value] of Object.entries(depositRatios)) {
@@ -337,18 +353,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                     ...depositRatios[key],
                     [categoryName]: 0
                 };
-                const totalCategories = Object.keys(newEvenRatio).length;
-                const evenRatio = Math.floor(10000 / totalCategories)
-                const firstRatio = 10000 - evenRatio * (totalCategories - 1)
-                let isFirstCategory = true;
-                for (const [key, value] of Object.entries(newEvenRatio)) {
-                    if (isFirstCategory) {
-                        newEvenRatio[key] = firstRatio;
-                        isFirstCategory = false;
-                    } else {
-                        newEvenRatio[key] = evenRatio;
-                    }
-                }
+                newEvenRatio = setEvenValues(newEvenRatio);
                 newDepositRatios[key] = newEvenRatio;
             }
         }
