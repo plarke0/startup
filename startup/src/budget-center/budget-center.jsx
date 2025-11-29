@@ -376,7 +376,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function create() {
-        const categoryName = utils.getValueFrom("transfer-amount", "key");
+        const categoryName = utils.getValueFrom("create-category-input", "key");
         if (categoryName === null) {
             //ERROR
             console.log("NAME ERROR");
@@ -394,13 +394,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function rename() {
-        const categoryName = utils.getValueFrom("transfer-amount", "key");
+        const categoryName = utils.getValueFrom("rename-select", "key");
         if (categoryName === null) {
             //ERROR
             console.log("CATEGORY ERROR");
             return;
         }
-        const newCategoryName = utils.getValueFrom("transfer-amount", "key");
+        const newCategoryName = utils.getValueFrom("rename-value-input", "key");
         if (newCategoryName === null) {
             //ERROR
             console.log("NEW NAME ERROR");
@@ -419,13 +419,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function merge() {
-        const firstCategoryName = utils.getValueFrom("transfer-amount", "key");
+        const firstCategoryName = utils.getValueFrom("merge-source", "key");
         if (firstCategoryName === null) {
             //ERROR
             console.log("FIRST CATEGORY ERROR");
             return;
         }
-        const secondCategoryName = utils.getValueFrom("transfer-amount", "key");
+        const secondCategoryName = utils.getValueFrom("merge-destination", "key");
         if (secondCategoryName === null) {
             //ERROR
             console.log("SECOND CATEGORY ERROR");
