@@ -373,7 +373,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         setDepositRatios(newDepositRatios);
     }
 
-    function removeFromRatios(categoryName) {
+    function mergeRatios(sourceCategoryName, destinationCategoryName) {
 
     }
 
@@ -453,29 +453,33 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         //TODO Add log
     }
 
-    function mergeCategories(firstCategoryName, secondCategoryName) {
-
+    function mergeCategories(sourceCategoryName, destinationCategoryName) {
+        //Remove source from names
+        //Add source to destination, then remove
+        //Merge ratios
+        //Add log in destination
+        //Move source log to unused
     }
 
     async function merge() {
-        const firstCategoryName = utils.getValueFrom("merge-source", "key");
-        if (firstCategoryName === null) {
+        const sourceCategoryName = utils.getValueFrom("merge-source", "key");
+        if (sourceCategoryName === null) {
             //ERROR
             console.log("FIRST CATEGORY ERROR");
             return;
         }
-        const secondCategoryName = utils.getValueFrom("merge-destination", "key");
-        if (secondCategoryName === null) {
+        const destinationCategoryName = utils.getValueFrom("merge-destination", "key");
+        if (destinationCategoryName === null) {
             //ERROR
             console.log("SECOND CATEGORY ERROR");
             return;
         }
-        if (firstCategoryName === secondCategoryName) {
+        if (sourceCategoryName === destinationCategoryName) {
             //ERROR
             console.log("SAME CATEGORY");
             return;
         }
-        mergeCategories(firstCategoryName, secondCategoryName);
+        mergeCategories(sourceCategoryName, destinationCategoryName);
         //TODO Add log
     }
 
