@@ -482,8 +482,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         setCategoryValues(newCategoryValues);
 
         mergeRatios(sourceCategoryName, destinationCategoryName)
-        
-        //Move source log to unused
+
+        let newLogs = {
+            ...logs
+        };
+        let newUnusedLogs = {
+            ...unusedLogs
+        };
+        unusedLogs[sourceCategoryName] = newLogs[sourceCategoryName];
+        delete newLogs[sourceCategoryName];
+        setLogs(newLogs);
+        setUnusedLogs(newUnusedLogs);
     }
 
     async function merge() {
