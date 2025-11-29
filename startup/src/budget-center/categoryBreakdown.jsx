@@ -18,23 +18,13 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
     if (categoryNames.length > 0) {
         for (const category of categoryNames) {
             let value = categoryValues[category];
-            categoryEntries.push(
-                <li className="list-group-item">
-                    {`${category}: ${stringifyMoney(value)}`}
-                </li>
-            );
+            categoryEntries.push(`${category}: ${stringifyMoney(value)}`);
             total += value;
         }
     } else {
-        categoryEntries.push(
-            <li className="list-group-item">
-                No Categories
-            </li>
-        );
+        categoryEntries.push('No Categories');
         total = 0;
     }
-
-    
 
     return (
         <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
@@ -47,7 +37,7 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
                     <h5>Categories:</h5>
                 </div>
                 <ul className="list-group list-group-flush">
-                    {categoryEntries}
+                    {categoryEntries.map((entry) => <li className="list-group-item">{entry}</li>)}
                 </ul>
             </div>
         </div>

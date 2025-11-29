@@ -9,26 +9,24 @@ export default function DepositControls({ depositFunction, selectOptions, deposi
     const [displayedRatios, setDisplayedRatios] = useState([]);
 
     useEffect(() => {
-        if (depositRatios !== undefined) {
-            console.log("NOT UNDEFINED");
+        if (Object.keys(depositRatios).length) {
             let newRatioOptions = [];
             for (const ratioName of Object.keys(depositRatios)) {
                 newRatioOptions.push(ratioName);
             }
             setRatioOptions(newRatioOptions);
+            if (currentRatio === null) {
+                setCurrentRatio(newRatioOptions[0]);
+            }
         }
     }, [depositRatios]);
 
     useEffect(() => {
-        if (currentRatio !== null) {
+        if (Object.keys(depositRatios).length && currentRatio !== null) {
             let newDisplayList = [];
             const ratioValues = depositRatios[currentRatio];
             for (const [key, value] of Object.entries(ratioValues)) {
-                newDisplayList.push(
-                    <li className="list-group-item">
-                        {`${key}: ${value/100}%`}
-                    </li>
-                );
+                newDisplayList.push(`${key}: ${value/100}%`);
             }
             setDisplayedRatios(newDisplayList);
         }
@@ -75,7 +73,7 @@ export default function DepositControls({ depositFunction, selectOptions, deposi
                         {/** TODO: Simplify ratios to 'Even' and 'Custom' **/}
                         <label htmlFor="category-splits">Deposit Ratios</label>
                         <select id="category-splits" className="form-select" onChange={updateCurrentRatio}>
-                            {ratioOptions}
+                            {ratioOptions.map((option) => <option>{option}</option>)}
                         </select>
                     </div>
                     {/* TODO: make this area scrollable */}
@@ -84,7 +82,7 @@ export default function DepositControls({ depositFunction, selectOptions, deposi
                     {/* Ability to edit values */}
                     {/* overflow-x/y/auto */}
                     <ul className="list-group list-group-flush">
-                        {displayedRatios}
+                        {displayedRatios.map((ratio) => <li className="list-group-item">{ratio}</li>)}
                     </ul>
                     <div className="card-footer">
                         <Button variant="primary" onClick={editCustomDepositRatio} className="me-1">Edit</Button>
