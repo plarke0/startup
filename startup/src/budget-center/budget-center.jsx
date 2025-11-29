@@ -330,15 +330,15 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             if (key !== "Even") {
                 newDepositRatios[key] = {
                     ...depositRatios[key],
-                    categoryName: 0
+                    [categoryName]: 0
                 };
             } else {
                 let newEvenRatio = {
                     ...depositRatios[key],
-                    categoryName: 0
+                    [categoryName]: 0
                 };
                 const totalCategories = Object.keys(newEvenRatio).length;
-                const evenRatio = floor(10000 / totalCategories)
+                const evenRatio = Math.floor(10000 / totalCategories)
                 const firstRatio = 10000 - evenRatio * (totalCategories - 1)
                 let isFirstCategory = true;
                 for (const [key, value] of Object.entries(newEvenRatio)) {
@@ -366,11 +366,11 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         ]));
         setCategoryValues(prevValues => ({
             ...prevValues,
-            categoryName: 0
+            [categoryName]: 0
         }));
         setLogs(prevValues => ({
             ...prevValues,
-            categoryName: []
+            [categoryName]: []
         }));
         addToRatios(categoryName);
     }
@@ -385,6 +385,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         if (categoryNames.includes(categoryName)) {
             //ERROR
             console.log("NAME ALREADY USED ERROR")
+            return;
         }
         createNewCategory(categoryName);
     }
