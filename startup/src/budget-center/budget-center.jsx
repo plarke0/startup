@@ -324,14 +324,55 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
     }
 
+    function addToRatios(categoryName) {
+        let newDepositRatios = {};
+        for (const [key, value] of Object.entries(depositRatios)) {
+            if (key !== "Even") {
+                newDepositRatios[key] = {
+                    ...depositRatios[key],
+                    categoryName: 0
+                };
+            } else {
+                let newEvenRatio = {
+                    ...depositRatios[key],
+                    categoryName: 0
+                };
+                const totalCategories = Object.keys(newEvenRatio).length;
+                const evenRatio = floor(10000 / totalCategories)
+                const firstRatio = 10000 - evenRatio * (totalCategories - 1)
+                let isFirstCategory = true;
+                for (const [key, value] of Object.entries(newEvenRatio)) {
+                    if (isFirstCategory) {
+                        newEvenRatio[key] = firstRatio;
+                        isFirstCategory = false;
+                    } else {
+                        newEvenRatio[key] = evenRatio;
+                    }
+                }
+                newDepositRatios[key] = newEvenRatio;
+            }
+        }
+        setDepositRatios(newDepositRatios);
+    }
+
+    function removeFromRatios(categoryName) {
+
+    }
+
     function createNewCategory(categoryName) {
         setCategoryNames(prevValues => ([
             ...prevValues,
             categoryName
         ]));
-        //Update category values
-        //Update logs
-        //Update all deposit ratio lists
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            categoryName: 0
+        }));
+        setLogs(prevValues => ({
+            ...prevValues,
+            categoryName: []
+        }));
+        addToRatios(categoryName);
     }
 
     async function create() {
@@ -349,7 +390,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function renameCategory(categoryName, newCategoryName) {
-
+        
     }
 
     async function rename() {
