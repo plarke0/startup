@@ -374,7 +374,25 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function mergeRatios(sourceCategoryName, destinationCategoryName) {
-
+        let newDepositRatios = {};
+        for (const [key, value] of Object.entries(depositRatios)) {
+            if (key !== "Even") {
+                const sourceValue = depositRatios[key][sourceCategoryName];
+                newDepositRatios[key] = {
+                    ...depositRatios[key]
+                };
+                newDepositRatios[key][destinationCategoryName] += sourceValue;
+                delete newDepositRatios[key][sourceCategoryName];
+            } else {
+                let newEvenRatio = {
+                    ...depositRatios[key]
+                };
+                delete newEvenRatio[sourceCategoryName]
+                newEvenRatio = setEvenValues(newEvenRatio);
+                newDepositRatios[key] = newEvenRatio;
+            }
+        }
+        setDepositRatios(newDepositRatios);
     }
 
     function createNewCategory(categoryName) {
@@ -454,10 +472,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function mergeCategories(sourceCategoryName, destinationCategoryName) {
-        //Remove source from names
-        //Add source to destination, then remove
-        //Merge ratios
-        //Add log in destination
+        setCategoryNames(categoryNames.filter((name) => name !== sourceCategoryName));
+        
+        let newCategoryValues = {
+            ...categoryValues
+        };
+        newCategoryValues[destinationCategoryName] += newCategoryValues[sourceCategoryName];
+        delete newCategoryValues[sourceCategoryName];
+        setCategoryValues(newCategoryValues);
+
+        mergeRatios(sourceCategoryName, destinationCategoryName)
+        
         //Move source log to unused
     }
 
@@ -465,13 +490,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         const sourceCategoryName = utils.getValueFrom("merge-source", "key");
         if (sourceCategoryName === null) {
             //ERROR
-            console.log("FIRST CATEGORY ERROR");
+            console.log("SOURCE CATEGORY ERROR");
             return;
         }
         const destinationCategoryName = utils.getValueFrom("merge-destination", "key");
         if (destinationCategoryName === null) {
             //ERROR
-            console.log("SECOND CATEGORY ERROR");
+            console.log("DESTINATION CATEGORY ERROR");
             return;
         }
         if (sourceCategoryName === destinationCategoryName) {
