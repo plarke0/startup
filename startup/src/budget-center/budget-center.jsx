@@ -456,6 +456,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                         <DepositControls
                             depositFunction={deposit}
                             selectOptions={categorySelectOptions}
+                            depositRatios={depositRatios}
                         />
                     </Carousel.Item>
 
