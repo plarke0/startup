@@ -360,6 +360,19 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         setDepositRatios(newDepositRatios);
     }
 
+    function renameCategoryInRatios(oldName, newName) {
+        let newDepositRatios = {};
+        for (const ratioName of Object.keys(depositRatios)) {
+            let newRatio = {
+                ...depositRatios[ratioName]
+            };
+            newRatio[newName] = newRatio[oldName];
+            delete newRatio[oldName];
+            newDepositRatios[ratioName] = newRatio;
+        }
+        setDepositRatios(newDepositRatios);
+    }
+
     function removeFromRatios(categoryName) {
 
     }
@@ -393,10 +406,29 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             return;
         }
         createNewCategory(categoryName);
+        //TODO Add log
     }
 
     function renameCategory(categoryName, newCategoryName) {
-        
+        setCategoryNames(
+            categoryNames.map((name) => name === categoryName ? newCategoryName : name)
+        );
+
+        let newCategoryValues = {
+            ...categoryValues
+        };
+        newCategoryValues[newCategoryName] = newCategoryValues[categoryName];
+        delete newCategoryValues[categoryName];
+        setCategoryValues(newCategoryValues);
+
+        let newLogs = {
+            ...logs
+        };
+        newLogs[newCategoryName] = newLogs[categoryName];
+        delete newLogs[categoryName];
+        setLogs(newLogs);
+
+        renameCategoryInRatios(categoryName, newCategoryName);
     }
 
     async function rename() {
@@ -418,6 +450,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             return;
         }
         renameCategory(categoryName, newCategoryName);
+        //TODO Add log
     }
 
     function mergeCategories(firstCategoryName, secondCategoryName) {
@@ -443,6 +476,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             return;
         }
         mergeCategories(firstCategoryName, secondCategoryName);
+        //TODO Add log
     }
 
     return (
