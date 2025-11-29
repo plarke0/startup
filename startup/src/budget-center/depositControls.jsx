@@ -30,7 +30,7 @@ export default function DepositControls({ depositFunction, selectOptions, deposi
             }
             setDisplayedRatios(newDisplayList);
         }
-    }, [currentRatio]);
+    }, [currentRatio, depositRatios]);
 
     function updateCurrentRatio(event) {
         setCurrentRatio(event.target.value);
