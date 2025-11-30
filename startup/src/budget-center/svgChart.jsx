@@ -38,6 +38,29 @@ export default function SVGChart({ categoryValues, total }) {
         }
     }
 
+    function setFontSize() {
+        if (total !== undefined) {
+            switch (total.toString().length) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    return 40;
+                case 6:
+                case 7:
+                case 8:
+                    return 30;
+                case 9:
+                case 10:
+                case 11:
+                    return 20;
+                default:
+                    return 15;
+            }
+        }
+    }
+
     function getChartArcs() {
         const valuesList = Object.entries(categoryValues).sort((a, b) => b[1] - a[1]);
         let arcList = [];
@@ -89,7 +112,7 @@ export default function SVGChart({ categoryValues, total }) {
                     d={`M ${arc.startX} ${arc.startY} A ${chartRadius} ${chartRadius} 0 ${arc.isLargeArc} 0 ${arc.endX} ${arc.endY}`}
                 ></path>
             )}
-            <text fill="#000000" fontSize="40" fontFamily="Monospace" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">{stringifyMoney(total)}</text>
+            <text fill="#000000" fontSize={setFontSize()} fontFamily="Monospace" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">{stringifyMoney(total)}</text>
         </svg>
     );
 }
