@@ -16,7 +16,7 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
     ];
 
     function stringifyMoney(value) {
-        const valueString = (Math.abs(value)/100).toFixed(2);
+        const valueString = (Math.abs(value)/100).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
         if (value < 0) {
             return `-$${valueString}`;
         } else {
