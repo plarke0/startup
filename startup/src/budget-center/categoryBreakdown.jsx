@@ -3,6 +3,18 @@ import SVGChart from "./svgChart";
 
 
 export default function CategoryBreakdown({ categoryNames, categoryValues }) {
+    const colorPalette = [
+        "#3EB680",
+        "#8ED8B7",
+        "#6B8CEF",
+        "#69B8F4",
+        "#C899F4",
+        "#BECFF6",
+        "#DEBA02",
+        "#FDE35A",
+        "#B6BEC7"
+    ];
+
     function stringifyMoney(value) {
         const valueString = (Math.abs(value)/100).toFixed(2);
         if (value < 0) {
@@ -21,11 +33,16 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
         
         if (categoryNames.length > 0) {
             const valuesList = Object.entries(categoryValues).sort((a, b) => b[1] - a[1]);
+            let valueIndex = 0;
             for (const categoryPair of valuesList) {
                 let category = categoryPair[0];
                 let value = categoryPair[1];
-                newCategoryEntries.push(`${category}: ${stringifyMoney(value)}`);
+                newCategoryEntries.push({
+                    color: colorPalette[valueIndex],
+                    text: `${category}: ${stringifyMoney(value)}`
+                });
                 newTotal += value;
+                valueIndex += (valueIndex >= colorPalette.length) ? 0 : 1;
             }
             setTotal(newTotal);
             setCategoryEntries(newCategoryEntries);
@@ -50,7 +67,12 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
                     <h5>Categories:</h5>
                 </div>
                 <ul className="list-group list-group-flush">
-                    {categoryEntries.map((entry) => <li className="list-group-item">{entry}</li>)}
+                    {categoryEntries.map((entry) => 
+                        <li className="list-group-item">
+                            <span style={{color: entry.color}}>■ </span>
+                            {entry.text}
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>
