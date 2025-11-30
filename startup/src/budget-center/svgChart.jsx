@@ -71,7 +71,7 @@ export default function SVGChart({ categoryValues, total }) {
                 fill="none" stroke={colorPalette[0]} strokeWidth={strokeWidth}
                 d="M 115 115 A 90 90 0 1 1 -57.85088487178855 -68.943999880708"
             ></path>
-            <text fill="#000000" fontSize="40" fontFamily="Monospace" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{stringifyMoney(total)}</text>
+            <text fill="#000000" fontSize="40" fontFamily="Monospace" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">{stringifyMoney(total)}</text>
         </svg>
     );
 }
