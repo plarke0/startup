@@ -63,6 +63,20 @@ export default function SVGChart({ categoryValues, total }) {
         } else {
             arcData[color] = colorPalette[finalColorIndex];
         }
+
+        const xOffset = svgWidth / 2;
+        const yOffset = svgHeight / 2;
+
+        const arcStart = (elapsedPercentage / 100) * 2 * Math.PI;
+        const arcEnd = arcStart + (arcPercentage / 100) * 2 * Math.PI;
+
+        arcData[startX] = Math.cos(arcStart) * chartRadius + xOffset;
+        arcData[startY] = Math.sin(arcStart) * chartRadius + yOffset;
+        arcData[endX] = Math.cos(arcEnd) * chartRadius + xOffset;
+        arcData[endY] = Math.sin(arcEnd) * chartRadius + yOffset;
+
+        arcData[isLargeArc] = arcPercentage > 50 ? 1 : 0;
+        arcData[isSweep] = 0;
     }
 
     return (
@@ -70,7 +84,7 @@ export default function SVGChart({ categoryValues, total }) {
             {chartArcs.map((arc) => 
                 <path
                     fill="none" stroke={arc.color} strokeWidth={strokeWidth}
-                    d={`M ${arc.startX} ${arc.startY} A ${chartRadius} ${chartRadius} 0 ${arc.isLargeArc} ${arc.isLargeSweep} ${arc.endX} ${arc.endY}`}
+                    d={`M ${arc.startX} ${arc.startY} A ${chartRadius} ${chartRadius} 0 ${arc.isLargeArc} ${arc.isSweep} ${arc.endX} ${arc.endY}`}
                 ></path>
             )}
             <path
