@@ -56,7 +56,13 @@ export default function SVGChart({ categoryValues, total }) {
     }
 
     function generateArcData(arcNumber, arcPercentage, elapsedPercentage) {
-        
+        const finalColorIndex = colorPalette.length - 1;
+        let arcData = {};
+        if (arcNumber < finalColorIndex) {
+            arcData[color] = colorPalette[arcNumber];
+        } else {
+            arcData[color] = colorPalette[finalColorIndex];
+        }
     }
 
     return (
