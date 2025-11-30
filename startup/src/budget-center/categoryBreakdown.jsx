@@ -42,7 +42,7 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
                     text: `${category}: ${stringifyMoney(value)}`
                 });
                 newTotal += value;
-                valueIndex += (valueIndex >= colorPalette.length) ? 0 : 1;
+                valueIndex += (valueIndex >= colorPalette.length - 1) ? 0 : 1;
             }
             setTotal(newTotal);
             setCategoryEntries(newCategoryEntries);
