@@ -20,7 +20,7 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
         let newTotal = 0;
         
         if (categoryNames.length > 0) {
-            let valuesList = Object.entries(categoryValues).sort((a, b) => b[1] - a[1]);
+            const valuesList = Object.entries(categoryValues).sort((a, b) => b[1] - a[1]);
             for (const categoryPair of valuesList) {
                 let category = categoryPair[0];
                 let value = categoryPair[1];
