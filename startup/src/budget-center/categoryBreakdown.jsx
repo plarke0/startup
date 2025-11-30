@@ -40,7 +40,10 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
         <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
             <h4>Category Breakdown</h4>
 
-            <SVGChart total={total}/>
+            <SVGChart
+                total={total}
+                categoryValues={categoryValues}
+            />
 
             <div className="card col-11 col-lg-8 col-xl-6">
                 <div className="card-header text-center">

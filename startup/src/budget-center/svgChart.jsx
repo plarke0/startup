@@ -7,7 +7,7 @@ export default function SVGChart({ categoryValues, total }) {
     const strokeWidth = 30;
     const svgWidth = 230;
     const svgHeight = 230;
-    const chartRadius = 115;
+    const chartRadius = 80;
     const colorPalette = [
         "#3EB680",
         "#8ED8B7",
@@ -23,10 +23,11 @@ export default function SVGChart({ categoryValues, total }) {
     const [chartArcs, setChartArcs] = useState([]);
 
     useEffect(() => {
-        if (categoryValues && typeof categoryValues === "object") {
-            setChartArcs(getChartArcs());
+        if (total !== 0 && categoryValues && typeof categoryValues === "object") {
+            const newArcs = getChartArcs();
+            setChartArcs(newArcs);
         }
-    }, [categoryValues]);
+    }, [categoryValues, total]);
 
     function stringifyMoney(value) {
         const valueString = (Math.abs(value)/100).toFixed(2);
@@ -59,24 +60,25 @@ export default function SVGChart({ categoryValues, total }) {
         const finalColorIndex = colorPalette.length - 1;
         let arcData = {};
         if (arcNumber < finalColorIndex) {
-            arcData[color] = colorPalette[arcNumber];
+            arcData["color"] = colorPalette[arcNumber];
         } else {
-            arcData[color] = colorPalette[finalColorIndex];
+            arcData["color"] = colorPalette[finalColorIndex];
         }
 
         const xOffset = svgWidth / 2;
         const yOffset = svgHeight / 2;
 
-        const arcStart = (elapsedPercentage / 100) * 2 * Math.PI;
-        const arcEnd = arcStart + (arcPercentage / 100) * 2 * Math.PI;
+        const arcStart = elapsedPercentage * 2 * Math.PI;
+        const arcEnd = arcStart + arcPercentage * 2 * Math.PI;
 
-        arcData[startX] = Math.cos(arcStart) * chartRadius + xOffset;
-        arcData[startY] = Math.sin(arcStart) * chartRadius + yOffset;
-        arcData[endX] = Math.cos(arcEnd) * chartRadius + xOffset;
-        arcData[endY] = Math.sin(arcEnd) * chartRadius + yOffset;
+        arcData["startX"] = Math.cos(arcStart) * chartRadius + xOffset;
+        arcData["startY"] = yOffset - Math.sin(arcStart) * chartRadius;
+        arcData["endX"] = Math.cos(arcEnd) * chartRadius + xOffset;
+        arcData["endY"] = yOffset - Math.sin(arcEnd) * chartRadius;
 
-        arcData[isLargeArc] = arcPercentage > 50 ? 1 : 0;
-        arcData[isSweep] = 0;
+        arcData["isLargeArc"] = arcPercentage > 0.5 ? 1 : 0;
+
+        return arcData;
     }
 
     return (
@@ -84,13 +86,9 @@ export default function SVGChart({ categoryValues, total }) {
             {chartArcs.map((arc) => 
                 <path
                     fill="none" stroke={arc.color} strokeWidth={strokeWidth}
-                    d={`M ${arc.startX} ${arc.startY} A ${chartRadius} ${chartRadius} 0 ${arc.isLargeArc} ${arc.isSweep} ${arc.endX} ${arc.endY}`}
+                    d={`M ${arc.startX} ${arc.startY} A ${chartRadius} ${chartRadius} 0 ${arc.isLargeArc} 0 ${arc.endX} ${arc.endY}`}
                 ></path>
             )}
-            <path
-                fill="none" stroke={colorPalette[0]} strokeWidth={strokeWidth}
-                d="M 115 115 A 90 90 0 1 1 -57.85088487178855 -68.943999880708"
-            ></path>
             <text fill="#000000" fontSize="40" fontFamily="Monospace" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">{stringifyMoney(total)}</text>
         </svg>
     );
