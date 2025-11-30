@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SVGChart from "./svgChart";
 
 
@@ -12,19 +12,29 @@ export default function CategoryBreakdown({ categoryNames, categoryValues }) {
         }
     }
 
-    const categoryEntries = [];
-    let total = 0;
-    
-    if (categoryNames.length > 0) {
-        for (const category of categoryNames) {
-            let value = categoryValues[category];
-            categoryEntries.push(`${category}: ${stringifyMoney(value)}`);
-            total += value;
+    const [total, setTotal] = useState(0);
+    const [categoryEntries, setCategoryEntries] = useState([]);
+
+    useEffect(() => {
+        let newCategoryEntries = [];
+        let newTotal = 0;
+        
+        if (categoryNames.length > 0) {
+            let valuesList = Object.entries(categoryValues).sort((a, b) => b[1] - a[1]);
+            for (const categoryPair of valuesList) {
+                let category = categoryPair[0];
+                let value = categoryPair[1];
+                newCategoryEntries.push(`${category}: ${stringifyMoney(value)}`);
+                newTotal += value;
+            }
+            setTotal(newTotal);
+            setCategoryEntries(newCategoryEntries);
+        } else {
+            newCategoryEntries.push('No Categories');
+            setTotal(0);
+            setCategoryEntries(newCategoryEntries);
         }
-    } else {
-        categoryEntries.push('No Categories');
-        total = 0;
-    }
+    }, [categoryNames, categoryValues]);
 
     return (
         <div className="d-flex flex-column justify-content-start align-items-center w-100 mb-2">
