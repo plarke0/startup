@@ -85,8 +85,8 @@ export default function DepositControls({ depositFunction, selectOptions, deposi
                         {displayedRatios.map((ratio) => <li className="list-group-item">{ratio}</li>)}
                     </ul>
                     <div className="card-footer">
-                        <Button variant="primary" onClick={editCustomDepositRatio} className="me-1">Edit</Button>
-                        <Button variant="primary" onClick={saveNewDepositRatio}>Save</Button>
+                        <Button variant="primary" disabled={currentRatio !== "Custom"} onClick={editCustomDepositRatio} className="me-1">Edit</Button>
+                        <Button variant="primary" disabled={currentRatio !== "Custom"} onClick={saveNewDepositRatio}>Save</Button>
                     </div>
                 </div>
             </form>
