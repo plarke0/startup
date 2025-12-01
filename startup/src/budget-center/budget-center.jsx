@@ -159,8 +159,60 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         console.log("Redone!");
     }
 
-    function createLog() {
+    function logEntrySort(a, b) {
+        const idA = a["id"];
+        const idB = b["id"];
+        const splitIdA = idA.split("-");
+        const splitIdB = idB.split("-");
+        if (splitIdB[0] === splitIdA[0]) {
+            return splitIdB[1] - splitIdA[1];
+        } else {
+            splitIdB[0] - splitIdA[0];
+        }
+    }
+
+    function filterLogById(baseId) {
+        return (logEntry) => {
+            const fullLogId = logEntry["id"];
+            const logBaseId = fullLogId.split("-")[0];
+            return logBaseId === baseId;
+        }
+    }
+
+    function getUniqueId(logEntry) {
+        const fullId = logEntry["id"];
+        return fullId.split("-")[1];
+    }
+
+    function createLog(category, date, delta, newAmount, note) {
         //TODO
+        //{"id": "250918-0", "date": "9/18/25", "delta": 1000, "newAmount": 1000, "note": "Just started saving!"}
+        const splitDate = date.split("-");
+        const day = splitDate[2];
+        const month = splitDate[1];
+        const year = splitDate[0];
+        const baseId = `${year}${month}${day}`;
+        let newLogList = [
+            ...logs[category]
+        ];
+        newLogList = newLogList.sort(logEntrySort);
+
+        const sameBaseIdList = newLogList.filter(filterLogById(baseId));
+        let uniqueId = sameBaseIdList.length;
+        
+        if (month < 10) {
+            if (day < 10) {
+                const logDate = `${month[1]}/${day[1]}/${year.slice(-2)}`;
+            } else {
+                const logDate = `${month[1]}/${day}/${year.slice(-2)}`;
+            }
+        } else {
+            if (day < 10) {
+                const logDate = `${month}/${day[1]}/${year.slice(-2)}`;
+            } else {
+                const logDate = `${month}/${day}/${year.slice(-2)}`;
+            }
+        }
     }
 
     function getDepositRatio() {
@@ -199,6 +251,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("DATE ERROR");
             return;
         }
+        console.log(dateValue);
         const noteValue = utils.getValueFrom("deposit-note", "note");
         if (noteValue === null) {
             //ERROR
@@ -213,6 +266,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
         const ratioKey = ratioObject.key;
         const ratioType = ratioObject.type;
+        createLog(ratioKey, dateValue, amountValue, amountValue, noteValue);
 
         if (ratioType === "single") {
             depositToCategory(amountValue, ratioKey, dateValue, noteValue);
