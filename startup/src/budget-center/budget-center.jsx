@@ -336,11 +336,12 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function withdrawFromCategory(amount, categoryName, date, note) {
+        const newAmount = categoryValues[categoryName] - amount;
         setCategoryValues(prevValues => ({
             ...prevValues,
-            [categoryName]: prevValues[categoryName] - amount
+            [categoryName]: newAmount
         }));
-        //Add log
+        regsterLog(categoryName, date, -amount, newAmount, note);
         //Add to action list for undo
     }
 
