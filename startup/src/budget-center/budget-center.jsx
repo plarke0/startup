@@ -174,9 +174,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         const splitIdA = idA.split("-");
         const splitIdB = idB.split("-");
         if (splitIdB[0] === splitIdA[0]) {
-            return splitIdB[1] - splitIdA[1];
+            return splitIdA[1] - splitIdB[1];
         } else {
-            splitIdB[0] - splitIdA[0];
+            splitIdA[0] - splitIdB[0];
         }
     }
 
@@ -194,8 +194,12 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function createLog(category, date, delta, newAmount, note) {
-        //TODO
-        //{"id": "250918-0", "date": "9/18/25", "delta": 1000, "newAmount": 1000, "note": "Just started saving!"}
+        if (date === "") {
+            date = getCurrentDate();
+        }
+        if (note === "") {
+            //TODO
+        }
         const splitDate = date.split("-");
         const day = splitDate[2];
         const month = splitDate[1];
@@ -233,6 +237,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         };
     }
 
+    function getCurrentDate() {
+        const date = new Date();
+        let day = date.getDate();
+        day = ("0" + day).slice(-2);
+        let month = date.getMonth() + 1;
+        month = ("0" + month).slice(-2);
+        let year = date.getFullYear();
+        const fullDate = `${year}-${month}-${day}`
+        return fullDate;
+    }
+
     function getDepositRatio() {
         const ratioKey = utils.getValueFrom("deposit-destination", "key");
         if (ratioKey === "ratio") {
@@ -248,12 +263,20 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function depositToCategory(amount, categoryName, date, note) {
+        const newAmount = categoryValues[categoryName] + amount;
         setCategoryValues(prevValues => ({
             ...prevValues,
-            [categoryName]: prevValues[categoryName] + amount
+            [categoryName]: newAmount
         }));
-        //Add log
-        //Add to action list for undo
+        const depositLog = createLog(categoryName, date, amount, newAmount, note);
+        let newLogList = logs[categoryName];
+        newLogList.push(depositLog);
+        newLogList = newLogList.sort(logEntrySort);
+        setLogs(prevValues => ({
+            ...prevValues,
+            [categoryName]: newLogList
+        }));
+        //TODO: Add to action list for undo
     }
 
     async function deposit() {
@@ -269,7 +292,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("DATE ERROR");
             return;
         }
-        console.log(dateValue);
         const noteValue = utils.getValueFrom("deposit-note", "note");
         if (noteValue === null) {
             //ERROR
@@ -284,7 +306,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
         const ratioKey = ratioObject.key;
         const ratioType = ratioObject.type;
-        createLog(ratioKey, dateValue, amountValue, amountValue, noteValue);
 
         if (ratioType === "single") {
             depositToCategory(amountValue, ratioKey, dateValue, noteValue);
