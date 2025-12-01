@@ -207,21 +207,30 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         newLogList = newLogList.sort(logEntrySort);
 
         const sameBaseIdList = newLogList.filter(filterLogById(baseId));
-        let uniqueId = sameBaseIdList.length;
+        const uniqueId = sameBaseIdList.length;
         
+        let logDate = "";
         if (month < 10) {
             if (day < 10) {
-                const logDate = `${month[1]}/${day[1]}/${year.slice(-2)}`;
+                logDate = `${month[1]}/${day[1]}/${year.slice(-2)}`;
             } else {
-                const logDate = `${month[1]}/${day}/${year.slice(-2)}`;
+                logDate = `${month[1]}/${day}/${year.slice(-2)}`;
             }
         } else {
             if (day < 10) {
-                const logDate = `${month}/${day[1]}/${year.slice(-2)}`;
+                logDate = `${month}/${day[1]}/${year.slice(-2)}`;
             } else {
-                const logDate = `${month}/${day}/${year.slice(-2)}`;
+                logDate = `${month}/${day}/${year.slice(-2)}`;
             }
         }
+
+        return {
+            "id": `${baseId}-${uniqueId}`,
+            "date": logDate,
+            "delta": delta,
+            "newAmount": newAmount,
+            "note": note
+        };
     }
 
     function getDepositRatio() {
