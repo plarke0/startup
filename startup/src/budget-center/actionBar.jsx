@@ -31,8 +31,8 @@ export default function ActionBar({ undo, redo, save, onLogout, userName }) {
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-start order-0">
                 <Button variant="link" onClick={() => undo()} className="text-decoration-none link-dark">Undo</Button>
                 <Button variant="link" onClick={() => redo()} className="text-decoration-none link-dark">Redo</Button>
-                <Button variant="link" onClick={() => save()} className="text-decoration-none link-dark">Save</Button>
-                <Button variant="link" onClick={() => onLogout()} className="text-decoration-none link-dark">Log Out</Button>
+                <Button variant="link" onClick={() => save()} className="text-decoration-none text-success link-dark">Save</Button>
+                <Button variant="link" onClick={() => onLogout()} className="text-decoration-none text-danger link-dark">Log Out</Button>
             </div>
             <div id="username" className="d-flex justify-content-center order-last order-sm-1">
                 <b>{userName}</b>
