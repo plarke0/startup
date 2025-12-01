@@ -193,6 +193,17 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         return fullId.split("-")[1];
     }
 
+    function regsterLog(category, date, delta, newAmount, note) {
+        const newLog = createLog(category, date, delta, newAmount, note);
+        let newCategoryLogList = logs[category];
+        newCategoryLogList.push(newLog);
+        newCategoryLogList = newCategoryLogList.sort(logEntrySort);
+        setLogs(prevValues => ({
+            ...prevValues,
+            [category]: newCategoryLogList
+        }));
+    }
+
     function createLog(category, date, delta, newAmount, note) {
         if (date === "") {
             date = getCurrentDate();
@@ -268,14 +279,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             ...prevValues,
             [categoryName]: newAmount
         }));
-        const depositLog = createLog(categoryName, date, amount, newAmount, note);
-        let newLogList = logs[categoryName];
-        newLogList.push(depositLog);
-        newLogList = newLogList.sort(logEntrySort);
-        setLogs(prevValues => ({
-            ...prevValues,
-            [categoryName]: newLogList
-        }));
+        regsterLog(categoryName, date, amount, newAmount, note);
         //TODO: Add to action list for undo
     }
 
