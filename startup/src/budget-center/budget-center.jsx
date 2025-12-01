@@ -549,9 +549,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         setLogs(newLogs);
 
         renameCategoryInRatios(categoryName, newCategoryName);
-        const date = getCurrentDate();
-        const amount = categoryValues[categoryName];
-        regsterLog(categoryName, date, 0, amount, `Category '${categoryName}' renamed to '${newCategoryName}'.`);
     }
 
     async function rename() {
@@ -573,7 +570,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             return;
         }
         renameCategory(categoryName, newCategoryName);
-        //TODO Add log
+        const date = getCurrentDate();
+        const amount = categoryValues[categoryName];
+        regsterLog(categoryName, date, 0, amount, `Category '${categoryName}' renamed to '${newCategoryName}'.`);
     }
 
     function mergeCategories(sourceCategoryName, destinationCategoryName) {
@@ -598,6 +597,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         delete newLogs[sourceCategoryName];
         setLogs(newLogs);
         setUnusedLogs(newUnusedLogs);
+        //
     }
 
     async function merge() {
