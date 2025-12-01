@@ -35,7 +35,7 @@ export default function ActionBar({ undo, redo, save, onLogout, userName }) {
                 <Button variant="link" onClick={() => onLogout()} className="text-decoration-none text-danger link-dark">Log Out</Button>
             </div>
             <div id="username" className="d-flex justify-content-center order-last order-sm-1">
-                <b>{userName}</b>
+                <b className="h4">{userName}</b>
             </div>
             <div className="d-flex col-sm-5 justify-content-center justify-content-sm-end order-2">
                 {/* Live user count through websocket */}
