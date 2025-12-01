@@ -159,6 +159,15 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         console.log("Redone!");
     }
 
+    function getLogPages() {
+        // TODO: Make sure to handle all errors when the page fails to retrieve data. Turn off internet and run on local host to see said errors
+        if (categoryNames !== undefined) {
+            return categoryNames.length;
+        } else {
+            return 1;
+        }
+    }
+
     function logEntrySort(a, b) {
         const idA = a["id"];
         const idB = b["id"];
@@ -617,7 +626,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 />
 
                 {/* Logs */}
-                <CarouselMenu controlTitle="Category Logs" numberOfPages={categoryNames.length}>
+                <CarouselMenu controlTitle="Category Logs" numberOfPages={getLogPages()}>
                     {categoryLogs}
                 </CarouselMenu>
             </div>
