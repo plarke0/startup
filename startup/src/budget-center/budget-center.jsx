@@ -569,10 +569,10 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("NAME ALREADY IN USE ERROR");
             return;
         }
-        renameCategory(categoryName, newCategoryName);
         const date = getCurrentDate();
         const amount = categoryValues[categoryName];
         regsterLog(categoryName, date, 0, amount, `Category '${categoryName}' renamed to '${newCategoryName}'.`);
+        renameCategory(categoryName, newCategoryName);
     }
 
     function mergeCategories(sourceCategoryName, destinationCategoryName) {
@@ -597,7 +597,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         delete newLogs[sourceCategoryName];
         setLogs(newLogs);
         setUnusedLogs(newUnusedLogs);
-        //
     }
 
     async function merge() {
@@ -618,8 +617,12 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             console.log("SAME CATEGORY");
             return;
         }
+        const date = getCurrentDate();
+        const sourceAmount = categoryValues[sourceCategoryName];
+        const destinationAmount = categoryValues[destinationCategoryName];
+        regsterLog(sourceCategoryName, date, -sourceAmount, 0, `Category '${sourceCategoryName}' merged into '${destinationCategoryName}'.`);
+        regsterLog(destinationCategoryName, date, sourceAmount, sourceAmount+destinationAmount, `Category '${sourceCategoryName}' merged into '${destinationCategoryName}'.`);
         mergeCategories(sourceCategoryName, destinationCategoryName);
-        //TODO Add log
     }
 
     return (
