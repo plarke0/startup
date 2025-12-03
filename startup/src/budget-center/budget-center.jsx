@@ -37,6 +37,9 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     const [categoryLogs, setCategoryLogs] = useState(null);
     const [categorySelectOptions, setCategorySelectOptions] = useState([]);
 
+    const [undoList, setUndoList] = useState([]);
+    const [redoList, setRedoList] = useState([]);
+
     useEffect(() => {
         updateDataComponents();
 
@@ -147,15 +150,113 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function undo() {
+        //TODO
         console.log("Undone!");
     }
 
     function redo() {
+        //TODO
         console.log("Redone!");
     }
 
-    function createLog() {
+    function getLogPages() {
+        // TODO: Make sure to handle all errors when the page fails to retrieve data. Turn off internet and run on local host to see said errors
+        if (categoryNames !== undefined) {
+            return categoryNames.length;
+        } else {
+            return 1;
+        }
+    }
 
+    function logEntrySort(a, b) {
+        const idA = a["id"];
+        const idB = b["id"];
+        const splitIdA = idA.split("-");
+        const splitIdB = idB.split("-");
+        if (splitIdB[0] === splitIdA[0]) {
+            return splitIdA[1] - splitIdB[1];
+        } else {
+            splitIdA[0] - splitIdB[0];
+        }
+    }
+
+    function filterLogById(baseId) {
+        return (logEntry) => {
+            const fullLogId = logEntry["id"];
+            const logBaseId = fullLogId.split("-")[0];
+            return logBaseId === baseId;
+        }
+    }
+
+    function getUniqueId(logEntry) {
+        const fullId = logEntry["id"];
+        return fullId.split("-")[1];
+    }
+
+    function regsterLog(category, date, delta, newAmount, note) {
+        const newLog = createLog(category, date, delta, newAmount, note);
+        let newCategoryLogList = logs[category];
+        newCategoryLogList.push(newLog);
+        newCategoryLogList = newCategoryLogList.sort(logEntrySort);
+        setLogs(prevValues => ({
+            ...prevValues,
+            [category]: newCategoryLogList
+        }));
+    }
+
+    function createLog(category, date, delta, newAmount, note) {
+        if (date === "") {
+            date = getCurrentDate();
+        }
+        if (note === "") {
+            //TODO
+        }
+        const splitDate = date.split("-");
+        const day = splitDate[2];
+        const month = splitDate[1];
+        const year = splitDate[0];
+        const baseId = `${year}${month}${day}`;
+        let newLogList = [
+            ...logs[category]
+        ];
+        newLogList = newLogList.sort(logEntrySort);
+
+        const sameBaseIdList = newLogList.filter(filterLogById(baseId));
+        const uniqueId = sameBaseIdList.length;
+        
+        let logDate = "";
+        if (month < 10) {
+            if (day < 10) {
+                logDate = `${month[1]}/${day[1]}/${year.slice(-2)}`;
+            } else {
+                logDate = `${month[1]}/${day}/${year.slice(-2)}`;
+            }
+        } else {
+            if (day < 10) {
+                logDate = `${month}/${day[1]}/${year.slice(-2)}`;
+            } else {
+                logDate = `${month}/${day}/${year.slice(-2)}`;
+            }
+        }
+
+        return {
+            "id": `${baseId}-${uniqueId}`,
+            "date": logDate,
+            "delta": delta,
+            "newAmount": newAmount,
+            "note": note
+        };
+    }
+
+    function getCurrentDate() {
+        const date = new Date();
+        let day = date.getDate();
+        day = ("0" + day).slice(-2);
+        let month = date.getMonth() + 1;
+        month = ("0" + month).slice(-2);
+        let year = date.getFullYear();
+        const fullDate = `${year}-${month}-${day}`
+        return fullDate;
     }
 
     function getDepositRatio() {
@@ -173,12 +274,13 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     function depositToCategory(amount, categoryName, date, note) {
+        const newAmount = categoryValues[categoryName] + amount;
         setCategoryValues(prevValues => ({
             ...prevValues,
-            [categoryName]: prevValues[categoryName] + amount
+            [categoryName]: newAmount
         }));
-        //Add log
-        //Add to action list for undo
+        regsterLog(categoryName, date, amount, newAmount, note);
+        //TODO: Add to action list for undo
     }
 
     async function deposit() {
@@ -233,6 +335,296 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }
 
+    function withdrawFromCategory(amount, categoryName, date, note) {
+        const newAmount = categoryValues[categoryName] - amount;
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: newAmount
+        }));
+        regsterLog(categoryName, date, -amount, newAmount, note);
+        //Add to action list for undo
+    }
+
+    async function withdraw() {
+        const amountValue = utils.getValueFrom("withdraw-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            console.log("AMOUNT ERROR");
+            return;
+        }
+        const dateValue = utils.getValueFrom("withdraw-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            console.log("DATE ERROR");
+            return;
+        }
+        const noteValue = utils.getValueFrom("withdraw-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            console.log("NOTE ERROR");
+            return;
+        }
+        const sourceValue = utils.getValueFrom("withdraw-category", "key");
+        if (sourceValue === null) {
+            //ERROR
+            console.log("SOURCE ERROR");
+            return;
+        }
+        withdrawFromCategory(amountValue, sourceValue, dateValue, noteValue);
+    }
+
+    function transferBetweenCategories(amount, sourceCategoryName, destinationCategoryName, date, note) {
+        const newSourceAmount = categoryValues[sourceCategoryName] - amount;
+        const newDestinationAmount = categoryValues[destinationCategoryName] + amount;
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [destinationCategoryName]: newDestinationAmount,
+            [sourceCategoryName]: newSourceAmount
+        }));
+        regsterLog(destinationCategoryName, date, amount, newDestinationAmount, note);
+        regsterLog(sourceCategoryName, date, -amount, newSourceAmount, note);
+        //Add to action list for undo
+    }
+
+    async function transfer() {
+        const amountValue = utils.getValueFrom("transfer-amount", "money");
+        if (amountValue === null) {
+            //ERROR
+            console.log("AMOUNT ERROR");
+            return;
+        }
+        const dateValue = utils.getValueFrom("transfer-date", "date");
+        if (dateValue === null) {
+            //ERROR
+            console.log("DATE ERROR");
+            return;
+        }
+        const noteValue = utils.getValueFrom("transfer-note", "note");
+        if (noteValue === null) {
+            //ERROR
+            console.log("NOTE ERROR");
+            return;
+        }
+        const sourceValue = utils.getValueFrom("transfer-source", "key");
+        if (sourceValue === null) {
+            //ERROR
+            console.log("SOURCE ERROR");
+            return;
+        }
+        const destinationValue = utils.getValueFrom("transfer-destination", "key");
+        if (destinationValue === null) {
+            //ERROR
+            console.log("DESTINATION ERROR");
+            return;
+        }
+        if (sourceValue === destinationValue) {
+            //ERROR
+            console.log("SAME CATEGORY");
+            return;
+        }
+        transferBetweenCategories(amountValue, sourceValue, destinationValue, dateValue, noteValue);
+    }
+
+    function setEvenValues(newEvenRatio) {
+        const totalCategories = Object.keys(newEvenRatio).length;
+        const evenRatio = Math.floor(10000 / totalCategories)
+        const firstRatio = 10000 - evenRatio * (totalCategories - 1)
+        let isFirstCategory = true;
+        for (const [key, value] of Object.entries(newEvenRatio)) {
+            if (isFirstCategory) {
+                newEvenRatio[key] = firstRatio;
+                isFirstCategory = false;
+            } else {
+                newEvenRatio[key] = evenRatio;
+            }
+        }
+        return newEvenRatio;
+    }
+
+    function addToRatios(categoryName) {
+        let newDepositRatios = {};
+        for (const [key, value] of Object.entries(depositRatios)) {
+            if (key !== "Even") {
+                newDepositRatios[key] = {
+                    ...depositRatios[key],
+                    [categoryName]: 0
+                };
+            } else {
+                let newEvenRatio = {
+                    ...depositRatios[key],
+                    [categoryName]: 0
+                };
+                newEvenRatio = setEvenValues(newEvenRatio);
+                newDepositRatios[key] = newEvenRatio;
+            }
+        }
+        setDepositRatios(newDepositRatios);
+    }
+
+    function renameCategoryInRatios(oldName, newName) {
+        let newDepositRatios = {};
+        for (const ratioName of Object.keys(depositRatios)) {
+            let newRatio = {
+                ...depositRatios[ratioName]
+            };
+            newRatio[newName] = newRatio[oldName];
+            delete newRatio[oldName];
+            newDepositRatios[ratioName] = newRatio;
+        }
+        setDepositRatios(newDepositRatios);
+    }
+
+    function mergeRatios(sourceCategoryName, destinationCategoryName) {
+        let newDepositRatios = {};
+        for (const [key, value] of Object.entries(depositRatios)) {
+            if (key !== "Even") {
+                const sourceValue = depositRatios[key][sourceCategoryName];
+                newDepositRatios[key] = {
+                    ...depositRatios[key]
+                };
+                newDepositRatios[key][destinationCategoryName] += sourceValue;
+                delete newDepositRatios[key][sourceCategoryName];
+            } else {
+                let newEvenRatio = {
+                    ...depositRatios[key]
+                };
+                delete newEvenRatio[sourceCategoryName]
+                newEvenRatio = setEvenValues(newEvenRatio);
+                newDepositRatios[key] = newEvenRatio;
+            }
+        }
+        setDepositRatios(newDepositRatios);
+    }
+
+    function createNewCategory(categoryName) {
+        setCategoryNames(prevValues => ([
+            ...prevValues,
+            categoryName
+        ]));
+        setCategoryValues(prevValues => ({
+            ...prevValues,
+            [categoryName]: 0
+        }));
+        setLogs(prevValues => ({
+            ...prevValues,
+            [categoryName]: []
+        }));
+        addToRatios(categoryName);
+    }
+
+    async function create() {
+        const categoryName = utils.getValueFrom("create-category-input", "key");
+        if (categoryName === null) {
+            //ERROR
+            console.log("NAME ERROR");
+            return;
+        }
+        if (categoryNames.includes(categoryName)) {
+            //ERROR
+            console.log("NAME ALREADY USED ERROR")
+            return;
+        }
+        createNewCategory(categoryName);
+        //TODO: Add creation log
+    }
+
+    function renameCategory(categoryName, newCategoryName) {
+
+        setCategoryNames(
+            categoryNames.map((name) => name === categoryName ? newCategoryName : name)
+        );
+
+        let newCategoryValues = {
+            ...categoryValues
+        };
+        newCategoryValues[newCategoryName] = newCategoryValues[categoryName];
+        delete newCategoryValues[categoryName];
+        setCategoryValues(newCategoryValues);
+
+        let newLogs = {
+            ...logs
+        };
+        newLogs[newCategoryName] = newLogs[categoryName];
+        delete newLogs[categoryName];
+        setLogs(newLogs);
+
+        renameCategoryInRatios(categoryName, newCategoryName);
+    }
+
+    async function rename() {
+        const categoryName = utils.getValueFrom("rename-select", "key");
+        if (categoryName === null) {
+            //ERROR
+            console.log("CATEGORY ERROR");
+            return;
+        }
+        const newCategoryName = utils.getValueFrom("rename-value-input", "key");
+        if (newCategoryName === null) {
+            //ERROR
+            console.log("NEW NAME ERROR");
+            return;
+        }
+        if (categoryNames.includes(newCategoryName)) {
+            //ERROR
+            console.log("NAME ALREADY IN USE ERROR");
+            return;
+        }
+        const date = getCurrentDate();
+        const amount = categoryValues[categoryName];
+        regsterLog(categoryName, date, 0, amount, `Category '${categoryName}' renamed to '${newCategoryName}'.`);
+        renameCategory(categoryName, newCategoryName);
+    }
+
+    function mergeCategories(sourceCategoryName, destinationCategoryName) {
+        setCategoryNames(categoryNames.filter((name) => name !== sourceCategoryName));
+        
+        let newCategoryValues = {
+            ...categoryValues
+        };
+        newCategoryValues[destinationCategoryName] += newCategoryValues[sourceCategoryName];
+        delete newCategoryValues[sourceCategoryName];
+        setCategoryValues(newCategoryValues);
+
+        mergeRatios(sourceCategoryName, destinationCategoryName)
+
+        let newLogs = {
+            ...logs
+        };
+        let newUnusedLogs = {
+            ...unusedLogs
+        };
+        unusedLogs[sourceCategoryName] = newLogs[sourceCategoryName];
+        delete newLogs[sourceCategoryName];
+        setLogs(newLogs);
+        setUnusedLogs(newUnusedLogs);
+    }
+
+    async function merge() {
+        const sourceCategoryName = utils.getValueFrom("merge-source", "key");
+        if (sourceCategoryName === null) {
+            //ERROR
+            console.log("SOURCE CATEGORY ERROR");
+            return;
+        }
+        const destinationCategoryName = utils.getValueFrom("merge-destination", "key");
+        if (destinationCategoryName === null) {
+            //ERROR
+            console.log("DESTINATION CATEGORY ERROR");
+            return;
+        }
+        if (sourceCategoryName === destinationCategoryName) {
+            //ERROR
+            console.log("SAME CATEGORY");
+            return;
+        }
+        const date = getCurrentDate();
+        const sourceAmount = categoryValues[sourceCategoryName];
+        const destinationAmount = categoryValues[destinationCategoryName];
+        regsterLog(sourceCategoryName, date, -sourceAmount, 0, `Category '${sourceCategoryName}' merged into '${destinationCategoryName}'.`);
+        regsterLog(destinationCategoryName, date, sourceAmount, sourceAmount+destinationAmount, `Category '${sourceCategoryName}' merged into '${destinationCategoryName}'.`);
+        mergeCategories(sourceCategoryName, destinationCategoryName);
+    }
+
     return (
         <main>
             <ActionBar undo={undo} redo={redo} save={save} onLogout={onLogout} userName={userName}/>
@@ -241,27 +633,45 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
                 {/* Control panel */}
                 <CarouselMenu controlTitle="Control Type" numberOfPages={4}>
                     <Carousel.Item key={0}>
-                        <DepositControls depositFunction={deposit} selectOptions={categorySelectOptions}/>
+                        <DepositControls
+                            depositFunction={deposit}
+                            selectOptions={categorySelectOptions}
+                            depositRatios={depositRatios}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={1}>
-                        <WithdrawControls selectOptions={categorySelectOptions}/>
+                        <WithdrawControls
+                            withdrawFunction={withdraw}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={2}>
-                        <TransferControls selectOptions={categorySelectOptions}/>
+                        <TransferControls
+                            transferFunction={transfer}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
 
                     <Carousel.Item key={3}>
-                        <CategoryControls selectOptions={categorySelectOptions}/>
+                        <CategoryControls
+                            createFunction={create}
+                            renameFunction={rename}
+                            mergeFunction={merge}
+                            selectOptions={categorySelectOptions}
+                        />
                     </Carousel.Item>
                 </CarouselMenu>
 
                 {/* Category breakdown */}
-                <CategoryBreakdown categoryNames={categoryNames} categoryValues={categoryValues}/>
+                <CategoryBreakdown
+                    categoryNames={categoryNames}
+                    categoryValues={categoryValues}
+                />
 
                 {/* Logs */}
-                <CarouselMenu controlTitle="Category Logs" numberOfPages={4}>
+                <CarouselMenu controlTitle="Category Logs" numberOfPages={getLogPages()}>
                     {categoryLogs}
                 </CarouselMenu>
             </div>

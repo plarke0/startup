@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
-export default function DepositControls({ depositFunction, selectOptions }) {
+export default function DepositControls({ depositFunction, selectOptions, depositRatios }) {
     const depositOptions = [{ value: "ratio", label: "Deposit Ratio" }].concat(selectOptions);
 
-    function editCurrentDepositRatio() {
+    const [currentRatio, setCurrentRatio] = useState(null);
+    const [ratioOptions, setRatioOptions] = useState([]);
+    const [displayedRatios, setDisplayedRatios] = useState([]);
+
+    useEffect(() => {
+        if (Object.keys(depositRatios).length) {
+            let newRatioOptions = [];
+            for (const ratioName of Object.keys(depositRatios)) {
+                newRatioOptions.push(ratioName);
+            }
+            setRatioOptions(newRatioOptions);
+            if (currentRatio === null) {
+                setCurrentRatio(newRatioOptions[0]);
+            }
+        }
+    }, [depositRatios]);
+
+    useEffect(() => {
+        if (Object.keys(depositRatios).length && currentRatio !== null) {
+            let newDisplayList = [];
+            const ratioValues = depositRatios[currentRatio];
+            for (const [key, value] of Object.entries(ratioValues)) {
+                newDisplayList.push(`${key}: ${value/100}%`);
+            }
+            setDisplayedRatios(newDisplayList);
+        }
+    }, [currentRatio, depositRatios]);
+
+    function updateCurrentRatio(event) {
+        setCurrentRatio(event.target.value);
+    }
+
+    function editCustomDepositRatio() {
         //TODO
     }
 
@@ -40,9 +72,8 @@ export default function DepositControls({ depositFunction, selectOptions }) {
                     <div className="card-header">
                         {/** TODO: Simplify ratios to 'Even' and 'Custom' **/}
                         <label htmlFor="category-splits">Deposit Ratios</label>
-                        <select id="category-splits" className="form-select">
-                            <option>Even</option>
-                            <option>Custom</option>
+                        <select id="category-splits" className="form-select" onChange={updateCurrentRatio}>
+                            {ratioOptions.map((option) => <option>{option}</option>)}
                         </select>
                     </div>
                     {/* TODO: make this area scrollable */}
@@ -51,14 +82,11 @@ export default function DepositControls({ depositFunction, selectOptions }) {
                     {/* Ability to edit values */}
                     {/* overflow-x/y/auto */}
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Savings: 25%</li>
-                        <li className="list-group-item">Tithing: 25%</li>
-                        <li className="list-group-item">Rent: 25%</li>
-                        <li className="list-group-item">Fun: 25%</li>
+                        {displayedRatios.map((ratio) => <li className="list-group-item">{ratio}</li>)}
                     </ul>
                     <div className="card-footer">
-                        <Button variant="primary" onClick={editCurrentDepositRatio} className="me-1">Edit</Button>
-                        <Button variant="primary" onClick={saveNewDepositRatio}>Save</Button>
+                        <Button variant="primary" disabled={currentRatio !== "Custom"} onClick={editCustomDepositRatio} className="me-1">Edit</Button>
+                        <Button variant="primary" disabled={currentRatio !== "Custom"} onClick={saveNewDepositRatio}>Save</Button>
                     </div>
                 </div>
             </form>

@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function TransferControls({ selectOptions }) {
+export default function TransferControls({ transferFunction, selectOptions }) {
     function transfer() {
-        //TODO
+        transferFunction()
     }
 
     return (
@@ -12,7 +12,7 @@ export default function TransferControls({ selectOptions }) {
                 <h4>Transfer</h4>
                 <div className="row g-1">
                     <div className="col">
-                        <input type="number" placeholder="Amount" className="form-control"/>
+                        <input id="transfer-amount" type="number" placeholder="Amount" className="form-control"/>
                     </div>
                     <div className="col">
                         <Button variant="primary" onClick={transfer}>Transfer</Button>

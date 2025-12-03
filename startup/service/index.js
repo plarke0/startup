@@ -106,6 +106,7 @@ apiRouter.post('/budget/userdata', verifyAuth, async (req, res) => {
     let data = req.body.data;
     data.userName = userName;
     updateData(data);
+    res.status(200).end();
 });
 
 // Default error handler
