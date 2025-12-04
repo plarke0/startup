@@ -1,5 +1,5 @@
 const { WebSocketServer } = require('ws');
-const DB = require('./database.js');
+//const DB = require('./database.js');
 
 function peerProxy(httpServer) {
     // Create a websocket object
@@ -7,28 +7,29 @@ function peerProxy(httpServer) {
 
     async function broadcastCounts() {
         const totalOpenSockets = socketServer.clients.size;
-        const totalUsers = await DB.getTotalUserCount();
+        //const totalUsers = await DB.getTotalUserCount();
         socketServer.clients.forEach((client) => {
-            client.send(JSON.stringify({ totalUsers: totalUsers, activeUsers: totalOpenSockets }));
+            client.send(JSON.stringify({ totalUsers: 2, activeUsers: totalOpenSockets }));
         });
     }
 
     socketServer.on('connection', (socket) => {
         socket.isAlive = true;
+        console.log("Connection detected");
 
         broadcastCounts();
 
         // Respond to pong messages by marking the connection alive
         socket.on('pong', () => {
+            console.log("-PONG-");
             socket.isAlive = true;
         });
+
+        socket.on('close', () => {
+            console.log("Connection closed");
+            broadcastCounts();
+        });
     });
-
-    socketServer.on('close', (socket) => {
-        broadcastCounts();
-    });
-
-
 
     // Periodically send out a ping message to make sure clients are alive
     setInterval(() => {

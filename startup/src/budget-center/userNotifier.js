@@ -3,8 +3,12 @@ class UserChangeNotifier {
 
     constructor() {
         let port = window.location.port;
-        const protocol = window.location.protocol === "http:" ? "ws" : "wss";
-        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`)
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+
+        this.socket.onopen = (event) => {
+            this.receiveMessage({ totalUsers: 2, activeUsers: 1 });
+        };
 
         this.socket.onmessage = async (message) => {
             try {
@@ -29,5 +33,5 @@ class UserChangeNotifier {
     }
 }
 
-const UserNotifier = new UserChangeNotifier();
-export { UserNotifier };
+// const UserNotifier = new UserChangeNotifier();
+export { UserChangeNotifier };
