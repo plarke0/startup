@@ -1,5 +1,5 @@
 const { WebSocketServer } = require('ws');
-//const DB = require('./database.js');
+const DB = require('./database.js');
 
 function peerProxy(httpServer) {
     // Create a websocket object
@@ -7,9 +7,9 @@ function peerProxy(httpServer) {
 
     async function broadcastCounts() {
         const totalOpenSockets = socketServer.clients.size;
-        //const totalUsers = await DB.getTotalUserCount();
+        const totalUsers = await DB.getTotalUserCount();
         socketServer.clients.forEach((client) => {
-            client.send(JSON.stringify({ totalUsers: 2, activeUsers: totalOpenSockets }));
+            client.send(JSON.stringify({ totalUsers: totalUsers, activeUsers: totalOpenSockets }));
         });
     }
 
