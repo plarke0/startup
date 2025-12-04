@@ -133,8 +133,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [X] **Backend listens for WebSocket connection** - The backend listens for new websockets connecting and disconnecting in order to keep count of how many active users there are.
+- [X] **Frontend makes WebSocket connection** - The frontend makes a WebSocket connection.
+- [X] **Data sent over WebSocket connection** - The total and active user counts are sent over WebSocket connection.
+- [X] **WebSocket data displayed** - I display the user counts in the upper right corner of the budget center page.
+- [X] **Application is fully functional** - My application is fully functional, outside of a ton of finishing touches that I will have to get to
