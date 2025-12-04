@@ -51,8 +51,9 @@ async function incrementTotalUserCount() {
     await userCountCollection.updateOne({ name: "total-user-count" }, { $inc: count });
 }
 
-function getTotalUserCount() {
-    return userCountCollection.findOne({ name: "total-user-count" })
+async function getTotalUserCount() {
+    const userCountEntry = await userCountCollection.findOne({ name: "total-user-count" });
+    return userCountEntry.count;
 }
 
 module.exports = {
