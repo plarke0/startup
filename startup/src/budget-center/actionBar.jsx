@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from 'react-bootstrap';
-import { UserChangeNotifier } from "./userNotifier";
+import { UserNotifier } from "./userNotifier";
 
 
 export default function ActionBar({ undo, redo, save, onLogout, userName }) {
@@ -9,8 +9,8 @@ export default function ActionBar({ undo, redo, save, onLogout, userName }) {
 
 
     useEffect(() => {
-        let UserNotifier = new UserChangeNotifier();
         UserNotifier.addHandler(updateUserCounts);
+        UserNotifier.getMostRecent();
 
         return () => {
             UserNotifier.removeHandler(updateUserCounts);

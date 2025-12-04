@@ -1,5 +1,9 @@
+import { act } from "react";
+
 class UserChangeNotifier {
-    handlers = []
+    handlers = [];
+    totalUsers = 0;
+    activeUsers = 0;
 
     constructor() {
         let port = window.location.port;
@@ -10,8 +14,16 @@ class UserChangeNotifier {
             try {
                 const content = await JSON.parse(message.data);
                 this.receiveMessage(content);
+                this.totalUsers = content.totalUsers;
+                this.activeUsers = content.activeUsers;
             } catch {}
         };
+    }
+
+    getMostRecent() {
+        this.handlers.forEach((handler) => {
+            handler({ totalUsers: this.totalUsers, activeUsers: this.activeUsers });
+        });
     }
 
     addHandler(handler) {
@@ -29,5 +41,5 @@ class UserChangeNotifier {
     }
 }
 
-// const UserNotifier = new UserChangeNotifier();
-export { UserChangeNotifier };
+const UserNotifier = new UserChangeNotifier();
+export { UserNotifier };
