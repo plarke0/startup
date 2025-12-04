@@ -48,7 +48,7 @@ function getData(userName) {
 }
 
 async function incrementTotalUserCount() {
-    await userCountCollection.updateOne({ name: "total-user-count" }, { $inc: count });
+    await userCountCollection.updateOne({ name: "total-user-count" }, { $inc: {count: 1} });
 }
 
 async function getTotalUserCount() {
