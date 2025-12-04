@@ -75,7 +75,10 @@ async function initializeBudgetData(userName) {
         categoryValues: { 'Savings': 0 },
         depositRatios: {
             'Even': {
-                'Savings': 1000
+                'Savings': 10000
+            },
+            'Custom': {
+                'Savings': 10000
             }
         },
         logs: {
