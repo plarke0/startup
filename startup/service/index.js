@@ -4,6 +4,7 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
 
@@ -128,6 +129,7 @@ async function createUser(email, password) {
         token: uuid.v4(),
     };
     await DB.addUser(user);
+    await DB.incrementTotalUserCount();
 
     return user;
 }
@@ -160,6 +162,8 @@ function setAuthCookie(res, authToken) {
     });
 }
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);

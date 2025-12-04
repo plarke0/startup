@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Button } from 'react-bootstrap';
+import { UserNotifier } from "./userNotifier";
 
 
 export default function ActionBar({ undo, redo, save, onLogout, userName }) {
-    const [totalUsers, setTotalUsers] = useState(10);
-    const [activeUsers, setActiveUsers] = useState(2);
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [activeUsers, setActiveUsers] = useState(0);
+
 
     useEffect(() => {
-        setUsers();
+        UserNotifier.addHandler(updateUserCounts);
+        UserNotifier.getMostRecent();
+
+        return () => {
+            UserNotifier.removeHandler(updateUserCounts);
+        };
     }, []);
 
-    
-    async function setUsers() {
-        setTimeout(() => {
-            setTotalUsers(prevTotal => {
-                const shouldIncrement = Math.random() > 0.75;
-                const newTotal = shouldIncrement ? prevTotal + 1 : prevTotal;
-                
-                setActiveUsers(Math.ceil(Math.random() * newTotal));
-                setUsers();
-
-                return newTotal;
-            });
-        }, 10000);
+    function updateUserCounts(data) {
+        setTotalUsers(data.totalUsers);
+        setActiveUsers(data.activeUsers);
     }
-
 
     return (
         <div className="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between border-bottom mb-2">

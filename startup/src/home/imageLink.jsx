@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 export default function ImageLink({ src, alt, destination }) {
     return(
-        <Link to={destination}>
-            <img src={src} alt={alt} className="img-fluid shadow"/>
-        </Link>
+        <div className='col text-center'>
+            <Link to={destination}>
+                <img src={src} alt={alt} className="rounded-3 img-fluid shadow"/>
+            </Link>
+        </div>
     );
 }

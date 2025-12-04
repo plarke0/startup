@@ -69,9 +69,6 @@ export default function Signup({ user, authState, onAuthChange }) {
         <main>
             <FormCard>
                 <form className="px-3 py-3">
-                    <aside className="mb-2">
-                        Note: I will call an api to filter inappropriate usernames here.
-                    </aside>
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">Username:</label>
                         <input id="username" type="text" placeholder="Username" className="form-control" onChange={(e) => setUserName(e.target.value)}/>

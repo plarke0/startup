@@ -5,6 +5,7 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('budget-center');
 const userCollection = db.collection('users');
+const userCountCollection = db.collection('user-count');
 const dataCollection = db.collection('data');
 
 // Asynchronously test the connection and exit the process if it fails
@@ -46,6 +47,15 @@ function getData(userName) {
     return dataCollection.findOne({ userName: userName });
 }
 
+async function incrementTotalUserCount() {
+    await userCountCollection.updateOne({ name: "total-user-count" }, { $inc: {count: 1} });
+}
+
+async function getTotalUserCount() {
+    const userCountEntry = await userCountCollection.findOne({ name: "total-user-count" });
+    return userCountEntry.count;
+}
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -54,4 +64,6 @@ module.exports = {
     addData,
     updateData,
     getData,
+    incrementTotalUserCount,
+    getTotalUserCount,
 };
