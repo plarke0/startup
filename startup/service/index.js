@@ -129,6 +129,7 @@ async function createUser(email, password) {
         token: uuid.v4(),
     };
     await DB.addUser(user);
+    await DB.incrementTotalUserCount();
 
     return user;
 }

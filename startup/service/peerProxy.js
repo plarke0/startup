@@ -15,18 +15,15 @@ function peerProxy(httpServer) {
 
     socketServer.on('connection', (socket) => {
         socket.isAlive = true;
-        console.log("Connection detected");
 
         broadcastCounts();
 
         // Respond to pong messages by marking the connection alive
         socket.on('pong', () => {
-            console.log("-PONG-");
             socket.isAlive = true;
         });
 
         socket.on('close', () => {
-            console.log("Connection closed");
             broadcastCounts();
         });
     });

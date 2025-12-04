@@ -6,10 +6,6 @@ class UserChangeNotifier {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
-        this.socket.onopen = (event) => {
-            this.receiveMessage({ totalUsers: 2, activeUsers: 1 });
-        };
-
         this.socket.onmessage = async (message) => {
             try {
                 const content = await JSON.parse(message.data);
