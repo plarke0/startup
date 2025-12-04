@@ -28,3 +28,6 @@ class UserChangeNotifier {
         });
     }
 }
+
+const UserNotifier = new UserChangeNotifier();
+export { UserNotifier };
