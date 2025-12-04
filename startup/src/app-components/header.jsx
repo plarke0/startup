@@ -16,8 +16,12 @@ export default function Header({ authState }) {
                 <LockedContent currentState={authState} requiredState={AuthState.Authenticated}>
                     <ReactiveNavLink destination= "budget-center" title= "Budget Center"/>
                 </LockedContent>
-                <ReactiveNavLink destination= "login" title= "Login"/>
-                <ReactiveNavLink destination= "signup" title= "Signup"/>
+                <LockedContent currentState={authState} requiredState={AuthState.Unauthenticated}>
+                    <ReactiveNavLink destination= "login" title= "Login"/>
+                </LockedContent>
+                <LockedContent currentState={authState} requiredState={AuthState.Unauthenticated}>
+                    <ReactiveNavLink destination= "signup" title= "Signup"/>
+                </LockedContent>
                 <ReactiveNavLink destination= "about" title= "About"/>
             </menu>
         </div>
