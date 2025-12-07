@@ -27,7 +27,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         const blocker = useBlocker(shouldBlock);
         useEffect(() => {
             if (blocker.state === "blocked") {
-                const confirm = window.confirm("Are you sure you want to leave? Changes you made may not be saved.")
+                const confirm = window.confirm("Are you sure you want to leave? Changes you made may not be saved.");
                 if (confirm) {
                     blocker.proceed();
                 } else {
@@ -143,6 +143,10 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function onLogout() {
+        const confirm = window.confirm("Are you sure you want to log out? Changes you made may not be saved.");
+        if (!confirm) {
+            return;
+        }
         try {
             const response = await fetch("api/auth/logout", {
                 method: "delete",
