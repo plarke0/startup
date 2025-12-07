@@ -23,6 +23,21 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }, [authState, navigate]);
 
+    useEffect(() => {
+        const unloadWarning = (event) => {
+            if (true) { 
+                event.preventDefault();
+                event.returnValue = '';
+            }
+        }
+
+        window.addEventListener('beforeunload', unloadWarning);
+
+        return () => {
+            window.removeEventListener('beforeunload', unloadWarning);
+        }
+    });
+
     const [data, setData] = useState(null);
     useEffect(() => {
         getData();
