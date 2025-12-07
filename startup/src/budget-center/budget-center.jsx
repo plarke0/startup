@@ -23,6 +23,32 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }, [authState, navigate]);
 
+    const [categoryNames, setCategoryNames] = useState([]);
+    const [categoryValues, setCategoryValues] = useState({});
+    const [depositRatios, setDepositRatios] = useState({});
+    const [logs, setLogs] = useState({});
+    const [unusedLogs, setUnusedLogs] = useState({});
+
+    const [categoryLogs, setCategoryLogs] = useState(null);
+    const [categorySelectOptions, setCategorySelectOptions] = useState([]);
+
+    const [undoList, setUndoList] = useState([]);
+    const [redoList, setRedoList] = useState([]);
+    const [savedState, setSavedState] = useState(true);
+
+    useEffect(() => {
+        const unloadWarning = (event) => {
+            if (!savedState) { 
+                event.preventDefault();
+                event.returnValue = '';
+            }
+        }
+        window.addEventListener('beforeunload', unloadWarning);
+        return () => {
+            window.removeEventListener('beforeunload', unloadWarning);
+        }
+    });
+
     function useConfirmLeave(shouldBlock) {
         const blocker = useBlocker(shouldBlock);
         useEffect(() => {
@@ -37,43 +63,15 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }, [blocker]);
     }
 
-    useConfirmLeave(true);
-
-    useEffect(() => {
-        const unloadWarning = (event) => {
-            if (true) { 
-                event.preventDefault();
-                event.returnValue = '';
-            }
-        }
-
-        window.addEventListener('beforeunload', unloadWarning);
-
-        return () => {
-            window.removeEventListener('beforeunload', unloadWarning);
-        }
-    });
+    useConfirmLeave(!savedState);
 
     const [data, setData] = useState(null);
     useEffect(() => {
         getData();
     }, [])
 
-    const [categoryNames, setCategoryNames] = useState([]);
-    const [categoryValues, setCategoryValues] = useState({});
-    const [depositRatios, setDepositRatios] = useState({});
-    const [logs, setLogs] = useState({});
-    const [unusedLogs, setUnusedLogs] = useState({});
-
-    const [categoryLogs, setCategoryLogs] = useState(null);
-    const [categorySelectOptions, setCategorySelectOptions] = useState([]);
-
-    const [undoList, setUndoList] = useState([]);
-    const [redoList, setRedoList] = useState([]);
-
     useEffect(() => {
         updateDataComponents();
-
     }, [data]);
 
     async function updateDataComponents() {
@@ -143,9 +141,11 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     }
 
     async function onLogout() {
-        const confirm = window.confirm("Are you sure you want to log out? Changes you made may not be saved.");
-        if (!confirm) {
-            return;
+        if (!savedState) {
+            const confirm = window.confirm("Are you sure you want to log out? Changes you made may not be saved.");
+            if (!confirm) {
+                return;
+            }
         }
         try {
             const response = await fetch("api/auth/logout", {
