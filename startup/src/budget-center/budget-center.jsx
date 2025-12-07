@@ -23,6 +23,8 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         }
     }, [authState, navigate]);
 
+    const [data, setData] = useState(null);
+
     const [categoryNames, setCategoryNames] = useState([]);
     const [categoryValues, setCategoryValues] = useState({});
     const [depositRatios, setDepositRatios] = useState({});
@@ -65,7 +67,6 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
 
     useConfirmLeave(!savedState);
 
-    const [data, setData] = useState(null);
     useEffect(() => {
         getData();
     }, [])
@@ -87,8 +88,8 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
     //Update log list
     useEffect(() => {
         (async () => {
-                const logList = await generateLogList();
-                setCategoryLogs(logList);
+            const logList = await generateLogList();
+            setCategoryLogs(logList);
         })()
     }, [logs]);
 
@@ -182,16 +183,19 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         } catch {
             console.log("ERROR SAVING")
         }
+        setSavedState(true);
     }
 
     function undo() {
         //TODO
         console.log("Undone!");
+        setSavedState(false);
     }
 
     function redo() {
         //TODO
         console.log("Redone!");
+        setSavedState(false);
     }
 
     function getLogPages() {
@@ -228,6 +232,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
         return fullId.split("-")[1];
     }
 
+    // TODO Fix function name typo
     function regsterLog(category, date, delta, newAmount, note) {
         const newLog = createLog(category, date, delta, newAmount, note);
         let newCategoryLogList = logs[category];
@@ -237,6 +242,7 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             ...prevValues,
             [category]: newCategoryLogList
         }));
+        setSavedState(false);
     }
 
     function createLog(category, date, delta, newAmount, note) {
