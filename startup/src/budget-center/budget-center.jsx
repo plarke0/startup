@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useBlocker } from 'react-router-dom';
 import { AuthState } from '../auth/authState';
 import ActionBar from './actionBar';
 import CarouselMenu from './CarouselMenu';
@@ -22,6 +22,22 @@ export default function BudgetCenter({ userName, authState, onAuthChange }) {
             navigate("/login")
         }
     }, [authState, navigate]);
+
+    function useConfirmLeave(shouldBlock) {
+        const blocker = useBlocker(shouldBlock);
+        useEffect(() => {
+            if (blocker.state === "blocked") {
+                const confirm = window.confirm("Are you sure you want to leave? Changes you made may not be saved.")
+                if (confirm) {
+                    blocker.proceed();
+                } else {
+                    blocker.reset();
+                }
+            }
+        }, [blocker]);
+    }
+
+    useConfirmLeave(true);
 
     useEffect(() => {
         const unloadWarning = (event) => {
