@@ -110,6 +110,12 @@ TCP ports allow your device to connect to different applications simultainiously
 - 80: Used for HTTP protocol
 - 22: Used for ssh (usually includes scp)
 
+### HTTP Status Codes:
+- 200: Success
+- 300: Redirection. The user must take additiponal action in order to complete the request.
+- 400: Error caused by the client.
+- 500: Error caused by the server.
+
 ### DNS
 Domains are split into three main parts: Top Level Domain, Root Domain, and Subdomains
 
@@ -491,9 +497,12 @@ coinToss
 //    Toss completed
 ```
 
-##Debugging the Backend
-###pm2
-####Useful Commands
+## Debugging the Backend
+
+### pm2
+A process manager for multiple node servers on the same machine.
+
+#### Useful Commands
 ```bash
 pm2 ls
 ```
@@ -517,3 +526,40 @@ pm2 logs
 ```bash
 ps -ef
 ```
+## Final Notes (Because I'm Lazy)
+
+### HTTP `content-type` Header
+
+The `content-type` header used in HTTP requests is used to define the type of content being sent or received. This informs the program and user what type of encoding to use and how to interpret the data.
+
+### Cookies
+
+Bits of data store on the client side that are sent with every request. Can be used toidentify a specific user/session. Cookies can also be set up to have a specific lifetime.
+- Secure Cookie: Not 100% sure what this is referencing, but cookies, by nature, are exposed to the end user. A cookie with the `Secure` attribute is only sent to the server with an encrypted request over the HTTPS protocol. It's never sent with unsecured HTTP.
+- Http-only Cookie: A cookie with the `HttpOnly` attribute can't be accessed by JavaScript, for example using Document.cookie; it can only be accessed when it reaches the server.
+- Same-site Cookie: The `SameSite` attribute lets servers specify whether/when cookies are sent with cross-site requests — i.e., third-party cookies.
+
+### Acronyms
+- JSX: JavaScript XML
+- JS: JavaScript
+- AWS: Amazon Web Services
+- NPM: Node Package Manager
+- NVM: Node Version Managr
+
+### React Hooks
+Hooks let you use different React features from your components.
+- State Hook: State lets a component “remember” information like user input. eg. `useState`.
+- Context Hook: Context lets a component receive information from distant parents without passing it as props. For example, your app’s top-level component can pass the current UI theme to all components below, no matter how deep.
+- Ref Hook: Refs let a component hold some information that isn’t used for rendering, like a DOM node or a timeout ID. Unlike with state, updating a ref does not re-render your component.
+- Effect Hook: Effects let a component connect to and synchronize with external systems. eg. `useEffect`.
+- Performance Hook: A common way to optimize re-rendering performance is to skip unnecessary work. For example, you can tell React to reuse a cached calculation or to skip a re-render if the data has not changed since the previous render.
+
+### Fetch Function
+The Fetch API provides a JavaScript interface for making HTTP requests and processing the responses. The `fetch()` function returns a Promise which is fulfilled with a Response object representing the server's response.
+
+### node.js
+Allows you to run JS code outside of a browser.
+
+### Vite
+A JS build tool to run frontend web applications.
+
